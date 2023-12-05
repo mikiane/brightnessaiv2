@@ -3,11 +3,6 @@
 
 #!/bin/bash
 
-# Chemin vers l'environnement virtuel
-VENV_PATH="brightnessai-env"
-
-# Activation de l'environnement virtuel
-source "$VENV_PATH/bin/activate"
 
 
 
@@ -42,5 +37,4 @@ for pid in $pids; do
     kill -9 $pid
 done
 
-# Désactivation de l'environnement virtuel (facultatif)
-deactivate
+

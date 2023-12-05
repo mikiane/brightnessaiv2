@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#!/bin/bash
 
 # Lancement de Gunicorn avec la configuration spécifique
 gunicorn --bind 0.0.0.0:8000 -w 4 streaming_api:app --timeout 1200 --daemon --access-logfile docs/access.log --error-logfile docs/error.log --capture-output
