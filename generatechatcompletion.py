@@ -87,6 +87,11 @@ def generate_chat_completion(consigne, texte, model="gpt-4", model_url=os.enviro
                     yield content
         
             else:
+                
+                
+                
+                
+                """
                 prompt = str(consigne + " : " + texte)  # Construct the prompt from the given consigne and texte
                 # Call the OpenAI API to create a chat completion
                 response = openai.ChatCompletion.create(
@@ -104,6 +109,36 @@ def generate_chat_completion(consigne, texte, model="gpt-4", model_url=os.enviro
                     if 'delta' in chunk['choices'][0] and 'content' in chunk['choices'][0]['delta']:
                         content = chunk['choices'][0]['delta']['content']  # Extract the content
                         yield f"{content}"  # Yield the content as a string
+                """
+                
+                # Construction du prompt à partir des variables 'consigne' et 'texte'
+                prompt = str(consigne + " : " + texte)
+
+                # Création de la requête de complétion de chat
+                response = openai.chat.completions.create(
+                    model=model,
+                    messages=[
+                        {'role': 'system', 'content': "Je suis un assistant parlant parfaitement le français et l'anglais capable de corriger, rédiger, paraphraser, traduire, résumer, développer des textes. "},
+                        {'role': 'user', 'content': prompt }
+                    ],
+                    temperature=0,
+                    stream=True
+
+                )
+
+                # Traitement de chaque partie de la réponse
+                for message in response.choices[0].message:  # Mise à jour de l'itération sur les messages
+                    # Vérification de l'existence de 'content' dans le message
+                    if 'content' in message:
+                        content = message['content']  # Extraction du contenu
+                        print(content)
+                        yield f"{content}"  # Renvoi du contenu sous forme de chaîne
+
+                        
+                        
+                        
+                        
+                        
 
 # Function to generate chat
 def generate_chat(consigne, texte, system, model="gpt-4", model_url=os.environ['MODEL_URL']):
@@ -160,7 +195,6 @@ def generate_chat(consigne, texte, system, model="gpt-4", model_url=os.environ['
                 # Création de la requête de complétion de chat
                 response = openai.chat.completions.create(
                     model=model,
-                    response_format={"type": "json_object"},
                     messages=[
                         {"role": "system", "content": system},
                         {"role": "user", "content": prompt}
@@ -178,4 +212,27 @@ def generate_chat(consigne, texte, system, model="gpt-4", model_url=os.environ['
                         print(content)
                         yield f"{content}"  # Renvoi du contenu sous forme de chaîne
 
-                                
+                
+                
+            """
+                response = openai.chat.completions.create(
+                    model=model,
+                    messages=[
+                        {'role': 'system', 'content': system},
+                        {'role': 'user', 'content': execprompt}
+                    ],
+                temperature=0,
+                stream=True
+                )
+
+            for chunk in response:
+                # Vérifiez ici la structure de 'chunk' et extrayez le contenu
+                # La ligne suivante est un exemple et peut nécessiter des ajustements
+                
+                if chunk.choices[0].delta.content: 
+                    text_chunk = chunk.choices[0].delta.content 
+                    print(text_chunk, end="", flush="true")
+                    yield text_chunk
+                    result += str(text_chunk)
+                    
+            """
