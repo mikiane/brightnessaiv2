@@ -62,8 +62,8 @@ def extract_context(text, model):
 # Function to generate chat completions
 def generate_chat_completion(consigne, texte, model="gpt-4", model_url=os.environ['MODEL_URL']):
     texte = extract_context(texte, model)
-    
     client = openai.OpenAI(api_key=os.environ['OPENAI_API_KEY'])
+    prompt = str(consigne + " : " + texte)  # Construct the prompt from the given consigne and texte
 
      
     if model == "claude-2":
@@ -75,7 +75,8 @@ def generate_chat_completion(consigne, texte, model="gpt-4", model_url=os.enviro
     else:
             
         if model == "hf":
-            prompt = str(consigne + "\n Le texte : ###" + texte + " ###\n")  # Construct the prompt from the given consigne and texte
+            prompt = str(consigne + " : " + texte)  # Construct the prompt from the given consigne and texte
+
             print("Prompt : " + prompt + "\n")
             response = lib__hfmodels.stream_hfllm(prompt, os.environ['HF_API_TOKEN'], model_url, 10, 500)
             for content in response:
@@ -124,7 +125,7 @@ def generate_chat_completion(consigne, texte, model="gpt-4", model_url=os.enviro
 def generate_chat(consigne, texte, system, model="gpt-4", model_url=os.environ['MODEL_URL']):
     prompt = str(consigne + " : " + texte)  # Construct the prompt from the given consigne and texte
     # Call the OpenAI API to create a chat
-    
+
     client = openai.OpenAI(api_key=os.environ['OPENAI_API_KEY'])
 
     texte = extract_context(texte, model)
