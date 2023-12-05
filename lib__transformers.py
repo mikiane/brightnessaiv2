@@ -294,7 +294,7 @@ def get_embedding(text, model="text-embedding-ada-002"):
     return openai.Embedding.create(input = [text], engine=model)['data'][0]['embedding']  # Returns the embedding
 
 
-"""
+
 # Function to search for a text within a local dataset using text embeddings
 def searchembedding(text, filename):
     openai.api_key = OPENAI_API_KEY
@@ -332,7 +332,7 @@ def searchembedding(text, filename):
     else:
         return "La colonne 'combined' n'existe pas dans le DataFrame"
 
-"""
+
 """
 def mailfile(filename, destinataire, message=""):
 
