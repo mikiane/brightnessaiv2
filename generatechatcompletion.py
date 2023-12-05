@@ -62,6 +62,9 @@ def extract_context(text, model):
 # Function to generate chat completions
 def generate_chat_completion(consigne, texte, model="gpt-4", model_url=os.environ['MODEL_URL']):
     texte = extract_context(texte, model)
+    
+    client = openai.OpenAI(api_key=os.environ['OPENAI_API_KEY'])
+
      
     if model == "claude-2":
         response = lib__anthropic.generate_chat_completion_anthropic(consigne, texte, model)
@@ -88,51 +91,22 @@ def generate_chat_completion(consigne, texte, model="gpt-4", model_url=os.enviro
         
             else:
                 
-                
-                
-                
-                """
-                prompt = str(consigne + " : " + texte)  # Construct the prompt from the given consigne and texte
-                # Call the OpenAI API to create a chat completion
-                response = openai.ChatCompletion.create(
+                # Use OpenAI's Chat Completion API
+                completion = client.chat.completions.create(
                     model=model,
                     messages=[
-                        {'role': 'system', 'content': "Je suis un assistant parlant parfaitement le français et l'anglais capable de corriger, rédiger, paraphraser, traduire, résumer, développer des textes. "},
-                        {'role': 'user', 'content': prompt }
+                        {'role': 'system', 'content': "Je suis un assistant parlant parfaitement le français et l'anglais capable de corriger, rédiger, paraphraser, traduire, résumer, développer des textes."},
+                        {'role': 'user', 'content': prompt}
                     ],
                     temperature=0,
                     stream=True
                 )
-                # For each part of the response
-                for chunk in response:
-                    # If the part contains a 'delta' and the 'delta' contains 'content'
-                    if 'delta' in chunk['choices'][0] and 'content' in chunk['choices'][0]['delta']:
-                        content = chunk['choices'][0]['delta']['content']  # Extract the content
-                        yield f"{content}"  # Yield the content as a string
-                """
-                
-                # Construction du prompt à partir des variables 'consigne' et 'texte'
-                prompt = str(consigne + " : " + texte)
 
-                # Création de la requête de complétion de chat
-                response = openai.chat.completions.create(
-                    model=model,
-                    messages=[
-                        {'role': 'system', 'content': "Je suis un assistant parlant parfaitement le français et l'anglais capable de corriger, rédiger, paraphraser, traduire, résumer, développer des textes. "},
-                        {'role': 'user', 'content': prompt }
-                    ],
-                    temperature=0,
-                    stream=True
-
-                )
-
-                # Traitement de chaque partie de la réponse
-                for message in response.choices[0].message:  # Mise à jour de l'itération sur les messages
-                    # Vérification de l'existence de 'content' dans le message
+                for message in completion.choices[0].message:
                     if 'content' in message:
-                        content = message['content']  # Extraction du contenu
+                        content = message['content']
                         print(content)
-                        yield f"{content}"  # Renvoi du contenu sous forme de chaîne
+                        yield f"{content}"
 
                         
                         
@@ -145,6 +119,8 @@ def generate_chat(consigne, texte, system, model="gpt-4", model_url=os.environ['
     prompt = str(consigne + " : " + texte)  # Construct the prompt from the given consigne and texte
     # Call the OpenAI API to create a chat
     
+    client = openai.OpenAI(api_key=os.environ['OPENAI_API_KEY'])
+
     texte = extract_context(texte, model)
     
     if model == "claude-2":
@@ -169,31 +145,8 @@ def generate_chat(consigne, texte, system, model="gpt-4", model_url=os.environ['
                     yield content
             else:
                 
-                """
-                prompt = str(consigne + " : " + texte)  # Construct the prompt from the given consigne and texte
-                response = openai.ChatCompletion.create(
-                    model=model,
-                    messages=[
-                        {'role': 'system', 'content': system },
-                        {'role': 'user', 'content': prompt }
-                    ],
-                    temperature=0,
-                    stream=True
-                )
-                # For each part of the response
-                for chunk in response:
-                    # If the part contains a 'delta' and the 'delta' contains 'content'
-                    if 'delta' in chunk['choices'][0] and 'content' in chunk['choices'][0]['delta']:
-                        content = chunk['choices'][0]['delta']['content']  # Extract the content
-                        print(content)
-                        yield f"{content}"  # Yield the content as a string
-                """
-
-                # Construction du prompt à partir des variables 'consigne' et 'texte'
-                prompt = str(consigne + " : " + texte)
-
-                # Création de la requête de complétion de chat
-                response = openai.chat.completions.create(
+                #Model = gpt-4-1106-preview 
+                completion = client.chat.completions.create(
                     model=model,
                     messages=[
                         {"role": "system", "content": system},
@@ -201,38 +154,10 @@ def generate_chat(consigne, texte, system, model="gpt-4", model_url=os.environ['
                     ],
                     temperature=0,
                     stream=True
-
                 )
 
-                # Traitement de chaque partie de la réponse
-                for message in response.choices[0].message:  # Mise à jour de l'itération sur les messages
-                    # Vérification de l'existence de 'content' dans le message
+                for message in completion.choices[0].message:
                     if 'content' in message:
-                        content = message['content']  # Extraction du contenu
+                        content = message['content']
                         print(content)
-                        yield f"{content}"  # Renvoi du contenu sous forme de chaîne
-
-                
-                
-            """
-                response = openai.chat.completions.create(
-                    model=model,
-                    messages=[
-                        {'role': 'system', 'content': system},
-                        {'role': 'user', 'content': execprompt}
-                    ],
-                temperature=0,
-                stream=True
-                )
-
-            for chunk in response:
-                # Vérifiez ici la structure de 'chunk' et extrayez le contenu
-                # La ligne suivante est un exemple et peut nécessiter des ajustements
-                
-                if chunk.choices[0].delta.content: 
-                    text_chunk = chunk.choices[0].delta.content 
-                    print(text_chunk, end="", flush="true")
-                    yield text_chunk
-                    result += str(text_chunk)
-                    
-            """
+                        yield f"{content}"
