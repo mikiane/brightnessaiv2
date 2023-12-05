@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Chemin vers l'environnement virtuel
-VENV_PATH="brightnessaiv2"
+VENV_PATH="/home/michel/brightnessaiv2/brightnessaiv2"
 
 # Activation de l'environnement virtuel
 source "$VENV_PATH/bin/activate"
