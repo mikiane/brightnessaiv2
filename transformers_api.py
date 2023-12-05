@@ -77,7 +77,8 @@ def podcast():
     lib__sendmail.mailfile(filename, email)
     res = [{'id':1,'request':text,'answer':filename}]
     response = jsonify(res)
-    response.headers['Content-Type']
+    response.headers['Content-Type'] = 'application/json'
+    return(response)
 
 
 
