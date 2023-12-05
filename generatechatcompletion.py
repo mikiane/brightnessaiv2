@@ -111,8 +111,6 @@ def generate_chat_completion(consigne, texte, model="gpt-4", model_url=os.enviro
                         print(text_chunk, end="", flush="true")
                         yield text_chunk
                     
-                    print("\n\n")
-                    yield "\n\n"                
                 
 
 
@@ -173,5 +171,3 @@ def generate_chat(consigne, texte, system, model="gpt-4", model_url=os.environ['
                         print(text_chunk, end="", flush="true")
                         yield text_chunk
                     
-                    print("\n\n")
-                    yield "\n\n"       
