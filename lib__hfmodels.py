@@ -7,7 +7,7 @@ def query(payload, headers, api_url):
     return response.json()
 
 
-"""
+
 #### NE FONCTIONNE PAS/ A DEBUGUER ####
 def stream_mistral(prompt, api_token="none", max_tokens=1024):
     client = openai.OpenAI(api_key=api_token)  # Create an OpenAI client with the API key
@@ -31,7 +31,7 @@ def stream_mistral(prompt, api_token="none", max_tokens=1024):
             print(content)
             yield f"{content}"  # Yield the content as a string
 
-"""
+
 #############################################################################################################################
 ##### NE FONCTIONNE PAS/ A DEBUGUER ####
 

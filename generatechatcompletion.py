@@ -19,6 +19,7 @@ load_dotenv(".env")
 openai.api_key = os.environ['OPEN_AI_KEY']
 
 
+
 def extract_context(text, model):
     """
     Extraire un contexte de 'text' basé sur la limite spécifiée.
@@ -132,6 +133,8 @@ def generate_chat(consigne, texte, system, model="gpt-4", model_url=os.environ['
                     print(content)
                     yield content
             else:
+                
+                """
                 prompt = str(consigne + " : " + texte)  # Construct the prompt from the given consigne and texte
                 response = openai.ChatCompletion.create(
                     model=model,
@@ -149,3 +152,30 @@ def generate_chat(consigne, texte, system, model="gpt-4", model_url=os.environ['
                         content = chunk['choices'][0]['delta']['content']  # Extract the content
                         print(content)
                         yield f"{content}"  # Yield the content as a string
+                """
+
+                # Construction du prompt à partir des variables 'consigne' et 'texte'
+                prompt = str(consigne + " : " + texte)
+
+                # Création de la requête de complétion de chat
+                response = openai.chat.completions.create(
+                    model=model,
+                    response_format={"type": "json_object"},
+                    messages=[
+                        {"role": "system", "content": system},
+                        {"role": "user", "content": prompt}
+                    ],
+                    temperature=0,
+                    stream=True
+
+                )
+
+                # Traitement de chaque partie de la réponse
+                for message in response.choices[0].message:  # Mise à jour de l'itération sur les messages
+                    # Vérification de l'existence de 'content' dans le message
+                    if 'content' in message:
+                        content = message['content']  # Extraction du contenu
+                        print(content)
+                        yield f"{content}"  # Renvoi du contenu sous forme de chaîne
+
+                                
