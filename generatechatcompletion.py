@@ -101,12 +101,20 @@ def generate_chat_completion(consigne, texte, model="gpt-4", model_url=os.enviro
                     temperature=0,
                     stream=True
                 )
+                
+                for message in completion:
+                # Vérifiez ici la structure de 'chunk' et extrayez le contenu
+                # La ligne suivante est un exemple et peut nécessiter des ajustements
+                
+                    if message.choices[0].delta.content: 
+                        text_chunk = message.choices[0].delta.content 
+                        print(text_chunk, end="", flush="true")
+                        yield text_chunk
+                    
+                    print("\n\n")
+                    yield "\n\n"                
+                
 
-                for message in completion.choices[0].message:
-                    if 'content' in message:
-                        content = message['content']
-                        print(content)
-                        yield f"{content}"
 
                         
                         
@@ -156,8 +164,14 @@ def generate_chat(consigne, texte, system, model="gpt-4", model_url=os.environ['
                     stream=True
                 )
 
-                for message in completion.choices[0].message:
-                    if 'content' in message:
-                        content = message['content']
-                        print(content)
-                        yield f"{content}"
+                for message in completion:
+                # Vérifiez ici la structure de 'chunk' et extrayez le contenu
+                # La ligne suivante est un exemple et peut nécessiter des ajustements
+                
+                    if message.choices[0].delta.content: 
+                        text_chunk = message.choices[0].delta.content 
+                        print(text_chunk, end="", flush="true")
+                        yield text_chunk
+                    
+                    print("\n\n")
+                    yield "\n\n"       
