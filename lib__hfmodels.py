@@ -40,7 +40,7 @@ def stream_mistral(prompt, api_token="none", max_tokens=1024):
 def stream_hfllm(prompt, api_token, api_url, max_token, num_tokens=300):
     client = InferenceClient(api_url, token=api_token)
     for token in client.text_generation(prompt, max_new_tokens=max_token, stream=True):
-        yield(token)
+        yield f"{token}"
 
 
 
