@@ -488,26 +488,24 @@ test_query_extended_llm()
 
 print("\n\n###############################################\n\n")
 
-def test_stream_hfllm():
-    try:
-        # Mock inputs for the test
-        mock_prompt = "Bonjour, peux tu m'aider ?"
-        dummy_token = hf_token
-        dummy_url = hf_url
-        max_token = 1024
-        num_tokens = 300
 
-        # Call the stream_hfllm function
-        result = lib__hfmodels.stream_hfllm(mock_prompt, dummy_token, dummy_url, max_token, num_tokens)
 
-        # Since it's a generator, we attempt to get the first item
-        first_response = next(result, "No response")
-        print(f"Function executed successfully. First response: {first_response}")
-    except Exception as e:
-        print(f"Error in stream_hfllm: {e}")
+# Mock inputs for the test
+mock_prompt = "Traduire ce texte en anglais : 'Je veux créer une page web avec des images et des textes. Comment puis-je créer une page web avec des images et des textes ? Vous pouvez utiliser HTML, CSS et JavaScript pour créer une page web avec des images et des textes. HTML est utilisé pour structurer la page web, CSS est utilisé pour définir le style de la page web et JavaScript est utilisé pour ajouter des fonctionnalités interactives à la page web. Vous pouvez utiliser un éditeur de texte pour créer votre page web, puis utiliser un navigateur web pour la visualiser. Il existe de nombr ux ressources en ligne pour aider à apprendre HTML, CSS et JavaScript, tels que des tutorials, des guides et des exemples de code.'"
+dummy_token = hf_token
+dummy_url = hf_url
+max_token = 1024
+num_tokens = 300
+
+for result in lib__hfmodels.stream_hfllm(mock_prompt, dummy_token, dummy_url, max_token, num_tokens):
+    print(result)
+        
+    # Since it's a generator, we attempt to get the first item
+    # first_response = next(result, "No response")
+    # print(f"Function executed successfully. First response: {first_response}")
 
 # Execute the test
-test_stream_hfllm()
+
 
 
 

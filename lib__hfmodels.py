@@ -39,37 +39,45 @@ def stream_hfllm(prompt, api_token, api_url, max_token, num_tokens=300):
     # Créer un pipeline pour la génération de texte avec le modèle spécifié
 
     input0 = prompt
-    n = num_tokens * 3 # Number of iterations * 15 = Nb Tokens
-    headers = {\
-        "Authorization": f"Bearer {api_token}",\
-        "max_tokens": str(max_token), \
-        "presence_penalty": "0",\
-        "frequency_penalty": "0",\
+    n = num_tokens * 3  # Number of iterations * 15 = Nb Tokens
+    headers = {
+        "Authorization": f"Bearer {api_token}",
+        "max_tokens": str(max_token),
+        "presence_penalty": "0",
+        "frequency_penalty": "0",
         "temperature" : "0"}
 
-    i=0
+    generated_text = ""  # Variable pour stocker l'ensemble du texte généré
+    i = 0
     data = query({"inputs": input0}, headers, api_url)
     input = str(data[0]['generated_text'])
     new_characters = input[len(prompt):]
+    generated_text += new_characters
     yield f"{new_characters}"
-    #print(input)  # Print initial output
-    previous_input = input  # Store the initial input
+    previous_input = input
+
     while (i < n):
-        #print(i)
         data = query({"inputs": input}, headers, api_url)
         new_input = str(data[0]['generated_text'])
-        if new_input == input[len(new_input):]: break
-        
-        # Find and print only the new part of the generated text
+
+        if new_input == input[len(new_input):]:
+            break
+
         new_characters = new_input[len(previous_input):]
-        #print(new_characters,end='\n')
+
+        if new_characters in generated_text:
+            break  # Sortie de la boucle si new_characters est déjà dans generated_text
+
         yield f"{new_characters}"
-        
-        if len(new_characters) == 0: break
-        # Update the previous_input and input variables
+
+        if len(new_characters) == 0:
+            break
+
+        generated_text += new_characters  # Ajout des nouveaux caractères à generated_text
         previous_input = new_input
         input = new_input
         i += 1
+
 
 #############################################################################################################################
 
