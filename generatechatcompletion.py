@@ -84,12 +84,14 @@ def generate_chat_completion(consigne, texte, model="gpt-4", model_url=os.enviro
             print("Model URL : " + model_url + "\n" + "HF TOKEN : " + os.environ['HF_API_TOKEN'] + "\n")
             
             client = InferenceClient(model_url, token=os.environ['HF_API_TOKEN'])
-            temperature = 0.1 # Choisissez une valeur entre 0 et 1
             response = client.text_generation(
                 prompt,
                 max_new_tokens=1024,
                 stream=True
             )
+            
+            for result in response:
+                yield result
 
         
         else:
@@ -148,12 +150,14 @@ def generate_chat(consigne, texte, system="", model="gpt-4", model_url=os.enviro
             print("Model URL : " + model_url + "\n" + "HF TOKEN : " + os.environ['HF_API_TOKEN'] + "\n")
             
             client = InferenceClient(model_url, token=os.environ['HF_API_TOKEN'])
-            temperature =  0.1 # Choisissez une valeur entre 0 et 1
             response = client.text_generation(
                 prompt,
                 max_new_tokens=1024,
                 stream=True
             )
+            
+            for result in response:
+                yield result
 
 
         else:   
