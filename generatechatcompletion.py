@@ -80,8 +80,8 @@ def generate_chat_completion(consigne, texte, model="gpt-4", model_url=os.enviro
             print("Model URL : " + model_url + "\n" + "HF TOKEN : " + os.environ['HF_API_TOKEN'] + "\n")
             
             for result in lib__hfmodels.stream_hfllm(prompt, os.environ['HF_API_TOKEN'], model_url, 300, 1024):
-                yield(result)
                 print(result)
+                yield(result)
                 
         else:
             if model == "mistral":
@@ -143,8 +143,9 @@ def generate_chat(consigne, texte, system="", model="gpt-4", model_url=os.enviro
             print("Model URL : " + model_url + "\n" + "HF TOKEN : " + os.environ['HF_API_TOKEN'] + "\n")
             
             for result in lib__hfmodels.stream_hfllm(prompt, os.environ['HF_API_TOKEN'], model_url, 300, 1024):
-                yield(result)
+
                 print(result)
+                yield(result)
 
         else:
             if model == "mistral":
