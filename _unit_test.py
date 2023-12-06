@@ -519,8 +519,7 @@ dummy_url = hf_url
 max_token = 1024
 num_tokens = 300
 for result in generatechatcompletion.generate_chat(consigne, texte, model="hf", model_url=dummy_url):
-    print(result, end="", flush="true")
-
+    print("", end="", flush="true")
 
 """
 ####################################################################################################
