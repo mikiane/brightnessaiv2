@@ -45,7 +45,7 @@ def stream_chat():
     texte = unquote(texte)
 
     # Generate a chat completion and return it as a server-sent event
-    return Response(generatechatcompletion.generate_chat_completion(consigne, texte, model), content_type='text/event-stream')
+    return Response(generatechatcompletion.generate_chat_completion(consigne, texte, model), content_type='text/plain')
 
 # Define a route for standard chat, accepting POST requests
 @app.route('/chat', methods=['POST'])
@@ -70,7 +70,7 @@ def chat():
     texte = unquote(texte)
 
     # Generate a chat and return it as a server-sent event
-    return Response(generatechatcompletion.generate_chat(consigne, texte, system, model), content_type='text/event-stream')
+    return Response(generatechatcompletion.generate_chat(consigne, texte, system, model), content_type='text/plain')
 
 # If this script is run directly, start the Flask server
 if __name__ == '__main__':

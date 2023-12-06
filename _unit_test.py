@@ -506,7 +506,7 @@ for result in lib__hfmodels.stream_hfllm(mock_prompt, dummy_token, dummy_url, ma
 # Execute the test
 
 
-
+"""
 
 
 
@@ -519,15 +519,8 @@ dummy_url = hf_url
 max_token = 1024
 num_tokens = 300
 for result in generatechatcompletion.generate_chat(consigne, texte, model="hf", model_url=dummy_url):
-    print(result)
+    print(result, end="", flush="true")
 
-
-"""
-from huggingface_hub import InferenceClient
-
-client = InferenceClient(hf_url, token=hf_token)
-for token in client.text_generation("How do you make cheese?", max_new_tokens=500, stream=True):
-    print(token)
 
 """
 ####################################################################################################
