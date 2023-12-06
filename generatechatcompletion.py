@@ -10,6 +10,8 @@ import os  # Import os module for interacting with the operating system
 from dotenv import load_dotenv  # Import dotenv module for loading .env files
 import lib__anthropic
 import lib__hfmodels
+from huggingface_hub import InferenceClient
+
 
 # Load the environment variables from the .env file
 load_dotenv(".env")
@@ -79,38 +81,32 @@ def generate_chat_completion(consigne, texte, model="gpt-4", model_url=os.enviro
             print("Prompt : " + prompt + "\n")
             print("Model URL : " + model_url + "\n" + "HF TOKEN : " + os.environ['HF_API_TOKEN'] + "\n")
             
-            for result in lib__hfmodels.stream_hfllm(prompt, os.environ['HF_API_TOKEN'], model_url, 300, 1024):
-                print(result)
-                yield(result)
-                
-        else:
-            if model == "mistral":
-                response = lib__hfmodels.stream_mistral(texte, model_url, os.environ['HF_API_TOKEN'])
-                for content in response:
-                    print(content)
-                    yield content
+            
+            client = InferenceClient(model_url, token=os.environ['HF_API_TOKEN'])
+            for token in client.text_generation(prompt, max_new_tokens=1024, stream=True):
+                yield f"{token}"
         
-            else:
-                
-                # Use OpenAI's Chat Completion API
-                completion = client.chat.completions.create(
-                    model=model,
-                    messages=[
-                        {'role': 'system', 'content': "Je suis un assistant parlant parfaitement le français et l'anglais capable de corriger, rédiger, paraphraser, traduire, résumer, développer des textes."},
-                        {'role': 'user', 'content': prompt}
-                    ],
-                    temperature=0,
-                    stream=True
-                )
-                
-                for message in completion:
-                # Vérifiez ici la structure de 'chunk' et extrayez le contenu
-                # La ligne suivante est un exemple et peut nécessiter des ajustements
-                
-                    if message.choices[0].delta.content: 
-                        text_chunk = message.choices[0].delta.content 
-                        print(text_chunk, end="", flush="true")
-                        yield text_chunk
+        else:
+            
+            # Use OpenAI's Chat Completion API
+            completion = client.chat.completions.create(
+                model=model,
+                messages=[
+                    {'role': 'system', 'content': "Je suis un assistant parlant parfaitement le français et l'anglais capable de corriger, rédiger, paraphraser, traduire, résumer, développer des textes."},
+                    {'role': 'user', 'content': prompt}
+                ],
+                temperature=0,
+                stream=True
+            )
+            
+            for message in completion:
+            # Vérifiez ici la structure de 'chunk' et extrayez le contenu
+            # La ligne suivante est un exemple et peut nécessiter des ajustements
+            
+                if message.choices[0].delta.content: 
+                    text_chunk = message.choices[0].delta.content 
+                    print(text_chunk, end="", flush="true")
+                    yield text_chunk
                     
                 
 
@@ -142,36 +138,28 @@ def generate_chat(consigne, texte, system="", model="gpt-4", model_url=os.enviro
             print("Prompt : " + prompt + "\n")
             print("Model URL : " + model_url + "\n" + "HF TOKEN : " + os.environ['HF_API_TOKEN'] + "\n")
             
-            for result in lib__hfmodels.stream_hfllm(prompt, os.environ['HF_API_TOKEN'], model_url, 300, 1024):
+            client = InferenceClient(model_url, token=os.environ['HF_API_TOKEN'])
+            for token in client.text_generation(prompt, max_new_tokens=1024, stream=True):
+                yield f"{token}"
 
-                print(result)
-                yield(result)
+        else:   
+            #Model = gpt-4-1106-preview 
+            completion = client.chat.completions.create(
+                model=model,
+                messages=[
+                    {"role": "system", "content": system},
+                    {"role": "user", "content": prompt}
+                ],
+                temperature=0,
+                stream=True
+            )
 
-        else:
-            if model == "mistral":
-                response = lib__hfmodels.stream_mistral(texte, model_url, os.environ['HF_API_TOKEN'])
-                for content in response:
-                    print(content)
-                    yield content
-            else:
-                
-                #Model = gpt-4-1106-preview 
-                completion = client.chat.completions.create(
-                    model=model,
-                    messages=[
-                        {"role": "system", "content": system},
-                        {"role": "user", "content": prompt}
-                    ],
-                    temperature=0,
-                    stream=True
-                )
-
-                for message in completion:
-                # Vérifiez ici la structure de 'chunk' et extrayez le contenu
-                # La ligne suivante est un exemple et peut nécessiter des ajustements
-                
-                    if message.choices[0].delta.content: 
-                        text_chunk = message.choices[0].delta.content 
-                        print(text_chunk, end="", flush="true")
-                        yield text_chunk
+            for message in completion:
+            # Vérifiez ici la structure de 'chunk' et extrayez le contenu
+            # La ligne suivante est un exemple et peut nécessiter des ajustements
+            
+                if message.choices[0].delta.content: 
+                    text_chunk = message.choices[0].delta.content 
+                    print(text_chunk, end="", flush="true")
+                    yield text_chunk
                     
