@@ -89,7 +89,8 @@ def generate_chat_completion(consigne, texte, model="gpt-4", model_url=os.enviro
                 prompt,
                 max_new_tokens=1024,
                 stream=True,
-                parameters={"temperature": temperature}
+                temperature = temperature
+                #parameters={"temperature": temperature}
             )
 
         
@@ -154,7 +155,8 @@ def generate_chat(consigne, texte, system="", model="gpt-4", model_url=os.enviro
                 prompt,
                 max_new_tokens=1024,
                 stream=True,
-                parameters={"temperature": temperature}
+                temperature = temperature
+                #parameters={"temperature": temperature}
             )
 
         else:   
