@@ -11,6 +11,7 @@ from dotenv import load_dotenv  # Import dotenv module for loading .env files
 import lib__env
 import lib__script_tasks
 import lib__transformers
+import generatechatcompletion
 
 load_dotenv(lib__env.DOTENVPATH)
 hf_token = os.environ.get("HF_API_TOKEN")
@@ -481,14 +482,12 @@ def test_query_extended_llm():
 # Exécution du test
 test_query_extended_llm()
 
-"""
+
 ####################################################################################################
 # Testing : lib__hfmodels
 ####################################################################################################
 
 print("\n\n###############################################\n\n")
-
-
 
 # Mock inputs for the test
 mock_prompt = "Traduire ce texte en anglais : 'Je veux créer une page web avec des images et des textes. Comment puis-je créer une page web avec des images et des textes ? Vous pouvez utiliser HTML, CSS et JavaScript pour créer une page web avec des images et des textes. HTML est utilisé pour structurer la page web, CSS est utilisé pour définir le style de la page web et JavaScript est utilisé pour ajouter des fonctionnalités interactives à la page web. Vous pouvez utiliser un éditeur de texte pour créer votre page web, puis utiliser un navigateur web pour la visualiser. Il existe de nombr ux ressources en ligne pour aider à apprendre HTML, CSS et JavaScript, tels que des tutorials, des guides et des exemples de code.'"
@@ -511,6 +510,18 @@ for result in lib__hfmodels.stream_hfllm(mock_prompt, dummy_token, dummy_url, ma
 
 
 """
+    
+consigne = "Traduire ce texte en anglais : "
+texte = "'Je veux créer une page web avec des images et des textes. Comment puis-je créer une page web avec des images et des textes ? Vous pouvez utiliser HTML, CSS et JavaScript pour créer une page web avec des images et des textes. HTML est utilisé pour structurer la page web, CSS est utilisé pour définir le style de la page web et JavaScript est utilisé pour ajouter des fonctionnalités interactives à la page web. Vous pouvez utiliser un éditeur de texte pour créer votre page web, puis utiliser un navigateur web pour la visualiser. Il existe de nombr ux ressources en ligne pour aider à apprendre HTML, CSS et JavaScript, tels que des tutorials, des guides et des exemples de code.'"
+dummy_token = hf_token
+dummy_url = hf_url
+max_token = 1024
+num_tokens = 300
+for result in generatechatcompletion.generate_chat(consigne, texte, model="hf", model_url=dummy_url):
+    print(result)
+    
+"""
+
 ####################################################################################################
 # Testing : lib__script_tasks
 ####################################################################################################

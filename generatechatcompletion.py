@@ -122,7 +122,7 @@ def generate_chat_completion(consigne, texte, model="gpt-4", model_url=os.enviro
                         
 
 # Function to generate chat
-def generate_chat(consigne, texte, system, model="gpt-4", model_url=os.environ['MODEL_URL']):
+def generate_chat(consigne, texte, system="", model="gpt-4", model_url=os.environ['MODEL_URL']):
     prompt = str(consigne + " : " + texte)  # Construct the prompt from the given consigne and texte
     # Call the OpenAI API to create a chat
 
