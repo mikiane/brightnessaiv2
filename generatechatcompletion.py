@@ -78,6 +78,7 @@ def generate_chat_completion(consigne, texte, model="gpt-4", model_url=os.enviro
             
         if model == "hf":
             #prompt = str(consigne + "\n Le texte : ###" + texte + " ###\n")  # Construct the prompt from the given consigne and texte
+            prompt = str(consigne + "\n" + texte)  # Construct the prompt from the given consigne and texte
             prompt = "<s>[INST]" + prompt + "[/INST]"
             print("Prompt : " + prompt + "\n")
             print("Model URL : " + model_url + "\n" + "HF TOKEN : " + os.environ['HF_API_TOKEN'] + "\n")
@@ -140,6 +141,7 @@ def generate_chat(consigne, texte, system="", model="gpt-4", model_url=os.enviro
     
     else:
         if model == "hf":
+            prompt = str(consigne + "\n" + texte)  # Construct the prompt from the given consigne and texte
             #prompt = str(consigne + "\n Le texte : ###" + texte + " ###\n")  # Construct the prompt from the given consigne and texte
             prompt = "<s>[INST]" + prompt + "[/INST]"
             
