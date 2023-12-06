@@ -140,10 +140,15 @@ def generate_chat(consigne, texte, system, model="gpt-4", model_url=os.environ['
         if model == "hf":
             prompt = str(consigne + "\n Le texte : ###" + texte + " ###\n")  # Construct the prompt from the given consigne and texte
             print("Prompt : " + prompt + "\n")
-            response = lib__hfmodels.stream_hfllm(prompt, os.environ['HF_API_TOKEN'], model_url, 10, 500)
-            for content in response:
-                print(content)
-                yield content
+            response = lib__hfmodels.stream_hfllm(prompt, os.environ['HF_API_TOKEN'], model_url, 300, 1024)
+            content = next(response, "")
+            print(content)
+            yield content
+            
+            #for content in response:
+            #    print(content)
+            #    yield content            
+            
         else:
             if model == "mistral":
                 response = lib__hfmodels.stream_mistral(texte, model_url, os.environ['HF_API_TOKEN'])
