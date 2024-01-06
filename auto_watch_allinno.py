@@ -35,8 +35,8 @@ formatted_date = current_date.strftime("%d %B %Y")
 
 #Commande pour générer la veille
 command = "Nous sommes le " + formatted_date + "\nA partir du texte suivant entre ___ , contenant des listes et descriptions des derniers articles sur les actus technologiques. \
-        Extraire les articles datant d'il y a moins d'une semaine et générer la liste exhaustive des informations récentes mentionnés dans le texte. \
-        La liste doit comprendre les informations suivantes : \
+        Extraire tous les articles datant d'il y a moins d'une semaine et générer la liste exhaustive des informations récentes mentionnés dans le texte. \
+        Aucun article datant de moins d'une semaine doit etre oublié. La liste doit comprendre les informations suivantes : \
             Titre de l'article \
             <br>Description / résumé de la video dans la langue originelle de l'article\
             <br>URL associée à l'article. La liste générée doit etre au format magazine, synthétique et simple. \

@@ -43,8 +43,8 @@ current_date = datetime.now()
 formatted_date = current_date.strftime("%d %B %Y")
         
 command = "Nous sommes le " + formatted_date + "\nA partir du texte suivant entre ___ , contenant des listes et descriptions des derniers articles sur l'IA. \
-        Extraire les vidéos datant d'il y a moins d'une semaine et générer la liste exhaustive des informations récentes mentionnés dans le texte. \
-        La liste doit comprendre les informations suivantes : \
+        Extraire TOUS les articles datant d'il y a moins d'une semaine et générer la liste exhaustive des informations récentes mentionnés dans le texte. \
+        Aucun article datant de moins d'une semaine doit etre oublié. La liste doit comprendre les informations suivantes : \
             Titre de l'article \
             <br>Description / résumé de l'article dans la langue originelle de l'article\
             <br>Pour chaque article genere un tweet en français en utilisant le titre, la description et en citant l'url associée. Utiliser un ton neutre. \

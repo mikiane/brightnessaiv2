@@ -35,8 +35,8 @@ formatted_date = current_date.strftime("%d %B %Y")
 
 #Commande pour générer la veille
 command = "Nous sommes le " + formatted_date + "\nA partir du texte suivant entre ___ , contenant des listes et descriptions des dernieres videos sur TED.com. \
-        Extraire les vidéos datant d'il y a moins d'une semaine et générer la liste exhaustive des informations récentes mentionnés dans le texte. \
-        La liste doit comprendre les informations suivantes : \
+        Extraire toutes les vidéos datant d'il y a moins d'une semaine et générer la liste exhaustive des informations récentes mentionnés dans le texte. \
+        Aucune video datant de moins d'une semaine doit etre oubliée. La liste doit comprendre les informations suivantes : \
             Titre de la vidéo \
             <br>Description / résumé de la video dans la langue originelle de l'article\
             <br>URL associée à la video. La liste générée doit etre au format magazine, synthétique et simple. \
