@@ -1,6 +1,6 @@
 
 
-#DOTENVPATH = "/home/michel/extended_llm/.env"
-DOTENVPATH = ".env"
-#LOCALPATH = "/home/michel/extended_llm/"
-LOCALPATH = ""
+DOTENVPATH = "/home/michel/brightnessaiv2/.env"
+#DOTENVPATH = ".env"
+LOCALPATH = "/home/michel/brightnessaiv2/"
+#LOCALPATH = ""
