@@ -34,7 +34,7 @@ url_list = ["https://www.technologyreview.com/artificial-intelligence/"
 
 
 # Setting the locale to French
-locale.setlocale(locale.LC_TIME, 'fr_FR')
+#locale.setlocale(locale.LC_TIME, 'fr_FR')
 
 # Getting the current date
 current_date = datetime.now()

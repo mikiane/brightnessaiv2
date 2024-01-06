@@ -24,7 +24,7 @@ rss_list = ["https://pa.tedcdn.com/feeds/talks.rss"]
 
 
 # Setting the locale to French
-locale.setlocale(locale.LC_TIME, 'fr_FR')
+#locale.setlocale(locale.LC_TIME, 'fr_FR')
 
 # Getting the current date
 current_date = datetime.now()
@@ -54,7 +54,7 @@ res = "<br><br>".join(responses)
 text_veille = str(res.replace("```html", "")).replace("```", "")
 
 """#generation de la newsletter
-command = "Voici en vrac des contenus récuéprés sur TED.com cette semaine. Génére une newsletter formatée en HTML propre en citant toutes les vidéos dans leur exhaustivité. Insérer le tweet généré sous chaque référence de vidéo. Répondre directement en générant la newsletter. Ne converse pas. Ne conclue pas."
+command = "Voici en vrac des contenus récupérés sur TED.com cette semaine. Génére une newsletter formatée en HTML propre en citant toutes les vidéos dans leur exhaustivité. Insérer le tweet généré sous chaque référence de vidéo. Répondre directement en générant la newsletter. Ne converse pas. Ne conclue pas."
 prompt = command + "\n ___ " + text_veille + "\n ___ \n"
 res = lib__agent_buildchronical.execute(prompt, "", "", model)
 text = str(res.replace("```html", "")).replace("```", "") + "\n\n" + text_veille

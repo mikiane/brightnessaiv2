@@ -24,7 +24,7 @@ rss_list = ["https://rss.app/feeds/tevRvhjRb3jyhRmQ.xml"]
 
 
 # Setting the locale to French
-locale.setlocale(locale.LC_TIME, 'fr_FR')
+#locale.setlocale(locale.LC_TIME, 'fr_FR')
 
 # Getting the current date
 current_date = datetime.now()
