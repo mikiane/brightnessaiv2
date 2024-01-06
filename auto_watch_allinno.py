@@ -20,7 +20,7 @@ def process_rss(command, url, model, site="", input_data=""):
 
 
 # Génération d'une liste de talks TED
-rss_list = ["https://rss.app/feeds/tZTJRd8QbKQoXf6q.xml"]
+rss_list = ["https://rss.app/feeds/_4i0XmYelLLXesGu9.xml"]
 
 
 # Setting the locale to French
@@ -34,7 +34,7 @@ formatted_date = current_date.strftime("%d %B %Y")
 
 
 #Commande pour générer la veille
-command = "Nous sommes le " + formatted_date + "\nA partir du texte suivant entre ___ , contenant des listes et descriptions des derniers articles sur le thème du Public Speaking. \
+command = "Nous sommes le " + formatted_date + "\nA partir du texte suivant entre ___ , contenant des listes et descriptions des derniers articles sur les actus technologiques. \
         Extraire les articles datant d'il y a moins d'une semaine et générer la liste exhaustive des informations récentes mentionnés dans le texte. \
         La liste doit comprendre les informations suivantes : \
             Titre de l'article \
@@ -53,15 +53,9 @@ responses = [process_rss(command, rss, model,"","") for rss in rss_list]
 res = "<br><br>".join(responses)
 text_veille = str(res.replace("```html", "")).replace("```", "")
 
-"""#generation de la newsletter
-command = "Voici en vrac des contenus récuéprés sur le thème du public speaking cette semaine. Génére une newsletter formatée en HTML propre en citant tous les articles dans leur exhaustivité. Insérer le tweet généré sous chaque référence d'article. Répondre directement en générant la newsletter. Ne converse pas. Ne conclue pas."
-prompt = command + "\n ___ " + text_veille + "\n ___ \n"
-res = lib__agent_buildchronical.execute(prompt, "", "", model)
-text = str(res.replace("```html", "")).replace("```", "") + "\n\n" + text_veille
-"""
 
 #envoi de la newsletter
-title = "Public Speaking WATCH : veille sur Public Speaking"
+title = "Techno WATCH : veille sur Techno"
 email = "michel@brightness.fr"
 lib__agent_buildchronical.mail_html(title, text_veille, email)
 
