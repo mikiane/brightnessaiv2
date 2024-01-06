@@ -56,6 +56,6 @@ text_veille = str(res.replace("```html", "")).replace("```", "")
 
 #envoi de la newsletter
 title = "Techno WATCH : veille sur Techno"
-email = "michel@brightness.fr"
+email = "contact@brightness.fr"
 lib__agent_buildchronical.mail_html(title, text_veille, email)
 
