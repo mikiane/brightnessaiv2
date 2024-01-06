@@ -50,9 +50,9 @@ def extract_context(text, model):
         token_nb = 2000      
     
     if token_nb > 2000:
-        limit = (int(token_nb)*3) - 4000
+        limit = (int(token_nb)*2) - 4000
     else:
-        limit = int((int(token_nb)*3)/2)
+        limit = int((int(token_nb)*2)/2)
     
     if len(text) < limit:
         return text

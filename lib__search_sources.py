@@ -12,13 +12,17 @@ import requests
 from dotenv import load_dotenv
 import os
 from lib__env import *
+from googlesearch import search
+from googleapiclient.discovery import build
+from bs4 import BeautifulSoup
 
 #Récupération des sites de veille via Feedly
 load_dotenv(DOTENVPATH)
 
 #load_dotenv(".env") # Load the environment variables from the .env file.
-FEEDLY_API_TOKEN = os.environ.get("FEEDLY_API_TOKEN")
-api_token = FEEDLY_API_TOKEN
+api_token = os.environ.get("FEEDLY_API_TOKEN")
+g_api_key = os.environ.get("GOOGLE_API_TOKEN")
+cse_id = os.environ.get("CSE_ID")
 
 # Function to get the feedly feeds (n = number of feeds, topic = topic to search)
 def get_feedly_feeds(topic, n=3):
@@ -42,3 +46,17 @@ def get_feedly_feeds(topic, n=3):
     return feeds
     
     
+
+
+def google_search(search_term, api_key=g_api_key, cse_id=cse_id, num_results=5):
+    service = build("customsearch", "v1", developerKey=api_key)
+    res = service.cse().list(q=search_term, cx=cse_id, num=num_results).execute()
+    
+    # Vérifie si 'items' existe dans la réponse
+    if 'items' in res:
+        return res['items']
+    else:
+        # Gérez l'absence de 'items' comme vous le jugez approprié
+        print("Aucun résultat trouvé")
+        return []
+

@@ -32,14 +32,14 @@ from elevenlabs import set_api_key
 from dotenv import load_dotenv
 import os
 from moviepy.editor import *
-import requests
+
 import json
 from PIL import Image, ImageDraw, ImageFont
 from num2words import num2words
 import re
 from lib__env import *
 from openai import OpenAI
-import requests
+import xml.etree.ElementTree as ET
 
 
 
@@ -377,6 +377,11 @@ def execute(prompt, site, input_data, model="gpt-4"):
         # Limitation des erreurs de longueur
         prompt, context, input_data = truncate_strings(prompt, context, input_data, 12000)
         
+    if model == "gpt-4-1106-preview":
+        # Limitation des erreurs de longueur
+        prompt, context, input_data = truncate_strings(prompt, context, input_data, 200000)
+  
+        
     if model == "gpt-3.5-turbo-16k":
         # Limitation des erreurs de longueur
         prompt, context, input_data = truncate_strings(prompt, context, input_data, 24000)
@@ -518,3 +523,89 @@ def filter_urls(rss_urls):
     rss_urls = [rss_urls[i-1] for i in selected_indices]
     
     return rss_urls
+
+
+
+def fetch_and_parse_urls(url):
+    """
+    Fetch and parse the content of web pages given a list of URLs.
+
+    Args:
+    url_list (list): A list of URLs to fetch and parse.
+
+    Returns:
+    list: A list where each element is the content of a web page. 
+          Links in the text are formatted as 'text [link associated with the text]'.
+    """
+
+    try:
+        # Fetch the content from the URL
+        response = requests.get(url)
+        response.raise_for_status()
+
+        # Parse the content using BeautifulSoup
+        soup = BeautifulSoup(response.text, 'html.parser')
+
+        # Extract and format text and links
+        text = ''
+        for element in soup.descendants:
+            if element.name == 'a' and element.get('href') and element.text:
+                # Add link in the specified format
+                text += f"{element.text} [{element.get('href')}] "
+            elif element.name in ['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6']:
+                # Add text elements (paragraphs and headers)
+                text += element.get_text() + ' '
+
+        res = text.strip()
+
+    except requests.RequestException as e:
+        # In case of request errors, append a descriptive message
+        res = f"Error fetching {url}: {e}"
+
+    return str(res)
+
+
+
+
+
+
+import requests
+import xml.etree.ElementTree as ET
+
+def fetch_and_parse_rss_to_string(rss_url):
+    """
+    Fetch and parse the content of an RSS feed given its URL and return a string
+    with each item's details separated by <br> tags.
+
+    Args:
+    rss_url (str): The URL of the RSS feed.
+
+    Returns:
+    str: A string representation of the RSS feed items, separated by <br> tags.
+    """
+
+    try:
+        # Fetch the content from the RSS URL
+        response = requests.get(rss_url)
+        response.raise_for_status()
+
+        # Parse the XML content
+        root = ET.fromstring(response.content)
+
+        # Initialize an empty string to store feed items
+        feed_items_str = ""
+
+        # Extract and format RSS feed items
+        for item in root.findall('.//item'):
+            title = item.find('title').text if item.find('title') is not None else 'No title'
+            link = item.find('link').text if item.find('link') is not None else 'No link'
+            description = item.find('description').text if item.find('description') is not None else 'No description'
+
+            # Append each item's details to the string, separated by <br>
+            feed_items_str += f"Title: {title}<br>Link: {link}<br>Description: {description}<br><br>"
+
+    except requests.RequestException as e:
+        # In case of request errors, return a descriptive message
+        return f"Error fetching RSS feed from {rss_url}: {e}"
+
+    return feed_items_str

@@ -12,10 +12,14 @@ import lib__env
 import lib__script_tasks
 import lib__transformers
 import generatechatcompletion
+import lib__search_sources
 
 load_dotenv(lib__env.DOTENVPATH)
 hf_token = os.environ.get("HF_API_TOKEN")
 hf_url = os.environ.get("MODEL_URL")
+api_token = os.environ.get("FEEDLY_API_TOKEN")
+g_api_key = os.environ.get("GOOGLE_API_TOKEN")
+cse_id = os.environ.get("CSE_ID")
 
 """
 
@@ -505,12 +509,6 @@ for result in lib__hfmodels.stream_hfllm(mock_prompt, dummy_token, dummy_url, ma
 
 # Execute the test
 
-
-"""
-
-
-
-
     
 consigne = "Traduire ce texte en anglais : "
 texte = "'Je veux créer une page web avec des images et des textes. Comment puis-je créer une page web avec des images et des textes ? Vous pouvez utiliser HTML, CSS et JavaScript pour créer une page web avec des images et des textes. HTML est utilisé pour structurer la page web, CSS est utilisé pour définir le style de la page web et JavaScript est utilisé pour ajouter des fonctionnalités interactives à la page web. Vous pouvez utiliser un éditeur de texte pour créer votre page web, puis utiliser un navigateur web pour la visualiser. Il existe de nombr ux ressources en ligne pour aider à apprendre HTML, CSS et JavaScript, tels que des tutorials, des guides et des exemples de code.'"
@@ -521,7 +519,7 @@ num_tokens = 300
 for result in generatechatcompletion.generate_chat(consigne, texte, model="hf", model_url=dummy_url):
     print("", end="", flush="true")
 
-"""
+
 ####################################################################################################
 # Testing : lib__script_tasks
 ####################################################################################################
@@ -671,3 +669,27 @@ def test_transcribe_audio():
 test_transcribe_audio()
 
 """
+
+
+response = lib__search_sources.google_search("Michel Levy Provençal", g_api_key, cse_id, 3)
+# Supposons que 'response' est la réponse que vous avez reçue de l'API Google Search
+# Exemple: response = google_search("Votre requête", "Votre API Key", "Votre CSE ID")
+
+# Vérification si la réponse contient des résultats
+
+print(response)
+print("\n\n######################################\n")
+for resultat in response:
+    titre = resultat['title']
+    lien = resultat['link']
+    snippet = resultat['snippet']
+
+    # Vous pouvez maintenant utiliser ou stocker ces variables comme vous le souhaitez
+    print("Titre:", titre)
+    print("\n\n")
+    print("Lien:", lien)
+    print("\n\n")
+    print("Snippet:", snippet)
+    print("\n\n")
+    print("\n\n")
+    print("\n\n")
