@@ -36,7 +36,7 @@ formatted_date = current_date.strftime("%d %B %Y")
 #Commande pour générer la veille
 command = "Nous sommes le " + formatted_date + "\nA partir du texte suivant entre ___ , contenant des listes et descriptions des derniers articles sur le thème du Learning & Development. \
         Extraire l'exhaustivité des articles datant d'il y a moins d'une semaine et générer la liste exhaustive des informations récentes mentionnés dans le texte. \
-        Aucun article datant de moins d'une semaine doit etre oublié. La liste doit comprendre les informations suivantes : \
+        Aucun article datant de moins d'une semaine ne doit etre oublié. La liste doit comprendre les informations suivantes : \
             Titre de l'article \
             <br>Description / résumé de la video dans la langue originelle de l'article\
             <br>URL associée à l'article. La liste générée doit etre au format magazine, synthétique et simple. \
@@ -53,12 +53,6 @@ responses = [process_rss(command, rss, model,"","") for rss in rss_list]
 res = "<br><br>".join(responses)
 text_veille = str(res.replace("```html", "")).replace("```", "")
 
-"""#generation de la newsletter
-command = "Voici en vrac des contenus récuéprés sur TED.com cette semaine. Génére une newsletter formatée en HTML propre en citant toutes les vidéos dans leur exhaustivité. Insérer le tweet généré sous chaque référence de vidéo. Répondre directement en générant la newsletter. Ne converse pas. Ne conclue pas."
-prompt = command + "\n ___ " + text_veille + "\n ___ \n"
-res = lib__agent_buildchronical.execute(prompt, "", "", model)
-text = str(res.replace("```html", "")).replace("```", "") + "\n\n" + text_veille
-"""
 
 #envoi de la newsletter
 title = "L&D WATCH : veille sur Learning & Development"
