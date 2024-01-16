@@ -18,10 +18,32 @@ def process_rss(command, url, model, site="", input_data=""):
     res = lib__agent_buildchronical.execute(prompt, site, input_data, model)
     return res
 
+def process_url(command, url, model, site="", input_data=""):
+    """
+    This function takes a command, a url and a model as input and generates a response based on the command and the content of the url
+    """
+    content = lib__agent_buildchronical.fetch_and_parse_urls(url)
+    content = content.replace('\n', '')
+    prompt = command + "\n ___ " + content + "\n ___ \n"
+    print("Prompt : " + prompt)
+    input_data = ""
+    site = ""
+    model=model
+    res = lib__agent_buildchronical.execute(prompt, site, input_data, model)
+    return res
 
-# Génération d'une liste de talks TED
-rss_list = ["https://rss.app/feeds/_4i0XmYelLLXesGu9.xml"]
-
+# Génération d'une liste de ressources
+#rss_list = ["https://rss.app/feeds/_4i0XmYelLLXesGu9.xml"]
+url_list = ['https://techcrunch.com',
+            'https://www.wired.com',
+            'https://arstechnica.com',
+            'https://www.theverge.com',
+            'https://mashable.com',
+            'https://www.cnet.com',
+            'https://www.engadget.com',
+            'https://gizmodo.com',
+            'https://www.technologyreview.com',
+            'https://venturebeat.com']
 
 # Setting the locale to French
 #locale.setlocale(locale.LC_TIME, 'fr_FR')
@@ -49,8 +71,10 @@ command = "Nous sommes le " + formatted_date + "\nA partir du texte suivant entr
 
 #génération de la veille
 model="gpt-4-1106-preview"
-responses = [process_rss(command, rss, model,"","") for rss in rss_list]
-res = "<br><br>".join(responses)
+#responses = [process_rss(command, rss, model,"","") for rss in rss_list]
+responses_url = [process_url(command, url, model,"","") for url in url_list]
+#res = "<br><br>".join(responses) + "<br><br>".join(responses_url)
+res = "<br><br>".join(responses_url)
 text_veille = str(res.replace("```html", "")).replace("```", "")
 
 
