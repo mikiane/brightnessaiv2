@@ -377,7 +377,7 @@ def execute(prompt, site, input_data, model="gpt-4"):
         # Limitation des erreurs de longueur
         prompt, context, input_data = truncate_strings(prompt, context, input_data, 12000)
         
-    if model == "gpt-4-1106-preview":
+    if model == "gpt-4-turbo-preview":
         # Limitation des erreurs de longueur
         prompt, context, input_data = truncate_strings(prompt, context, input_data, 200000)
   

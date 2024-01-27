@@ -6,7 +6,7 @@ import lib__agent_buildchronical
 # Utilisez les fonctions ou classes de libx comme vous le feriez normalement
 
 
-def tweet_gen(text, num_page, command, model="gpt-4-1106-preview", input_data = "", site = ""):
+def tweet_gen(text, num_page, command, model="gpt-4-turbo-preview", input_data = "", site = ""):
     # Votre traitement ici
     prompt = command + "\n ___ Voici le texte de la page numero : " + str(num_page) + "\n\n" + text + "\n ___ \n"
     print("Prompt : " + prompt)
@@ -29,7 +29,7 @@ def process_pdf(chemin_du_fichier, command):
                 contenu = page.extract_text()
                 num_page += 1
                 # Appeler la fonction f sur le contenu de la page
-                res = res + "\n\n" + tweet_gen(contenu, num_page, command, model="gpt-4-1106-preview")
+                res = res + "\n\n" + tweet_gen(contenu, num_page, command, model="gpt-4-turbo-preview")
                 
     except Exception as e:
         print("Une erreur est survenue : ", e)

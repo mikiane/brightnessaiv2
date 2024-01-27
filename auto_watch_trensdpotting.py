@@ -47,7 +47,7 @@ command = "A partir du texte suivant entre ___ , contenant des listes et descrip
             Toujours utiliser un modele de page HTML fond blanc, avec Titre en rouge en <h3>, description en <p> noir sur fond bleu clair, lien vers le livre derriere un Read More.\
             Démarrer la liste avec le titre de la source."
             
-model="gpt-4-1106-preview"
+model="gpt-4-turbo-preview"
 
 
 responses = [process_url(command, url, model,"","") for url in url_list]

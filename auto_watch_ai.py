@@ -53,7 +53,7 @@ command = "Nous sommes le " + formatted_date + "\nA partir du texte suivant entr
         Démarrer la liste avec le titre de la source."
      
 #generation de la veille
-model="gpt-4-1106-preview"
+model="gpt-4-turbo-preview"
 responses = [process_url(command, url, model,"","") for url in url_list]
 res = "<br><br>".join(responses)
 

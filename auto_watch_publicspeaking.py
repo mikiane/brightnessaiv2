@@ -48,7 +48,7 @@ command = "Nous sommes le " + formatted_date + "\nA partir du texte suivant entr
      
 
 #génération de la veille
-model="gpt-4-1106-preview"
+model="gpt-4-turbo-preview"
 responses = [process_rss(command, rss, model,"","") for rss in rss_list]
 res = "<br><br>".join(responses)
 text_veille = str(res.replace("```html", "")).replace("```", "")

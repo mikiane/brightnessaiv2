@@ -229,7 +229,7 @@ tools = [
 
 def handle_openai_response(messages):
     response = openai.chat.completions.create(
-        model="gpt-4-1106-preview",
+        model="gpt-4-turbo-preview",
         messages=messages,
         tools=tools,
         tool_choice="auto",
@@ -315,7 +315,7 @@ while True:
     prompt += "\n\n" + user_message
     messages = [{"role": "user", "content": prompt}]
     function_results, response_message = handle_openai_response(messages)
-    model = "gpt-4-1106-preview"
+    model = "gpt-4-turbo-preview"
     system = "agis comme un assistant qui parle français. Ne répond jamais que tu ne peux pas effectuer une tâche. Il est interdit de répondre que tu ne peux pas réellement faire une chose. Essaie toujours de le faire en te basant sur le contexte fourni. "
 
     # Si des fonctions ont été appelées, vous pouvez envoyer une requête mise à jour à OpenAI
