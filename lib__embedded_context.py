@@ -317,7 +317,7 @@ def write_blocks_to_csv(blocks, path, filename):
 
 
 
-def get_embedding(text, engine="text-embedding-ada-002"):
+def get_embedding(text, engine="text-embedding-3-large"):
     """
     This function takes in a piece of text and a model engine as input parameters, and returns an embedding for the input text.
     It utilizes OpenAI's Embedding API to generate the embedding based on the specified model.
@@ -326,7 +326,7 @@ def get_embedding(text, engine="text-embedding-ada-002"):
     handle single continuous strings of text.
 
     :param text: The input text for which to generate an embedding.
-    :param engine: The model engine to use for generating the embedding. Default is 'text-embedding-ada-002'.
+    :param engine: The model engine to use for generating the embedding. Default is 'text-embedding-ada-002'. Trying with 'text-embedding-3-large"
     :return: The generated embedding for the input text.
     """
     
