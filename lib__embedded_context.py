@@ -317,7 +317,7 @@ def write_blocks_to_csv(blocks, path, filename):
 
 
 
-def get_embedding(text, engine="text-embedding-3-large"):
+def get_embedding(text, engine="text-embedding-ada-002"):
     """
     This function takes in a piece of text and a model engine as input parameters, and returns an embedding for the input text.
     It utilizes OpenAI's Embedding API to generate the embedding based on the specified model.

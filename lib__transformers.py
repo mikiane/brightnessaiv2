@@ -288,7 +288,7 @@ def synthesize_multi(text, voice_id="FL36qzLoYbdCLMM5R9rF"):
 
 
 # Function to get the text embedding from OpenAI's API
-def get_embedding(text, model="text-embedding-3-large"):
+def get_embedding(text, model="text-embedding-ada-002"):
     openai.api_key = OPENAI_API_KEY
     text = text.replace("\n", " ")  # Replaces newline characters with spaces
     return openai.Embedding.create(input = [text], engine=model)['data'][0]['embedding']  # Returns the embedding
@@ -306,7 +306,7 @@ def searchembedding(text, filename):
     df['ada_embedding'] = df.ada_embedding.apply(eval).apply(np.array)
 
     # Convert the search term into a vector
-    searchvector = get_embedding(text, model='text-embedding-3-large')
+    searchvector = get_embedding(text, model='text-embedding-ada-002')
 
     # Create a new column using cosine_similarity to compare the searchvector with each row
     df['similarities'] = df.ada_embedding.apply(lambda x: np.dot(x, searchvector))
