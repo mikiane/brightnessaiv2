@@ -11,7 +11,7 @@
 # Author:  Michel Levy Provencal
 # Brightness.ai - 2023 - contact@brightness.fr
 # ----------------------------------------------------------------------------
-
+import codecs
 import pandas as pd
 import os
 import csv
@@ -211,8 +211,19 @@ def convert_text_to_text(file_path):
     :param file_path: The path to the text file.
     :return: The text extracted from the text file.
     """
-    with open(file_path, "r", encoding="utf-8") as file:
-        text = file.read()
+    
+    # Tente de deviner l'encodage du fichier
+    with open(file_path, 'rb') as file:
+        raw = file.read(4096)  # lit les premiers octets pour deviner l'encodage
+    encoding = codecs.detect_encoding(raw, default='utf-8')
+
+    # Lit le fichier avec l'encodage détecté
+    with open(file_path, 'r', encoding=encoding) as file:
+        content = file.read()
+
+    # Réécrit le content en UTF-8
+    text = content.encode('utf-8')
+
     return text
 
 
