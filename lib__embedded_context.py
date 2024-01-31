@@ -11,7 +11,7 @@
 # Author:  Michel Levy Provencal
 # Brightness.ai - 2023 - contact@brightness.fr
 # ----------------------------------------------------------------------------
-import codecs
+import chardet
 import pandas as pd
 import os
 import csv
@@ -205,26 +205,34 @@ def convert_image_to_text(file_path):
 
 
 
+
 def convert_text_to_text(file_path):
     """
     Converts the content of a text file to UTF-8 and returns a text string.
     :param file_path: The path to the text file.
-    :return: The text extracted from the text file.
+    :return: The text extracted from the text file in UTF-8.
     """
     
-    # Tente de deviner l'encodage du fichier
+    # Détecte l'encodage du fichier
     with open(file_path, 'rb') as file:
-        raw = file.read(4096)  # lit les premiers octets pour deviner l'encodage
-    encoding = codecs.detect_encoding(raw, default='utf-8')
+        raw_data = file.read()
+        result = chardet.detect(raw_data)
+        encoding = result['encoding']
 
     # Lit le fichier avec l'encodage détecté
     with open(file_path, 'r', encoding=encoding) as file:
         content = file.read()
 
-    # Réécrit le content en UTF-8
-    text = content.encode('utf-8')
+    # Convertit le contenu en UTF-8 si nécessaire
+    if encoding.lower() != 'utf-8':
+        content = content.encode(encoding).decode('utf-8')
 
-    return text
+    return content
+
+# Exemple d'utilisation
+# text = convert_text_to_text('mon_fichier.txt')
+# print(text)
+
 
 
 """ VERSION WITH COMPREHENSSION LIST
