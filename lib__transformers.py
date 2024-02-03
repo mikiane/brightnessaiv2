@@ -44,7 +44,7 @@ from openai import OpenAI
 
 
 
-model="gpt-4"
+model="gpt-4-tubo-preview"
 # Charger les variables d'environnement depuis le fichier .env
 load_dotenv('.env')
 #model = "gpt-3.5-turbo"
@@ -417,7 +417,7 @@ def write_blocks_to_csv(blocks, filename):
 
 # Function to generate a csv file from a string of text
 def write_csv_from_string(text, filename):
-    limit = 4000  # Limit for text blocks
+    limit = 20000  # Limit for text blocks
     blocks = split_text_into_blocks(text, limit)  # Split text into blocks
     write_blocks_to_csv(blocks, filename)  # Write blocks to csv file
 
@@ -470,11 +470,11 @@ def transform(text, instruct, model="gpt-4"):
 
 
 
-def transform(text, instruct, model="gpt-4"):
+def transform(text, instruct, model="gpt-4-turbo-preview"):
     # Chargez votre clé API depuis une variable d'environnement ou directement
     client = openai.OpenAI(api_key=os.environ.get('OPENAI_API_KEY'))
 
-    if model == "gpt-4":
+    if model == "gpt-4-turbo-preview":
         limit = 10000  # Limite pour la taille du texte
     else:
         limit = 5000
@@ -507,8 +507,8 @@ def transform(text, instruct, model="gpt-4"):
 
 
 # Function to summarize a chapter of text
-def transform_chap(text, prefix, instruct, n=3, model='gpt-4'):
-    model = "gpt-4"
+def transform_chap(text, prefix, instruct, n=3, model='gpt-4-turbo-preview'):
+    model = "gpt-4-turbo-preview"
     now = datetime.now()
     rand_str = str(now.strftime("%Y%m%d%H%M%S")) + "-"+ str(random.randint(0, 100))
     path = APP_PATH + "datas/"
@@ -584,11 +584,6 @@ def write_blocks_to_csv(blocks, filename):
         for block in blocks:
             csvwriter.writerow([block])
 
-# Function to generate a csv file from a string of text
-def write_csv_from_string(text, filename):
-    limit = 2000  # Limit for text blocks
-    blocks = split_text_into_blocks(text, limit)  # Split text into blocks
-    write_blocks_to_csv(blocks, filename)  # Write blocks to csv file
 
 # Function to summarize text
 """
@@ -659,6 +654,7 @@ def summarize(text, model='gpt-4-turbo-preview'):
     attempts = 0
     while attempts < 100000:
         try:
+            print("tentative résumé : " + str(attempts))
             response = client.chat.completions.create(
                 model=model,
                 messages=[
@@ -673,7 +669,7 @@ def summarize(text, model='gpt-4-turbo-preview'):
             error_reason = str(e)
             attempts += 1
             print(f"Erreur : {error_code} - {error_reason}. Nouvel essai dans 8 secondes...")
-            time.sleep(1.1 * attempts)
+            time.sleep(1.001 * attempts)
 
     print("Erreur : Echec de la création de la completion après x essais")
     sys.exit()
