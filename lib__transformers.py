@@ -640,21 +640,19 @@ def summarize(text, model='gpt-4'):
 
 
 
-def summarize(text, model='gpt-4'):
+def summarize(text, model='gpt-4-turbo-preview'):
     # Chargez votre clé API depuis une variable d'environnement ou directement
     client = openai.OpenAI(api_key=os.environ.get('OPENAI_API_KEY'))
 
-    model = "gpt-4"
-    if model == "gpt-4":
-        limit = 10000  # Limite pour la taille du texte
+    model = "gpt-4-turbo-preview"
+    if model == "gpt-4-turbo-preview":
+        limit = 50000  # Limite pour la taille du texte
     else:
         limit = 5000
 
-    prompt = "Texte : " + text[:limit] + "\nTache : Résumer le texte en respectant le style et le sens. \
-        \nFormat : Un texte court dont le style et le sens sont conformes au texte original. \
-        \nObjectif : Obtenir un résumé sans introduction particulière. \
-        \nEtapes : Ne jamais mentionner que le texte produit est un résumé. \
-        \n Le résumé : \
+    prompt = "Texte : " + text[:limit] + "\nTache : Résumer le texte suivant en français en respectant le style et le sens \
+        Proposer un titre au résumé. \
+        Ne JAMAIS mentionner le terme 'texte' ou 'résumé' dans le contenu produit \
         \n"
     system = "Rôle : Etre un rédacteur en français spécialisé dans le résumé d’ouvrages."
 
@@ -683,8 +681,8 @@ def summarize(text, model='gpt-4'):
 
 
 # Function to summarize large chapter
-def summarizelarge_chap(text, prefix, n=3, model="gpt-4"):
-    model = "gpt-4"
+def summarizelarge_chap(text, prefix, n=3, model="gpt-4-turbo-preview"):
+    model = "gpt-4-turbo-preview"
     now = datetime.now()
     rand_str = str(now.strftime("%Y%m%d%H%M%S")) + "-"+ str(random.randint(0, 100))
     path = APP_PATH + "datas/"
