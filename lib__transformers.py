@@ -417,7 +417,7 @@ def write_blocks_to_csv(blocks, filename):
 
 # Function to generate a csv file from a string of text
 def write_csv_from_string(text, filename):
-    limit = 20000  # Limit for text blocks
+    limit = 40000  # Limit for text blocks
     blocks = split_text_into_blocks(text, limit)  # Split text into blocks
     write_blocks_to_csv(blocks, filename)  # Write blocks to csv file
 
@@ -475,7 +475,7 @@ def transform(text, instruct, model="gpt-4-turbo-preview"):
     client = openai.OpenAI(api_key=os.environ.get('OPENAI_API_KEY'))
 
     if model == "gpt-4-turbo-preview":
-        limit = 10000  # Limite pour la taille du texte
+        limit = 40000  # Limite pour la taille du texte
     else:
         limit = 5000
 
@@ -645,7 +645,7 @@ def summarize(text, model='gpt-4-turbo-preview'):
     else:
         limit = 5000
 
-    prompt = "Texte : " + text[:limit] + "\nTache : Résumer le texte suivant en français en respectant le style et le sens \
+    prompt = "Texte : " + text[:limit] + "\nAction : Résumer le texte en français en respectant le style et le sens \
         Proposer un titre au résumé. \
         Ne JAMAIS mentionner le terme 'texte' ou 'résumé' dans le contenu produit \
         \n"
