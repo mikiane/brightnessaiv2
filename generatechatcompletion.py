@@ -168,7 +168,7 @@ def generate_chat(consigne, texte, system="", model="gpt-4", model_url=os.enviro
                     {"role": "system", "content": system},
                     {"role": "user", "content": prompt}
                 ],
-                temperature=0.3,
+                temperature=0.4,
                 stream=True
             )
 
