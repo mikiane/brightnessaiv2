@@ -21,7 +21,7 @@ api_key = ANTHROPIC_API_KEY
 
 
 
-def generate_chat_completion_anthropic(consigne, texte, model="claude-2"):
+def generate_chat_completion_anthropic(consigne, texte, model="claude-3-opus-20240229"):
     # Construct the prompt from the given consigne and texte
     prompt = f"{HUMAN_PROMPT} {consigne} : {texte}{AI_PROMPT}"
 

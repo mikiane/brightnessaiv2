@@ -50,7 +50,7 @@ def split_text_into_blocks(text, limit=4000):
     return blocks
 
 # Example usage
-with open('sapiens.txt', 'r', encoding='utf-8') as file:
+with open('toko.txt', 'r', encoding='utf-8') as file:
     text = file.read()
 text_segments = split_text_into_blocks(text)
 
@@ -97,7 +97,7 @@ embeddings = get_embeddings(text_segments)
 
 # Clustering based on cosine similarity
 similarity_matrix = cosine_similarity(embeddings)
-clustering_model = AgglomerativeClustering(n_clusters=None, affinity='precomputed', linkage='average', distance_threshold=0.17)
+clustering_model = AgglomerativeClustering(n_clusters=None, affinity='precomputed', linkage='average', distance_threshold=0.14)
 labels = clustering_model.fit_predict(1 - similarity_matrix)
 
 # Display the number of detected clusters
