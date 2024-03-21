@@ -33,6 +33,7 @@ def generate_chat_completion_anthropic(consigne, texte, model="claude-3-opus-202
         prompt=prompt,
         model=model,
         stream=True,
+        temperature=0.2,
         # Set any other desired parameters here, for example:
         max_tokens_to_sample=99000
     )
