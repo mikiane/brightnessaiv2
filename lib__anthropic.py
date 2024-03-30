@@ -1,6 +1,7 @@
 from anthropic import Anthropic, HUMAN_PROMPT, AI_PROMPT
 import os
 from dotenv import load_dotenv
+import requests
 
 
 load_dotenv('.env')
@@ -22,7 +23,7 @@ api_key = ANTHROPIC_API_KEY
 
 
 
-def generate_chat_completion_anthropic(consigne, texte, model="claude-3-opus-20240229"):
+def generate_chat_completion_anthropic_api(consigne, texte, model="claude-3-opus-20240229"):
     
 
     # Construct the prompt from the given consigne and texte
@@ -44,5 +45,38 @@ def generate_chat_completion_anthropic(consigne, texte, model="claude-3-opus-202
     # Iterate over the stream completions and yield the results
     for completion in stream:
         yield completion.completion
+        
+        
+
+def generate_chat_completion_anthropic(consigne, texte, model="claude-3-opus-20240229"):
+    # Construct the prompt from the given consigne and texte
+    prompt = f"{HUMAN_PROMPT} {consigne} : {texte}{AI_PROMPT}"
+    
+    # Set the API endpoint URL
+    url = "https://api.anthropic.com/v1/messages"
+    
+    # Set the headers
+    headers = {
+        "anthropic-version": "2023-06-01",
+        "anthropic-beta": "messages-2023-12-15",
+        "content-type": "application/json",
+        "x-api-key": ANTHROPIC_API_KEY
+    }
+    
+    # Set the request data
+    data = {
+        "model": model,
+        "messages": [{"role": "user", "content": prompt}],
+        "max_tokens": 99000,
+        "stream": True
+    }
+    
+    # Send the POST request to the API endpoint
+    response = requests.post(url, headers=headers, json=data, stream=True)
+    
+    # Iterate over the stream completions and yield the results
+    for line in response.iter_lines():
+        if line:
+            yield line.decode('utf-8')
 
 
