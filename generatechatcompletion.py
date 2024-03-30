@@ -69,6 +69,7 @@ def generate_chat_completion(consigne, texte, model="gpt-4", model_url=os.enviro
 
      
     if model == "claude-2":
+        model = "claude-3-opus-20240229" #update to claude 3
         response = lib__anthropic.generate_chat_completion_anthropic(consigne, texte, model)
         for content in response:
             print(content)
@@ -135,6 +136,7 @@ def generate_chat(consigne, texte, system="", model="gpt-4", model_url=os.enviro
     texte = extract_context(texte, model)
     
     if model == "claude-2":
+        model = "claude-3-opus-20240229" #update to claude 3
         response = lib__anthropic.generate_chat_completion_anthropic(consigne, texte, model)
         for content in response:
             print(content)
