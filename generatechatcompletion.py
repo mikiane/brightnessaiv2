@@ -69,53 +69,61 @@ def generate_chat_completion(consigne, texte, model="gpt-4", model_url=os.enviro
 
      
     if model == "claude-2":
-        model = "claude-3-opus-20240229" #update to claude 3
+        model = "claude-2.1" #update to claude 2.1
         response = lib__anthropic.generate_chat_completion_anthropic(consigne, texte, model)
         for content in response:
             print(content)
             yield content
             
     else:
+        if model == "claude-3":
+            model = "claude-3-opus-20240229" #update to claude 3
+            response = lib__anthropic.generate_chat_completion_anthropic(consigne, texte, model)
+            for content in response:
+                print(content)
+                yield content
             
-        if model == "hf":
-            #prompt = str(consigne + "\n Le texte : ###" + texte + " ###\n")  # Construct the prompt from the given consigne and texte
-            prompt = str(consigne + "\n" + texte)  # Construct the prompt from the given consigne and texte
-            prompt = "<s>[INST]" + prompt + "[/INST]"
-            print("Prompt : " + prompt + "\n")
-            print("Model URL : " + model_url + "\n" + "HF TOKEN : " + os.environ['HF_API_TOKEN'] + "\n")
-            
-            client = InferenceClient(model_url, token=os.environ['HF_API_TOKEN'])
-            response = client.text_generation(
-                prompt,
-                max_new_tokens=1024,
-                stream=True
-            )
-            
-            for result in response:
-                yield result
-
-        
         else:
+                
+            if model == "hf":
+                #prompt = str(consigne + "\n Le texte : ###" + texte + " ###\n")  # Construct the prompt from the given consigne and texte
+                prompt = str(consigne + "\n" + texte)  # Construct the prompt from the given consigne and texte
+                prompt = "<s>[INST]" + prompt + "[/INST]"
+                print("Prompt : " + prompt + "\n")
+                print("Model URL : " + model_url + "\n" + "HF TOKEN : " + os.environ['HF_API_TOKEN'] + "\n")
+                
+                client = InferenceClient(model_url, token=os.environ['HF_API_TOKEN'])
+                response = client.text_generation(
+                    prompt,
+                    max_new_tokens=1024,
+                    stream=True
+                )
+                
+                for result in response:
+                    yield result
+
             
-            # Use OpenAI's Chat Completion API
-            completion = client.chat.completions.create(
-                model=model,
-                messages=[
-                    {'role': 'system', 'content': "Je suis un assistant parlant parfaitement le français et l'anglais capable de corriger, rédiger, paraphraser, traduire, résumer, développer des textes."},
-                    {'role': 'user', 'content': prompt}
-                ],
-                temperature=0,
-                stream=True
-            )
-            
-            for message in completion:
-            # Vérifiez ici la structure de 'chunk' et extrayez le contenu
-            # La ligne suivante est un exemple et peut nécessiter des ajustements
-            
-                if message.choices[0].delta.content: 
-                    text_chunk = message.choices[0].delta.content 
-                    print(text_chunk, end="", flush="true")
-                    yield text_chunk
+            else:
+                
+                # Use OpenAI's Chat Completion API
+                completion = client.chat.completions.create(
+                    model=model,
+                    messages=[
+                        {'role': 'system', 'content': "Je suis un assistant parlant parfaitement le français et l'anglais capable de corriger, rédiger, paraphraser, traduire, résumer, développer des textes."},
+                        {'role': 'user', 'content': prompt}
+                    ],
+                    temperature=0,
+                    stream=True
+                )
+                
+                for message in completion:
+                # Vérifiez ici la structure de 'chunk' et extrayez le contenu
+                # La ligne suivante est un exemple et peut nécessiter des ajustements
+                
+                    if message.choices[0].delta.content: 
+                        text_chunk = message.choices[0].delta.content 
+                        print(text_chunk, end="", flush="true")
+                        yield text_chunk
                     
                 
 
@@ -136,50 +144,58 @@ def generate_chat(consigne, texte, system="", model="gpt-4", model_url=os.enviro
     texte = extract_context(texte, model)
     
     if model == "claude-2":
-        model = "claude-3-opus-20240229" #update to claude 3
+        model = "claude-2.1" #update to claude 2.1
         response = lib__anthropic.generate_chat_completion_anthropic(consigne, texte, model)
         for content in response:
             print(content)
             yield content
-    
+            
     else:
-        if model == "hf":
-            prompt = str(consigne + "\n" + texte)  # Construct the prompt from the given consigne and texte
-            #prompt = str(consigne + "\n Le texte : ###" + texte + " ###\n")  # Construct the prompt from the given consigne and texte
-            prompt = "<s>[INST]" + prompt + "[/INST]"
-            
-            print("Prompt : " + prompt + "\n")
-            print("Model URL : " + model_url + "\n" + "HF TOKEN : " + os.environ['HF_API_TOKEN'] + "\n")
-            
-            client = InferenceClient(model_url, token=os.environ['HF_API_TOKEN'])
-            response = client.text_generation(
-                prompt,
-                max_new_tokens=1024,
-                stream=True
-            )
-            
-            for result in response:
-                yield result
+        if model == "claude-3":
+            model = "claude-3-opus-20240229" #update to claude 3
+            response = lib__anthropic.generate_chat_completion_anthropic(consigne, texte, model)
+            for content in response:
+                print(content)
+                yield content
+    
+        else:
+            if model == "hf":
+                prompt = str(consigne + "\n" + texte)  # Construct the prompt from the given consigne and texte
+                #prompt = str(consigne + "\n Le texte : ###" + texte + " ###\n")  # Construct the prompt from the given consigne and texte
+                prompt = "<s>[INST]" + prompt + "[/INST]"
+                
+                print("Prompt : " + prompt + "\n")
+                print("Model URL : " + model_url + "\n" + "HF TOKEN : " + os.environ['HF_API_TOKEN'] + "\n")
+                
+                client = InferenceClient(model_url, token=os.environ['HF_API_TOKEN'])
+                response = client.text_generation(
+                    prompt,
+                    max_new_tokens=1024,
+                    stream=True
+                )
+                
+                for result in response:
+                    yield result
 
 
-        else:   
-            #Model = gpt-4-1106-preview 
-            completion = client.chat.completions.create(
-                model=model,
-                messages=[
-                    {"role": "system", "content": system},
-                    {"role": "user", "content": prompt}
-                ],
-                temperature=0.2, # set to 0.4 for scenario planning
-                stream=True
-            )
+            else:   
+                #Model = gpt-4-1106-preview 
+                completion = client.chat.completions.create(
+                    model=model,
+                    messages=[
+                        {"role": "system", "content": system},
+                        {"role": "user", "content": prompt}
+                    ],
+                    temperature=0.2, # set to 0.4 for scenario planning
+                    stream=True
+                )
 
-            for message in completion:
-            # Vérifiez ici la structure de 'chunk' et extrayez le contenu
-            # La ligne suivante est un exemple et peut nécessiter des ajustements
-            
-                if message.choices[0].delta.content: 
-                    text_chunk = message.choices[0].delta.content 
-                    print(text_chunk, end="", flush="true")
-                    yield text_chunk
-                    
+                for message in completion:
+                # Vérifiez ici la structure de 'chunk' et extrayez le contenu
+                # La ligne suivante est un exemple et peut nécessiter des ajustements
+                
+                    if message.choices[0].delta.content: 
+                        text_chunk = message.choices[0].delta.content 
+                        print(text_chunk, end="", flush="true")
+                        yield text_chunk
+                        

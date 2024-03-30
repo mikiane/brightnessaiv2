@@ -25,6 +25,34 @@ api_key = ANTHROPIC_API_KEY
 
 
 
+def generate_chat_completion_anthropic(consigne, texte, model="claude-3-opus-20240229"):
+# Construct the prompt from the given consigne and texte
+
+    prompt = f"{HUMAN_PROMPT} {consigne} : {texte}{AI_PROMPT}"
+    client = Anthropic(api_key=ANTHROPIC_API_KEY)
+
+    # Create a stream completion using the Anthropic API
+    completion = client.messages.stream(
+        max_tokens=4096,
+        messages=[
+            {
+                "role": "user",
+                "content": prompt,
+            }
+        ],
+        model=model
+    )
+
+    # Iterate over the stream completions and yield the results
+    with completion as stream:
+        for text in stream.text_stream:
+            yield text
+            
+            
+
+
+###### OLD VERSIONS OF API CALLS #########
+
 def generate_chat_completion_anthropic_v2(consigne, texte, model="claude-3-opus-20240229"):
     
 
@@ -81,27 +109,3 @@ def generate_chat_completion_anthropic_request(consigne, texte, model="claude-3-
         if line:
             yield line.decode('utf-8')
 
-
-
-def generate_chat_completion_anthropic(consigne, texte, model="claude-3-opus-20240229"):
-# Construct the prompt from the given consigne and texte
-
-    prompt = f"{HUMAN_PROMPT} {consigne} : {texte}{AI_PROMPT}"
-    client = Anthropic(api_key=ANTHROPIC_API_KEY)
-
-    # Create a stream completion using the Anthropic API
-    completion = client.messages.stream(
-        max_tokens=4096,
-        messages=[
-            {
-                "role": "user",
-                "content": prompt,
-            }
-        ],
-        model=model
-    )
-
-    # Iterate over the stream completions and yield the results
-    with completion as stream:
-        for text in stream.text_stream:
-            yield text
