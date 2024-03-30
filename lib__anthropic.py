@@ -98,7 +98,7 @@ def generate_chat_completion_anthropic(consigne, texte, model="claude-3-opus-202
                 "content": prompt,
             }
         ],
-        model=model,
+        model=model
     )
 
     # Iterate over the stream completions and yield the results
