@@ -2,6 +2,8 @@ from anthropic import Anthropic, HUMAN_PROMPT, AI_PROMPT
 import os
 from dotenv import load_dotenv
 import requests
+import anthropic
+
 
 
 load_dotenv('.env')
@@ -23,7 +25,7 @@ api_key = ANTHROPIC_API_KEY
 
 
 
-def generate_chat_completion_anthropic_api(consigne, texte, model="claude-3-opus-20240229"):
+def generate_chat_completion_anthropic_api_2(consigne, texte, model="claude-3-opus-20240229"):
     
 
     # Construct the prompt from the given consigne and texte
@@ -48,7 +50,7 @@ def generate_chat_completion_anthropic_api(consigne, texte, model="claude-3-opus
         
         
 
-def generate_chat_completion_anthropic(consigne, texte, model="claude-3-opus-20240229"):
+def generate_chat_completion_anthropic_req(consigne, texte, model="claude-3-opus-20240229"):
     # Construct the prompt from the given consigne and texte
     prompt = f"{HUMAN_PROMPT} {consigne} : {texte}{AI_PROMPT}"
     
@@ -80,3 +82,26 @@ def generate_chat_completion_anthropic(consigne, texte, model="claude-3-opus-202
             yield line.decode('utf-8')
 
 
+
+
+
+
+def generate_chat_completion_anthropic(consigne, texte, model="claude-3-opus-20240229"):
+    client = anthropic.Anthropic(
+        api_key=ANTHROPIC_API_KEY
+    )
+
+    with client.messages.stream(
+        model=model,
+        max_tokens=99000,
+        temperature=0,
+        system=consigne,
+        messages=[
+            {
+                "role": "user",
+                "content": texte
+            }
+        ]
+    ) as stream:
+        for text in stream.text_stream:
+            yield text
