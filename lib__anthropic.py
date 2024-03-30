@@ -91,7 +91,7 @@ def generate_chat_completion_anthropic(consigne, texte, model="claude-3-opus-202
 
     # Create a stream completion using the Anthropic API
     completion = client.messages.stream(
-        max_tokens=99000,
+        max_tokens=4096,
         messages=[
             {
                 "role": "user",
