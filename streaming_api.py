@@ -60,7 +60,7 @@ def chat():
     model = data.get('model', 'gpt-4')  # Default to 'gpt-4' if no model is provided
     temperature = data.get('temperature', 0)  # Default to 0.5 if no temperature is provided
      
-    print("consigne: " + consigne + "\n" + "texte: " + texte + "\n" + "system: " + system + "\n" + "model: " + model + "\n" + "temperature" + str(temperature) + "\n")
+    print("consigne: " + consigne + "\n" + "texte: " + texte + "\n" + "system: " + system + "\n" + "model: " + model + "\n" + "temperature: " + str(temperature) + "\n")
 
 
     # Import module to unescape URL-encoded strings
