@@ -60,7 +60,7 @@ def chat():
     model = data.get('model', 'gpt-4')  # Default to 'gpt-4' if no model is provided
     temperature = data.get('temperature', 0)  # Default to 0.5 if no temperature is provided
      
-    print("consigne: " + consigne + "\n" + "texte: " + texte + "\n" + "system: " + system + "\n" + "model: " + model + "\n")
+    print("consigne: " + consigne + "\n" + "texte: " + texte + "\n" + "system: " + system + "\n" + "model: " + model + "\n" + "temperature" + str(temperature) + "\n")
 
 
     # Import module to unescape URL-encoded strings
@@ -71,7 +71,7 @@ def chat():
     texte = unquote(texte)
 
     # Generate a chat and return it as a server-sent event
-    return Response(generatechatcompletion.generate_chat(consigne, texte, system, model), content_type='text/plain')
+    return Response(generatechatcompletion.generate_chat(consigne, texte, system, model, temperature), content_type='text/plain')
 
 # If this script is run directly, start the Flask server
 if __name__ == '__main__':
