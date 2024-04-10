@@ -44,6 +44,8 @@ def extract_context(text, model):
         token_nb = 8000
     if model == "gpt-4-turbo-preview":
         token_nb = 128000
+    if model == "gpt-4-turbo":
+        token_nb = 128000
     if model == "gpt-3.5-turbo-16k": 
         token_nb = 16000
     if model == "hf":
