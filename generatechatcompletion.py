@@ -139,7 +139,7 @@ def generate_chat_completion(consigne, texte, model="gpt-4", model_url=os.enviro
                         
 
 # Function to generate chat
-def generate_chat(consigne, texte, system="", model="gpt-4", model_url=os.environ['MODEL_URL']):
+def generate_chat(consigne, texte, system="", model="gpt-4", model_url=os.environ['MODEL_URL'], temperature=0):
     prompt = str(consigne + " : " + texte)  # Construct the prompt from the given consigne and texte
     # Call the OpenAI API to create a chat
 
@@ -149,7 +149,7 @@ def generate_chat(consigne, texte, system="", model="gpt-4", model_url=os.enviro
     
     if model == "claude-2":
         model = "claude-2.1" #update to claude 2.1
-        response = lib__anthropic.generate_chat_completion_anthropic(consigne, texte, model)
+        response = lib__anthropic.generate_chat_completion_anthropic(consigne, texte, model, temperature)
         for content in response:
             print(content)
             yield content
@@ -157,7 +157,7 @@ def generate_chat(consigne, texte, system="", model="gpt-4", model_url=os.enviro
     else:
         if model == "claude-3":
             model = "claude-3-opus-20240229" #update to claude 3
-            response = lib__anthropic.generate_chat_completion_anthropic(consigne, texte, model)
+            response = lib__anthropic.generate_chat_completion_anthropic(consigne, texte, model, temperature)
             for content in response:
                 print(content)
                 yield content
@@ -190,7 +190,7 @@ def generate_chat(consigne, texte, system="", model="gpt-4", model_url=os.enviro
                         {"role": "system", "content": system},
                         {"role": "user", "content": prompt}
                     ],
-                    temperature=0.2, # set to 0.4 for scenario planning
+                    temperature=temperature, # set to 0.4 for scenario planning
                     stream=True
                 )
 
