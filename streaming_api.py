@@ -59,7 +59,9 @@ def chat():
     system = data.get('system', '') # Default to '' if no model is provided
     model = data.get('model', 'gpt-4')  # Default to 'gpt-4' if no model is provided
     temperature = float(data.get('temperature', str(0)))  # Default to 0.5 if no temperature is provided
-     
+    temperature_str = data.get('temperature', '0').replace(',', '.')
+    temperature = float(temperature_str)  # Convertissez en float après avoir remplacé
+ 
     print("consigne: " + consigne + "\n" + "texte: " + texte + "\n" + "system: " + system + "\n" + "model: " + model + "\n" + "temperature: " + str(temperature) + "\n")
 
 
