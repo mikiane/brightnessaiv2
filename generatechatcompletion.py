@@ -142,7 +142,8 @@ def generate_chat_completion(consigne, texte, model="gpt-4", model_url=os.enviro
 def generate_chat(consigne, texte, system="", model="gpt-4", model_url=os.environ['MODEL_URL'], temperature=0):
     prompt = str(consigne + " : " + texte)  # Construct the prompt from the given consigne and texte
     # Call the OpenAI API to create a chat
-
+    print("Model : " + model + "\n")
+    print("Temperature : " + temperature + "\n")
     client = openai.OpenAI(api_key=os.environ['OPENAI_API_KEY'])
 
     texte = extract_context(texte, model)
