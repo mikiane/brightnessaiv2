@@ -50,7 +50,7 @@ def split_text_into_blocks(text, limit=4000):
     return blocks
 
 # Example usage
-with open('toko.txt', 'r', encoding='utf-8') as file:
+with open('fireup.txt', 'r', encoding='utf-8') as file:
     text = file.read()
 text_segments = split_text_into_blocks(text)
 
@@ -61,10 +61,16 @@ def extract_context(text, model):
     
     if model == "claude-2":
         token_nb = 100000 
+    if model == "claude-3":
+        token_nb = 150000
     if model == "gpt-4":
         token_nb = 8000
     if model == "gpt-4-turbo-preview":
         token_nb = 128000
+    if model == "gpt-4-turbo":
+        token_nb = 128000
+    if model == "gpt-4o":
+        token_nb = 250000
     if model == "gpt-3.5-turbo-16k": 
         token_nb = 16000
     if model == "hf":
@@ -102,7 +108,7 @@ labels = clustering_model.fit_predict(1 - similarity_matrix)
 
 # Display the number of detected clusters
 unique_clusters = np.unique(labels)
-print(f"Nombre de clusters détectés : {len(unique_clusters)}")
+print(f"Nombre d'idées détectés : {len(unique_clusters)}")
 
 # Identification of clusters and association of texts
 clusters = {}
@@ -114,10 +120,10 @@ for label, text in zip(labels, text_segments):
 # Summary of texts in each cluster
 for cluster_id, texts in clusters.items():
     cluster_text = " ".join(texts)
-    print(f"Cluster {cluster_id} :")
-    cluster_text = extract_context(cluster_text, "gpt-4-turbo-preview")
+    print(f"Idée {cluster_id} :")
+    cluster_text = extract_context(cluster_text, "gpt-4o")
     response = openai.chat.completions.create(
-      model="gpt-4-turbo-preview",
+      model="gpt-4-turbo",
       messages=[{"role": "system", "content": "Résumer le texte suivant en français et donner un titre au résumé. Ne pas mentionner le terme 'texte' ou 'résumé' dans le contenu produit :"},
                 {"role": "user", "content": cluster_text}],
       temperature=0,

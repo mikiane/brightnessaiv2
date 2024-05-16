@@ -46,6 +46,8 @@ def extract_context(text, model):
         token_nb = 128000
     if model == "gpt-4-turbo":
         token_nb = 128000
+    if model == "gpt-4o":
+        token_nb = 250000
     if model == "gpt-3.5-turbo-16k": 
         token_nb = 16000
     if model == "hf":
@@ -66,7 +68,7 @@ def extract_context(text, model):
 
 
 # Function to generate chat completions
-def generate_chat_completion(consigne, texte, model="gpt-4", model_url=os.environ['MODEL_URL']):
+def generate_chat_completion(consigne, texte, model="gpt-4o", model_url=os.environ['MODEL_URL']):
     texte = extract_context(texte, model)
     client = openai.OpenAI(api_key=os.environ['OPENAI_API_KEY'])
     prompt = str(consigne + " : " + texte)  # Construct the prompt from the given consigne and texte
@@ -139,7 +141,7 @@ def generate_chat_completion(consigne, texte, model="gpt-4", model_url=os.enviro
                         
 
 # Function to generate chat
-def generate_chat(consigne, texte, system="", model="gpt-4", temperature=1):
+def generate_chat(consigne, texte, system="", model="gpt-4o", temperature=1):
     prompt = str(consigne + " : " + texte)  # Construct the prompt from the given consigne and texte
     # Call the OpenAI API to create a chat
     print("Model : " + model + "\n")
