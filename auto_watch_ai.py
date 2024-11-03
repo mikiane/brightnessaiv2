@@ -28,9 +28,7 @@ def process_url(command, url, model, site="", input_data=""):
 
 ## PODCAST VEILLE #1 ##
 # Génération d'une liste de livres pour veille podcast
-url_list = ["https://www.technologyreview.com/artificial-intelligence/"
-            , "https://www.artificialintelligence-news.com/"
-            , "https://rss.app/feeds/v1.1/ts7TBAc6R3BNeWTU.json"
+url_list = ["https://www.artificialintelligence-news.com/"
             , "https://www.artificialintelligence-news.com/"
             , "https://venturebeat.com/category/ai/"
             , "https://www.wired.com/tag/artificial-intelligence/"
@@ -43,7 +41,6 @@ url_list = ["https://www.technologyreview.com/artificial-intelligence/"
             , "https://venturebeat.com/category/ai/"
             , "https://towardsdatascience.com/"
             , "https://openai.com/news/"
-            , "https://www.exponentialview.co/"
             , "https://neurips.cc/"
             , "https://london.theaisummit.com/ai-summit-event-series"
             , "https://www.reddit.com/r/MachineLearning/?rdt=41943"
