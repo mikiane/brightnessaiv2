@@ -36,8 +36,19 @@ url_list = ["https://www.technologyreview.com/artificial-intelligence/"
             , "https://www.wired.com/tag/artificial-intelligence/"
             , "https://www.forbes.com/ai/"
             , "https://www.theverge.com/ai-artificial-intelligence"
-            , "https://www.theguardian.com/technology/artificialintelligenceai"]
-
+            , "https://www.theguardian.com/technology/artificialintelligenceai"
+            , "https://arxiv.org/list/cs.AI/recent"
+            , "https://www.nature.com/natmachintell/"
+            , "https://www.gartner.com/en/topics/artificial-intelligence"
+            , "https://venturebeat.com/category/ai/"
+            , "https://towardsdatascience.com/"
+            , "https://openai.com/news/"
+            , "https://www.exponentialview.co/"
+            , "https://neurips.cc/"
+            , "https://london.theaisummit.com/ai-summit-event-series"
+            , "https://www.reddit.com/r/MachineLearning/?rdt=41943"
+            , "https://www.theverge.com/ai-artificial-intelligence"
+            , "https://techcrunch.com/tag/artificial-intelligence/"]
 
 
 # Setting the locale to French

@@ -50,7 +50,20 @@ url_list = ['https://techcrunch.com',
             'https://www.engadget.com',
             'https://gizmodo.com',
             'https://www.technologyreview.com',
-            'https://venturebeat.com']
+            'https://venturebeat.com',
+            "https://www.bbc.com/news/technology",
+            "https://www.theguardian.com/uk/technology",
+            "https://www.telegraph.co.uk/technology/",
+            "https://www.reuters.com/technology/",
+            "https://www.bloomberg.com/technology",
+            "https://www.ft.com/technology",
+            "https://www.haaretz.com/israel-news/tech-news",
+            "https://www.calcalistech.com/",
+            "https://www.globes.co.il/en/",
+            "https://www.lemonde.fr/technologies/",
+            "https://www.numerama.com/tech/",
+            "https://www.euronews.com/programmes/actualite-tech",
+            "https://www.lemondeinformatique.fr/"]
 
 # Setting the locale to French
 #locale.setlocale(locale.LC_TIME, 'fr_FR')
