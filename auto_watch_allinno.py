@@ -2,6 +2,13 @@ import lib__agent_buildchronical
 
 from datetime import datetime
 import locale
+# Load the environment variables from the .env file
+load_dotenv(".env")
+from dotenv import load_dotenv
+import os
+
+DEFAULT_MODEL = os.environ.get("DEFAULT_MODEL")
+model = DEFAULT_MODEL
 
 
 def process_rss(command, url, model, site="", input_data=""):
@@ -70,7 +77,7 @@ command = "Nous sommes le " + formatted_date + "\nA partir du texte suivant entr
      
 
 #génération de la veille
-model="gpt-4-turbo-preview"
+model=DEFAULT_MODEL
 #responses = [process_rss(command, rss, model,"","") for rss in rss_list]
 responses_url = [process_url(command, url, model,"","") for url in url_list]
 #res = "<br><br>".join(responses) + "<br><br>".join(responses_url)

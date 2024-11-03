@@ -19,6 +19,7 @@ app = Flask(__name__)  # Initialize Flask app
 #CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
 app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024  # Limit the size of uploaded files to 50 MB
 PODCASTS_PATH = os.environ.get("PODCASTS_PATH")
+DEFAULT_MODEL = os.environ.get("DEFAULT_MODEL")
 
 
 
@@ -32,7 +33,7 @@ def sumup():
         return jsonify({'error': 'No file provided'}), 400
     email = request.form.get('email')  # Get email from form data
     n = request.form.get('facteur')  # Get factor from form data
-    model = request.form.get('model', "gpt-4")  # Get model from form data
+    model = request.form.get('model', DEFAULT_MODEL)  # Get model from form data
 
     # Read the uploaded file
     inputstring = uploaded_file.read().decode('utf-8')

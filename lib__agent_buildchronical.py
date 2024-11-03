@@ -41,11 +41,20 @@ from lib__env import *
 from openai import OpenAI
 import xml.etree.ElementTree as ET
 
+load_dotenv(DOTENVPATH)
+from dotenv import load_dotenv
+import os
+
+
+# Charger les variables d'environnement depuis le fichier .env
+load_dotenv('.env')
+
+DEFAULT_MODEL = os.environ.get("DEFAULT_MODEL")
+model = DEFAULT_MODEL
 
 
 
-
-model="gpt-4"
+model=DEFAULT_MODEL
 load_dotenv(DOTENVPATH)
 ELEVENLABS_API_KEY = os.environ.get("ELEVENLABS_API_KEY")
 PODCASTS_PATH = os.environ.get("PODCASTS_PATH")
@@ -347,7 +356,7 @@ def extract_title(url):
 
 
 
-def execute(prompt, site, input_data, model="gpt-4"):
+def execute(prompt, site, input_data, model=DEFAULT_MODEL):
     ########################################################################################################################
     """
     Function execute a prompt with the OpenAI API / with some context (brain_id, ur or input_data) and return the result
@@ -373,7 +382,7 @@ def execute(prompt, site, input_data, model="gpt-4"):
 
     prompt, context, input_data = truncate_strings(prompt, context, input_data, 6000)
     
-    if model == "gpt-4":
+    if model == DEFAULT_MODEL:
         # Limitation des erreurs de longueur
         prompt, context, input_data = truncate_strings(prompt, context, input_data, 12000)
         
@@ -445,7 +454,7 @@ def create_image_with_text(text, input_file, output_file):
 
 
 
-def convert_into_html(text, model="gpt-3.5-turbo-16k"):
+def convert_into_html(text, model=DEFAULT_MODEL):
     ########################################################################################################################
     """ 
     Function that uses GPT 3.5 to convert a text into an HTML page

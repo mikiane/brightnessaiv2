@@ -21,6 +21,7 @@ from lib__env import *
 #load_dotenv("/home/michel/extended_llm/.env") # Load the environment variables from the .env file.
 
 load_dotenv(DOTENVPATH)
+DEFAULT_MODEL = os.environ.get("DEFAULT_MODEL")
 DESTINATAIRES_TECH = os.environ.get("DESTINATAIRES_TECH")
 PODCASTS_PATH = os.environ.get("PODCASTS_PATH")
 n_feeds = 5 # define the number of feeds to get from Feedly

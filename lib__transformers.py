@@ -41,12 +41,14 @@ from num2words import num2words
 import re
 import lib__sendmail
 from openai import OpenAI
+from dotenv import load_dotenv
+import os
 
 
-
-model="gpt-4-tubo-preview"
 # Charger les variables d'environnement depuis le fichier .env
 load_dotenv('.env')
+
+
 #model = "gpt-3.5-turbo"
 #load_dotenv(".env")  # Load the environment variables from the .env file.
 #load_dotenv("/home/michel/extended_llm/.env")  # Load the environment variables from the .env file.
@@ -54,8 +56,8 @@ load_dotenv('.env')
 ELEVENLABS_API_KEY = os.environ.get("ELEVENLABS_API_KEY")
 PODCASTS_PATH = os.environ.get("PODCASTS_PATH")
 SENDGRID_KEY = os.environ.get("SENDGRID_KEY")
-
-
+DEFAULT_MODEL = os.environ.get("DEFAULT_MODEL")
+model = DEFAULT_MODEL
 
 # Environment Variables
 SENDGRID_KEY = os.environ['SENDGRID_KEY']
@@ -470,12 +472,12 @@ def transform(text, instruct, model="gpt-4"):
 
 
 
-def transform(text, instruct, model="gpt-4-turbo-preview"):
+def transform(text, instruct, model=DEFAULT_MODEL):
     # Chargez votre clé API depuis une variable d'environnement ou directement
     client = openai.OpenAI(api_key=os.environ.get('OPENAI_API_KEY'))
 
-    if model == "gpt-4-turbo-preview":
-        limit = 40000  # Limite pour la taille du texte
+    if model == DEFAULT_MODEL:
+        limit = 90000  # Limite pour la taille du texte
     else:
         limit = 5000
 
@@ -507,8 +509,8 @@ def transform(text, instruct, model="gpt-4-turbo-preview"):
 
 
 # Function to summarize a chapter of text
-def transform_chap(text, prefix, instruct, n=3, model='gpt-4-turbo-preview'):
-    model = "gpt-4-turbo-preview"
+def transform_chap(text, prefix, instruct, n=3, model=DEFAULT_MODEL):
+    model = DEFAULT_MODEL
     now = datetime.now()
     rand_str = str(now.strftime("%Y%m%d%H%M%S")) + "-"+ str(random.randint(0, 100))
     path = APP_PATH + "datas/"
@@ -635,12 +637,12 @@ def summarize(text, model='gpt-4'):
 
 
 
-def summarize(text, model='gpt-4-turbo-preview'):
+def summarize(text, model=DEFAULT_MODEL):
     # Chargez votre clé API depuis une variable d'environnement ou directement
     client = openai.OpenAI(api_key=os.environ.get('OPENAI_API_KEY'))
 
-    model = "gpt-4-turbo-preview"
-    if model == "gpt-4-turbo-preview":
+    model = DEFAULT_MODEL
+    if model == DEFAULT_MODEL:
         limit = 50000  # Limite pour la taille du texte
     else:
         limit = 5000
@@ -677,8 +679,8 @@ def summarize(text, model='gpt-4-turbo-preview'):
 
 
 # Function to summarize large chapter
-def summarizelarge_chap(text, prefix, n=3, model="gpt-4-turbo-preview"):
-    model = "gpt-4-turbo-preview"
+def summarizelarge_chap(text, prefix, n=3, model=DEFAULT_MODEL):
+    model = DEFAULT_MODEL
     now = datetime.now()
     rand_str = str(now.strftime("%Y%m%d%H%M%S")) + "-"+ str(random.randint(0, 100))
     path = APP_PATH + "datas/"

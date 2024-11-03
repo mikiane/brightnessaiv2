@@ -15,8 +15,15 @@ from huggingface_hub import InferenceClient
 
 # Load the environment variables from the .env file
 load_dotenv(".env")
+from dotenv import load_dotenv
+import os
 
+DEFAULT_MODEL = os.environ.get("DEFAULT_MODEL")
+model = DEFAULT_MODEL
 
+ELEVENLABS_API_KEY = os.environ.get("ELEVENLABS_API_KEY")
+PODCASTS_PATH = os.environ.get("PODCASTS_PATH")
+SENDGRID_KEY = os.environ.get("SENDGRID_KEY")
 # Set the OpenAI API key from the environment variables
 openai.api_key = os.environ['OPEN_AI_KEY']
 
@@ -46,7 +53,7 @@ def extract_context(text, model):
         token_nb = 128000
     if model == "gpt-4-turbo":
         token_nb = 128000
-    if model == "gpt-4o":
+    if model == DEFAULT_MODEL:
         token_nb = 250000
     if model == "gpt-3.5-turbo-16k": 
         token_nb = 16000
@@ -68,7 +75,7 @@ def extract_context(text, model):
 
 
 # Function to generate chat completions
-def generate_chat_completion(consigne, texte, model="gpt-4o", model_url=os.environ['MODEL_URL']):
+def generate_chat_completion(consigne, texte, model=DEFAULT_MODEL, model_url=os.environ['MODEL_URL']):
     texte = extract_context(texte, model)
     client = openai.OpenAI(api_key=os.environ['OPENAI_API_KEY'])
     prompt = str(consigne + " : " + texte)  # Construct the prompt from the given consigne and texte
@@ -141,7 +148,7 @@ def generate_chat_completion(consigne, texte, model="gpt-4o", model_url=os.envir
                         
 
 # Function to generate chat
-def generate_chat(consigne, texte, system="", model="gpt-4o", temperature=1):
+def generate_chat(consigne, texte, system="", model=DEFAULT_MODEL, temperature=1):
     prompt = str(consigne + " : " + texte)  # Construct the prompt from the given consigne and texte
     # Call the OpenAI API to create a chat
     print("Model : " + model + "\n")

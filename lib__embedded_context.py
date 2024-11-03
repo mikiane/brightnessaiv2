@@ -41,6 +41,16 @@ from markdownify import markdownify as md
 from urllib.parse import urlparse, urljoin
 from lib__env import *
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
+load_dotenv(DOTENVPATH)
+from dotenv import load_dotenv
+import os
+
+
+# Charger les variables d'environnement depuis le fichier .env
+load_dotenv('.env')
+
+DEFAULT_MODEL = os.environ.get("DEFAULT_MODEL")
+model = DEFAULT_MODEL
 
 """
 #############################################################################################################
@@ -706,7 +716,7 @@ def find_context(text, index_filename, n_results=5):
 
 # ----------------------------------------------------------------------------
 # Function that queries the OpenAI language model with a context and query
-def query_extended_llm(text, index_filename, model="gpt-4"):
+def query_extended_llm(text, index_filename, model=DEFAULT_MODEL):
     """
     This function takes as input a piece of text, the filename of a CSV file containing indexed data, 
     and an optional AI model to use. It queries the OpenAI language model with a context derived from 

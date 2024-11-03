@@ -47,6 +47,15 @@ import time
 
 
 load_dotenv(DOTENVPATH)
+from dotenv import load_dotenv
+import os
+
+
+# Charger les variables d'environnement depuis le fichier .env
+load_dotenv('.env')
+
+DEFAULT_MODEL = os.environ.get("DEFAULT_MODEL")
+model = DEFAULT_MODEL
 
 
 ####################################################################################################
@@ -161,7 +170,7 @@ def text_to_json(text, json_file):
 # SCRIPT EXECUTION FUNCTIONS
 ####################################################################################################
 
-def request_llm(prompt, context, input_data, model="gpt-4"):
+def request_llm(prompt, context, input_data, model=DEFAULT_MODEL):
 
     attempts = 0
     execprompt = "Context : " + context + "\n" + input_data + "\n" + "Query : " + prompt
@@ -231,7 +240,7 @@ def execute_tasks(tasks, model):
         context = lib__embedded_context.find_context(prompt, index_filename, 3)
         
         
-        if model=="gpt-4":
+        if model==DEFAULT_MODEL:
             # truncate strings for gpt-4
             prompt, context, input_data = truncate_strings(prompt, context, input_data)
         else:

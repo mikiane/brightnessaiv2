@@ -21,6 +21,7 @@ from flask_cors import CORS
 
 # Create a new Flask web server application
 app = Flask(__name__)
+DEFAULT_MODEL = os.environ.get("DEFAULT_MODEL")
 
 # Enable CORS for the Flask app for all routes and a specific origin
 #CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
@@ -35,7 +36,7 @@ def stream_chat():
     consigne = data.get('consigne')
     texte = data.get('texte')
     system = data.get('system', '') # Default to '' if no model is provided
-    model = data.get('model', 'gpt-4')  # Default to 'gpt-4' if no model is provided
+    model = data.get('model', DEFAULT_MODEL)  # Default to 'gpt-4' if no model is provided
     
     # Import module to unescape URL-encoded strings
     from urllib.parse import unquote
@@ -57,7 +58,7 @@ def chat():
     consigne = data.get('consigne')
     texte = data.get('texte')
     system = data.get('system', '') # Default to '' if no model is provided
-    model = data.get('model', 'gpt-4')  # Default to 'gpt-4' if no model is provided
+    model = data.get('model', DEFAULT_MODEL)  # Default to 'gpt-4' if no model is provided
     #temperature = float(data.get('temperature', str(0)))  # Default to 0.5 if no temperature is provided
     temperature_str = data.get('temperature', '0').replace(',', '.')
     if temperature_str == "":

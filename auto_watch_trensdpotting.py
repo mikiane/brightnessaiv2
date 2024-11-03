@@ -1,5 +1,12 @@
 import lib__agent_buildchronical
 
+# Load the environment variables from the .env file
+load_dotenv(".env")
+from dotenv import load_dotenv
+import os
+
+DEFAULT_MODEL = os.environ.get("DEFAULT_MODEL")
+model = DEFAULT_MODEL
 
 
 def process_url(command, url, model, site="", input_data=""):
@@ -47,7 +54,7 @@ command = "A partir du texte suivant entre ___ , contenant des listes et descrip
             Toujours utiliser un modele de page HTML fond blanc, avec Titre en rouge en <h3>, description en <p> noir sur fond bleu clair, lien vers le livre derriere un Read More.\
             Démarrer la liste avec le titre de la source."
             
-model="gpt-4-turbo-preview"
+model=DEFAULT_MODEL
 
 
 responses = [process_url(command, url, model,"","") for url in url_list]

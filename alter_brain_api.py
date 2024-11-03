@@ -34,6 +34,13 @@ import lib__sendmail
 import lib__script_tasks
 import random
 
+# Load the environment variables from the .env file
+load_dotenv(".env")
+from dotenv import load_dotenv
+import os
+
+DEFAULT_MODEL = os.environ.get("DEFAULT_MODEL")
+model = DEFAULT_MODEL
 
 
 
@@ -71,7 +78,9 @@ def extract_context(text, model):
     if model == "gpt-3.5-turbo-16k": 
         token_nb = 16000
     if model == "hf":
-        token_nb = 2000        
+        token_nb = 2000  
+    if model == DEFAULT_MODEL:
+        token_nb = 250000      
     
     limit = int((int(token_nb)*3)/2)
     
@@ -162,7 +171,7 @@ def handle_req():
     
     text = request.form.get('request')
     index = request.form.get('brain_id')
-    model = request.form.get('model', 'gpt-4')
+    model = request.form.get('model', DEFAULT_MODEL)
     index_filename = "datas/" + index + "/emb_index.csv"
     
     ## formate le texte en fonction du modèle utilisé
@@ -192,9 +201,9 @@ def handle_stream_tasks():
     
     print("Requête reçue : " + str(request.get_json()))
     
-    model = request.get_json().get('model', 'gpt-4')
+    model = request.get_json().get('model', DEFAULT_MODEL)
     print("Modèle utilisé : " + model)
-    model = "gpt-4"
+    model = DEFAULT_MODEL
 
     # vérifier si le json contient un champ 'script'
     script = request.get_json().get('script')
