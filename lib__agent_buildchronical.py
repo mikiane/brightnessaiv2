@@ -41,10 +41,10 @@ from lib__env import *
 from openai import OpenAI
 import xml.etree.ElementTree as ET
 
-load_dotenv(DOTENVPATH)
 from dotenv import load_dotenv
 import os
 
+load_dotenv(DOTENVPATH)
 
 # Charger les variables d'environnement depuis le fichier .env
 load_dotenv('.env')

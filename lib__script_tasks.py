@@ -46,9 +46,9 @@ import sys
 import time
 
 
-load_dotenv(DOTENVPATH)
 from dotenv import load_dotenv
 import os
+load_dotenv(DOTENVPATH)
 
 
 # Charger les variables d'environnement depuis le fichier .env

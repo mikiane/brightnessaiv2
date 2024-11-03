@@ -41,9 +41,9 @@ from markdownify import markdownify as md
 from urllib.parse import urlparse, urljoin
 from lib__env import *
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
-load_dotenv(DOTENVPATH)
 from dotenv import load_dotenv
 import os
+load_dotenv(DOTENVPATH)
 
 
 # Charger les variables d'environnement depuis le fichier .env

@@ -13,7 +13,10 @@ import lib__transformers
 import os
 import uuid
 import lib__sendmail
+from dotenv import load_dotenv
+import os
 
+load_dotenv('.env')
 
 app = Flask(__name__)  # Initialize Flask app
 #CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
@@ -54,7 +57,7 @@ def transform():
     email = request.form.get('email')  # Get email from form data
     text = request.form.get('text')  # Get text from form data
     instruction = request.form.get('instruction')  # Get instruction from form data
-    model = request.form.get('model', "gpt-4")  # Get model from form data
+    model = request.form.get('model', DEFAULT_MODEL)  # Get model from form data
 
     # Transform the text and get the filename of the transformed text
     filename = lib__transformers.transform_chap(text, str(email), instruction, 1, model)

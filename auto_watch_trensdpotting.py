@@ -1,9 +1,9 @@
 import lib__agent_buildchronical
 
 # Load the environment variables from the .env file
-load_dotenv(".env")
 from dotenv import load_dotenv
 import os
+load_dotenv(".env")
 
 DEFAULT_MODEL = os.environ.get("DEFAULT_MODEL")
 model = DEFAULT_MODEL
