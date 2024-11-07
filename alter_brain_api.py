@@ -34,15 +34,15 @@ import lib__sendmail
 import lib__script_tasks
 import random
 
-# Load the environment variables from the .env file
-load_dotenv(".env")
 from dotenv import load_dotenv
 import os
 
+# Load the environment variables from the .env file
+load_dotenv(".env")
+
+
 DEFAULT_MODEL = os.environ.get("DEFAULT_MODEL")
 model = DEFAULT_MODEL
-
-
 
 
 # Base folder path
