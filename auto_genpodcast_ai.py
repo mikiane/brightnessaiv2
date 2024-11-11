@@ -60,9 +60,9 @@ current_date = datetime.now()
 # Formatting the date as "dd month yyyy"
 formatted_date = current_date.strftime("%d %B %Y")
         
-command = "Nous sommes le " + formatted_date + "\nA partir du texte suivant entre ___ , contenant des listes et descriptions des derniers articles sur l'IA. \
-        Extraire TOUS les articles datant d'il y a moins de 24 heures et générer un compte rendu traitant de l'article. Chaque compte rendu doit contenir au moins 6000 signes. N'hésite pas à développer si besoin afin d'expliquer les termes techniques ou jargonneux à une audience grand public\
-        Aucun article datant de moins de 24 heures ne doit etre oublié. Ne converse pas. Ne conclue pas. Ne pas générer d'introduction ni de conclusion, juste le compte rendu traitant de l'article. Si il n'y a pas d'article, ne pas dire qu'il n'y pas d'article, renvoyer une chaine vide.Ne pas commencer par Voici le compte rendu de l'artcie... Mais directement démarrer par le compte rendu. \
+command = "Nous sommes le " + formatted_date + "\nA partir du texte suivant entre ___ , contenant les derniers articles sur l'IA, \
+        extraire TOUS les articles datant d'il y a moins de 24 heures et les traduire en français.  Chaque article doit contenir au moins 6000 signes. N'hésite pas à développer si besoin afin d'expliquer les termes techniques ou jargonneux à une audience grand public\
+        Aucun article datant de moins de 24 heures ne doit etre oublié. Ne converse pas. Ne conclue pas. Ne pas générer d'introduction ni de conclusion, juste l'articke traduit'. Si il n'y a pas d'article, ne pas dire qu'il n'y pas d'article, renvoyer une chaine vide.Ne pas commencer par Voici le compte rendu de l'artcie... Mais directement démarrer par l'article'. \
         "
      
 #generation de la veille
@@ -73,8 +73,8 @@ res = "<br><br>".join(responses)
 text_veille = str(res.replace("```html", "")).replace("```", "")
 
 
-prompt =    "A partir du texte suivant générer un script de podcast en français d'au moins 20 000 signes, \
-            pret à etre lu par Michel Levy Provencal le host de //L'IA aujourd'hui : le podcast de l'IA par l'IA qui vous permet de rester à la page !// \
+prompt =    "A partir du texte suivant générer un script de podcast en français d'au moins 50 000 signes, \
+            pret à etre lu par Michel Lévy Provençal le host de //L'IA aujourd'hui : le podcast de l'IA par l'IA qui vous permet de rester à la page !// \
             Chaque news doit etre assez développée au moins 3000 signes, pour être pertinente et compréhensible par un auditeur non expert. Si besoin expliquer les acronymes ou les termes techniques. Ne pas trop résumer chaque article. \
             Si tu n'as pas assez d'info sur un article, le zapper. Attention si la news n'est pas originale, c'est à dire qu'elle traite d'information générique, la zapper. \
             Toujours démarrer par cette petite introduction, puis enchainer tout de suite aprés sur le script. Attention, ne jamais démarrer en disant, voici le script du podcast. toujours démarrer directement. \
@@ -84,9 +84,9 @@ prompt =    "A partir du texte suivant générer un script de podcast en frança
 text_final = lib__agent_buildchronical.execute(prompt, '', text_veille, model)
 
 #envoi de la newsletter
-title = "AI PODCAST : veille sur l'IA"
-email = "contact@brightness.fr"
-lib__agent_buildchronical.mail_html(title, text_final, email)
+#title = "AI PODCAST : veille sur l'IA"
+#email = "contact@brightness.fr"
+#lib__agent_buildchronical.mail_html(title, text_final, email)
 
 
 # Task : task7
@@ -102,8 +102,6 @@ voice_id = "FL36qzLoYbdCLMM5R9rF" # MLP FL36qzLoYbdCLMM5R9rF
 # randint = randint(0, 100000)
 # filename = PODCASTS_PATH + "podcast" + str(randint) + ".mp3"
 # texttospeech(text, voice_id, filename)
-
-
 
 randint = random.randint(0, 100000)
 final_filename = PODCASTS_PATH + "final_podcast" + str(randint) + str(date.today()) + ".mp3"
