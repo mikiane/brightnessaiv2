@@ -51,8 +51,8 @@ current_date = datetime.now()
 formatted_date = current_date.strftime("%d %B %Y")
         
 command = "Nous sommes le " + formatted_date + "\nA partir du texte suivant entre ___ , contenant des listes et descriptions des derniers articles sur l'IA. \
-        Extraire TOUS les articles datant d'il y a moins de 24 heures et générer un script de podcast d'environ 10 000 signes traitant des denrieres nouvelles sur le front de l'IA en t'appuyant sur des informations récentes mentionnés dans le texte. \
-        Aucun article datant de moins de 24 heures ne doit etre oublié. Ne converse pas. Ne conclue pas. Ne pas générer d'introduction ni de conclusion, juste le script du podcast. \
+        Extraire TOUS les articles datant d'il y a moins de 24 heures et générer un compte rendu traitant de l'article. \
+        Aucun article datant de moins de 24 heures ne doit etre oublié. Ne converse pas. Ne conclue pas. Ne pas générer d'introduction ni de conclusion, juste le compte rendu traitant de l'article. Si il n'y a pas d'article, ne pas dire qu'il n'y pas d'article, renvoyer une chaine vide.Ne pas commencer par Voici le compte rendu de l'artcie... Mais directement démarrer par le compte rendu. \
         "
      
 #generation de la veille
@@ -64,6 +64,6 @@ text_veille = str(res.replace("```html", "")).replace("```", "")
 
 
 #envoi de la newsletter
-title = "AI WATCH : veille sur l'IA"
+title = "AI PODCAST : veille sur l'IA"
 email = "contact@brightness.fr"
 lib__agent_buildchronical.mail_html(title, text_veille, email)
