@@ -2,6 +2,7 @@ import lib__agent_buildchronical
 
 from datetime import datetime
 import locale
+import lib__transformers
 
 # Load the environment variables from the .env file
 from dotenv import load_dotenv
@@ -63,7 +64,33 @@ res = "<br><br>".join(responses)
 text_veille = str(res.replace("```html", "")).replace("```", "")
 
 
+
+
+
+prompt =    "A partir du texte suivant générer un script de podcast en français d'au moins 20 000 signes, \
+            pret à etre lu par Michel Levy Provencal le host de //L'IA aujourd'hui : le podcast de l'IA par l'IA qui vous permet de rester à la page !// \
+            Chaque news doit etre assez développée au moins 3000 signes, pour être pertinente et compréhensible par un auditeur non expert. Si besoin expliquer les acronymes ou les termes techniques. Ne pas trop résumer chaque article. \
+            Si tu n'as pas assez d'info sur un article, le zapper. Attention si la news n'est pas originale, c'est à dire qu'elle traite d'information générique, la zapper. \
+            Toujours démarrer par cette petite introduction, puis enchainer tout de suite aprés sur le script. Attention, ne jamais démarrer en disant, voici le script du podcast. toujours démarrer directement. \
+            La conclusion du script doit etre courte et toujours sous cette forme : //Voilà qui conclut notre épisode d'aujourd'hui. Merci de nous avoir rejoints et n'oubliez pas de vous abonner pour ne manquer aucune de nos discussions passionnantes. À très bientôt dans L'IA aujourd'hui !// \
+            "
+
+text_final = lib__agent_buildchronical.execute(prompt, '', text_veille, model)
+
 #envoi de la newsletter
 title = "AI PODCAST : veille sur l'IA"
 email = "contact@brightness.fr"
-lib__agent_buildchronical.mail_html(title, text_veille, email)
+lib__agent_buildchronical.mail_html(title, text_final, email)
+
+
+# Task : task7
+
+# Appeler l'API elevenLabs et construire un podcast
+
+# creation de l'audio
+#voice_id = "DnF3PZl1PUQOKY4LvcUl" # MLP
+voice_id = "TxGEqnHWrfWFTfGW9XjX" # Josh
+# randint = randint(0, 100000)
+# filename = PODCASTS_PATH + "podcast" + str(randint) + ".mp3"
+# texttospeech(text, voice_id, filename)
+
