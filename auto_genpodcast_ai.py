@@ -1,5 +1,6 @@
 import lib__agent_buildchronical
-
+import random
+import datetime
 from datetime import datetime
 import locale
 import lib__transformers
@@ -8,6 +9,10 @@ import lib__transformers
 from dotenv import load_dotenv
 import os
 load_dotenv(".env")
+
+DESTINATAIRES_TECH = os.environ.get("DESTINATAIRES_TECH")
+PODCASTS_PATH = os.environ.get("PODCASTS_PATH")
+
 
 DEFAULT_MODEL = os.environ.get("DEFAULT_MODEL")
 model = DEFAULT_MODEL
@@ -93,4 +98,30 @@ voice_id = "TxGEqnHWrfWFTfGW9XjX" # Josh
 # randint = randint(0, 100000)
 # filename = PODCASTS_PATH + "podcast" + str(randint) + ".mp3"
 # texttospeech(text, voice_id, filename)
+
+
+
+randint = random.randint(0, 100000)
+final_filename = PODCASTS_PATH + "final_podcast" + str(randint) + str(datetime.date.today()) + ".mp3"
+
+# gestion des intonations.
+lib__agent_buildchronical.split_text(text_final, limit=300)
+lib__agent_buildchronical.convert_and_merge(text_final, voice_id, final_filename)
+
+# titre = "Dailywatch \n du \n" + str(date.today())
+# input_audiofile = filename
+# output_videofile = "datas/podcast" + str(randint) + ".mp4"
+
+## creation de la video avec les fichiers d'entrée appropriés
+# create_video_with_audio(input_audiofile, titre, output_videofile)
+
+
+titre = 'Daily Watch Generative AI du ' + str(datetime.date.today())
+text = text_final
+audio = final_filename
+destinataires = ["michel@brightness.fr","mlevypro@gmail.com"]
+
+## envoyer par email
+lib__agent_buildchronical.mailfile(titre, audio, destinataires, text)
+
 
