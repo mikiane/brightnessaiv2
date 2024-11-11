@@ -51,7 +51,7 @@ current_date = datetime.now()
 formatted_date = current_date.strftime("%d %B %Y")
         
 command = "Nous sommes le " + formatted_date + "\nA partir du texte suivant entre ___ , contenant des listes et descriptions des derniers articles sur l'IA. \
-        Extraire TOUS les articles datant d'il y a moins de 24 heures et générer un compte rendu traitant de l'article. \
+        Extraire TOUS les articles datant d'il y a moins de 24 heures et générer un compte rendu traitant de l'article. Chaque compte rendu doit contenir au moins 6000 signes. N'hésite pas à développer si besoin afin d'expliquer les termes techniques ou jargonneux à une audience grand public\
         Aucun article datant de moins de 24 heures ne doit etre oublié. Ne converse pas. Ne conclue pas. Ne pas générer d'introduction ni de conclusion, juste le compte rendu traitant de l'article. Si il n'y a pas d'article, ne pas dire qu'il n'y pas d'article, renvoyer une chaine vide.Ne pas commencer par Voici le compte rendu de l'artcie... Mais directement démarrer par le compte rendu. \
         "
      
