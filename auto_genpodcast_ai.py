@@ -51,14 +51,9 @@ current_date = datetime.now()
 formatted_date = current_date.strftime("%d %B %Y")
         
 command = "Nous sommes le " + formatted_date + "\nA partir du texte suivant entre ___ , contenant des listes et descriptions des derniers articles sur l'IA. \
-        Extraire TOUS les articles datant d'il y a moins de 24 heures et générer la liste exhaustive des informations récentes mentionnés dans le texte. \
-        Aucun article datant de moins de 24 heures ne doit etre oublié. La liste doit comprendre les informations suivantes : \
-            Titre de l'article \
-            <br>Description / résumé de l'article dans la langue originelle de l'article\
-            <br>Pour chaque article genere un tweet en français en utilisant le titre, la description et en citant l'url associée. Utiliser un ton neutre. \
-        Répondre directement en générant la liste. Ne converse pas. Ne conclue pas. Ne pas générer d'introduction ni de conclusion, juste la liste. \
-        Toujours utiliser un modele de page HTML fond blanc, avec Titre en rouge en <h3>, description en <p> noir, tweet en <p> sur fond bleu clair, lien vers l'article derriere un Read More.\
-        Démarrer la liste avec le titre de la source."
+        Extraire TOUS les articles datant d'il y a moins de 24 heures et générer un script de podcast d'environ 10 000 signes traitant des denrieres nouvelles sur le front de l'IA en t'appuyant sur des informations récentes mentionnés dans le texte. \
+        Aucun article datant de moins de 24 heures ne doit etre oublié. Ne converse pas. Ne conclue pas. Ne pas générer d'introduction ni de conclusion, juste le script du podcast. \
+        "
      
 #generation de la veille
 model=DEFAULT_MODEL
