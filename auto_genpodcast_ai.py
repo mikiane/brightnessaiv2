@@ -1,7 +1,7 @@
 import lib__agent_buildchronical
 import random
 import datetime
-from datetime import datetime
+from datetime import date
 import locale
 import lib__transformers
 
@@ -102,7 +102,7 @@ voice_id = "TxGEqnHWrfWFTfGW9XjX" # Josh
 
 
 randint = random.randint(0, 100000)
-final_filename = PODCASTS_PATH + "final_podcast" + str(randint) + str(datetime.date.today()) + ".mp3"
+final_filename = PODCASTS_PATH + "final_podcast" + str(randint) + str(date.today()) + ".mp3"
 
 # gestion des intonations.
 lib__agent_buildchronical.split_text(text_final, limit=300)
@@ -116,7 +116,7 @@ lib__agent_buildchronical.convert_and_merge(text_final, voice_id, final_filename
 # create_video_with_audio(input_audiofile, titre, output_videofile)
 
 
-titre = 'Daily Watch Generative AI du ' + str(datetime.date.today())
+titre = 'Daily Watch Generative AI du ' + str(date.today())
 text = text_final
 audio = final_filename
 destinataires = ["michel@brightness.fr","mlevypro@gmail.com"]
