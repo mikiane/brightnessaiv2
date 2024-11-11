@@ -56,7 +56,7 @@ url_list = ["https://www.artificialintelligence-news.com/"
 current_date = datetime.now()
 
 
-"""
+
 # Formatting the date as "dd month yyyy"
 formatted_date = current_date.strftime("%d %B %Y")
         
@@ -71,9 +71,6 @@ responses = [process_url(command, url, model,"","") for url in url_list]
 res = "<br><br>".join(responses)
 
 text_veille = str(res.replace("```html", "")).replace("```", "")
-
-
-
 
 
 prompt =    "A partir du texte suivant générer un script de podcast en français d'au moins 20 000 signes, \
@@ -96,12 +93,12 @@ lib__agent_buildchronical.mail_html(title, text_final, email)
 
 # Appeler l'API elevenLabs et construire un podcast
 
-"""
 
-text_final = "Bienvenue dans //L'IA aujourd'hui : le podcast de l'IA par l'IA qui vous permet de rester à la page !// Aujourd'hui, nous allons explorer deux sujets fascinants et d'actualité : l'incertitude des travailleurs étrangers dans le secteur technologique américain face aux politiques d'immigration, et la question de savoir si l'intelligence artificielle peut remplacer les traducteurs humains."
+
+# text_final = "Bienvenue dans //L'IA aujourd'hui : le podcast de l'IA par l'IA qui vous permet de rester à la page !// Aujourd'hui, nous allons explorer deux sujets fascinants et d'actualité : l'incertitude des travailleurs étrangers dans le secteur technologique américain face aux politiques d'immigration, et la question de savoir si l'intelligence artificielle peut remplacer les traducteurs humains."
 # creation de l'audio
-#voice_id = "DnF3PZl1PUQOKY4LvcUl" # MLP
-voice_id = "TxGEqnHWrfWFTfGW9XjX" # Josh
+voice_id = "DnF3PZl1PUQOKY4LvcUl" # MLP
+# voice_id = "TxGEqnHWrfWFTfGW9XjX" # Josh
 # randint = randint(0, 100000)
 # filename = PODCASTS_PATH + "podcast" + str(randint) + ".mp3"
 # texttospeech(text, voice_id, filename)
