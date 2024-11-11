@@ -126,9 +126,8 @@ lib__agent_buildchronical.convert_and_merge(text_final, voice_id, final_filename
 titre = 'Daily Watch Generative AI du ' + str(date.today())
 text = text_final
 audio = final_filename
-destinataire = "michel@brightness.fr"
+email = "michel@brightness.fr"  # Remplacez 'destinataire' par 'email'
 
-## envoyer par email
-lib__agent_buildchronical.mailaudio(titre, audio, destinataire, text)
-
+# Appel de la fonction mailaudio
+lib__agent_buildchronical.mailaudio(titre, audio, text, email)
 
