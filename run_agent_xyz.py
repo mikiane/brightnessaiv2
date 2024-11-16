@@ -15,11 +15,13 @@ from datetime import *
 import random
 import argparse
 from lib__env import *
+from dotenv import load_dotenv
+import os
 
 #import streamlit as st
 #load_dotenv(".env") # Load the environment variables from the .env file.
 #load_dotenv("/home/michel/extended_llm/.env") # Load the environment variables from the .env file.
-
+load_dotenv('.env')
 load_dotenv(DOTENVPATH)
 DEFAULT_MODEL = os.environ.get("DEFAULT_MODEL")
 DESTINATAIRES_TECH = os.environ.get("DESTINATAIRES_TECH")

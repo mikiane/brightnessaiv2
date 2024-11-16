@@ -11,6 +11,8 @@ Modifications: The code has been updated to include a default model if no 'model
 import generatechatcompletion
 
 # Import os module for interacting with the operating system
+from lib__env import *
+from dotenv import load_dotenv
 import os
 
 # Import Flask and related modules for building a web server
@@ -20,6 +22,7 @@ from flask import Flask, Response, request, jsonify
 from flask_cors import CORS
 
 # Create a new Flask web server application
+load_dotenv('.env')
 app = Flask(__name__)
 DEFAULT_MODEL = os.environ.get("DEFAULT_MODEL")
 

@@ -6,10 +6,30 @@ from datetime import datetime
 
 import locale
 import lib__transformers
-
-# Load the environment variables from the .env file
+import json
+import lib__embedded_context
 from dotenv import load_dotenv
 import os
+import requests
+import time
+import openai
+from urllib.parse import unquote
+from queue import Queue
+from datetime import *
+from lib__env import *
+from openai import OpenAI
+import sys
+import time
+
+
+from dotenv import load_dotenv
+import os
+load_dotenv(DOTENVPATH)
+
+
+
+
+# Load the environment variables from the .env file
 load_dotenv(".env")
 
 DESTINATAIRES_TECH = os.environ.get("DESTINATAIRES_TECH")
@@ -26,12 +46,45 @@ def process_url(command, url, model, site="", input_data=""):
     content = lib__agent_buildchronical.fetch_and_parse_urls(url)
     content = content.replace('\n', '')
     prompt = command + "\n ___ " + content + "\n ___ \n"
-    print("Prompt : " + prompt)
+    # print("Prompt : " + prompt)
     input_data = ""
     site = ""
     model=model
     res = lib__agent_buildchronical.execute(prompt, site, input_data, model)
     return res
+
+def call_llm(prompt, context, input_data, model=DEFAULT_MODEL, max_tokens=10000):
+
+    attempts = 0
+    execprompt = "Context : " + context + "\n" + input_data + "\n" + "Query : " + prompt
+    system = "Je suis un assistant parlant parfaitement le français et l'anglais."
+
+    client = OpenAI(api_key=os.environ['OPENAI_API_KEY'])
+
+    while attempts < 10:
+        try:
+            response = client.chat.completions.create(
+                model=model,
+                temperature=0.01,
+                max_tokens=max_tokens,
+                messages=[
+                    {'role': 'user', 'content': execprompt},
+                    {'role': 'system', 'content': system}
+                ]
+            )
+            message = response.choices[0].message.content
+            print(str(datetime.now()) + " : " + "Réponse : " + str(message) + "\n\n")
+            return message.strip()
+
+        except Exception as e:
+            error_code = type(e).__name__
+            error_reason = str(e)
+            attempts += 1
+            print(f"Erreur : {error_code} - {error_reason}. Nouvel essai dans {str(attempts * 2)} secondes...")
+            time.sleep(attempts * 2)
+
+    print("Erreur : Echec de la création de la completion après 10 essais")
+    sys.exit()
 
 
 ## PODCAST VEILLE #1 ##
@@ -61,9 +114,15 @@ current_date = datetime.now()
 formatted_date = current_date.strftime("%d %B %Y")
         
 command = "Nous sommes le " + formatted_date + "\nA partir du texte suivant entre ___ , contenant les derniers articles sur l'IA, \
-        extraire TOUS les articles datant d'il y a moins de 24 heures et les traduire en français.  Chaque article doit contenir au moins 6000 signes. N'hésite pas à développer si besoin afin d'expliquer les termes techniques ou jargonneux à une audience grand public\
-        Aucun article datant de moins de 24 heures ne doit etre oublié. Ne converse pas. Ne conclue pas. Ne pas générer d'introduction ni de conclusion, juste l'articke traduit'. Si il n'y a pas d'article, ne pas dire qu'il n'y pas d'article, renvoyer une chaine vide.Ne pas commencer par Voici le compte rendu de l'artcie... Mais directement démarrer par l'article'. \
-        "
+        extraire TOUS les articles datant d'il y a moins de 24 heures et les traduire en français. \
+        La traduction doit avoir pour longueur le nombre de signes approximatif de l'article source. \
+        Commencer par le titre traduit en français et la date de l'article. Citer la source. \
+        Toujours utiliser la forme d'un contenu journalistique pour la traduction. \
+        N'hésite pas à développer si besoin afin d'expliquer les termes techniques ou jargonneux à une audience grand public \
+        Aucun article datant de moins de 24 heures ne doit etre oublié. Ne converse pas. Ne conclue pas. \
+        Ne pas générer d'introduction ni de conclusion, juste l'articke traduit'. \
+        Si il n'y a pas d'article, ne pas dire qu'il n'y pas d'article, renvoyer une chaine vide.\
+        Ne pas commencer par Voici le compte rendu de l'artcie... Mais directement démarrer par l'article'. Respecter ces consignes strictement. "
      
 #generation de la veille
 model=DEFAULT_MODEL
@@ -72,16 +131,23 @@ res = "<br><br>".join(responses)
 
 text_veille = str(res.replace("```html", "")).replace("```", "")
 
+print(text_veille)
 
-prompt =    "A partir du texte suivant générer un script de podcast en français d'au moins 50 000 signes, \
+
+
+prompt =    "A partir du texte suivant générer un script de podcast en français d'au moins 30000 signes, \
             pret à etre lu par Michel Lévy Provençal le host de //L'IA aujourd'hui : le podcast de l'IA par l'IA qui vous permet de rester à la page !// \
-            Chaque news doit etre assez développée au moins 3000 signes, pour être pertinente et compréhensible par un auditeur non expert. Si besoin expliquer les acronymes ou les termes techniques. Ne pas trop résumer chaque article. \
-            Si tu n'as pas assez d'info sur un article, le zapper. Attention si la news n'est pas originale, c'est à dire qu'elle traite d'information générique, la zapper. \
+            Chaque news doit etre assez développée au moins 6000 signes, pour être pertinente et compréhensible par un auditeur non expert. Si besoin expliquer les acronymes ou les termes techniques. Ne pas trop résumer chaque article. \
+            Si tu n'as pas assez d'info sur un article, le zapper. Attention si la news n'est pas o@riginale, c'est à dire qu'elle traite d'information générique, la zapper. \
             Toujours démarrer par cette petite introduction, puis enchainer tout de suite aprés sur le script. Attention, ne jamais démarrer en disant, voici le script du podcast. toujours démarrer directement. \
             La conclusion du script doit etre courte et toujours sous cette forme : //Voilà qui conclut notre épisode d'aujourd'hui. Merci de nous avoir rejoints et n'oubliez pas de vous abonner pour ne manquer aucune de nos discussions passionnantes. À très bientôt dans L'IA aujourd'hui !// \
             "
 
-text_final = lib__agent_buildchronical.execute(prompt, '', text_veille, model)
+#text_final = lib__agent_buildchronical.execute(prompt, '', text_veille, model)
+text_final = call_llm(prompt, text_veille, "", model, 12000)
+
+print(text_final)
+
 
 #envoi de la newsletter
 #title = "AI PODCAST : veille sur l'IA"
