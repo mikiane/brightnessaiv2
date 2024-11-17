@@ -257,7 +257,7 @@ final_filename = PODCASTS_PATH + "final_podcast" + str(randint) + str(date.today
 
 # gestion des intonations.
 lib__agent_buildchronical.split_text(text_final, limit=300)
-lib__agent_buildchronical.convert_and_merge(text_final, voice_id, final_filename)
+lib__agent_buildchronical.convert_and_merge(lib__agent_buildchronical.replace_numbers_with_text(text_final), voice_id, final_filename)
 
 # titre = "Dailywatch \n du \n" + str(date.today())
 # input_audiofile = filename
