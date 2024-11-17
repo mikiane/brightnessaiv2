@@ -218,14 +218,14 @@ print(text_veille)
 
 prompt =    "A partir du texte suivant générer un script de podcast en français d'au moins 30000 signes, \
             pret à etre lu par Michel Lévy Provençal le host de //L'IA aujourd'hui : le podcast de l'IA par l'IA qui vous permet de rester à la page !// \
-            Chaque news doit etre assez développée au moins 6000 signes, pour être pertinente et compréhensible par un auditeur non expert. Si besoin expliquer les acronymes ou les termes techniques. Ne pas trop résumer chaque article. \
-            Si tu n'as pas assez d'info sur un article, le zapper. Attention si la news n'est pas o@riginale, c'est à dire qu'elle traite d'information générique, la zapper. \
+            Chaque news doit etre assez développée au moins 6000 signes, elle doit contenr les détails, exemples, sources contenues dans l'a news originale pour être pertinente et compréhensible par un auditeur non expert. Si besoin expliquer les acronymes ou les termes techniques sans résumer chaque article. \
+            Si tu n'as pas assez d'info sur un article, le zapper. Attention si la news n'est pas originale, c'est à dire qu'elle traite d'information générique, la zapper. \
             Toujours démarrer par cette petite introduction, puis enchainer tout de suite aprés sur le script. Attention, ne jamais démarrer en disant, voici le script du podcast. toujours démarrer directement. \
             La conclusion du script doit etre courte et toujours sous cette forme : //Voilà qui conclut notre épisode d'aujourd'hui. Merci de nous avoir rejoints et n'oubliez pas de vous abonner pour ne manquer aucune de nos discussions passionnantes. À très bientôt dans L'IA aujourd'hui !// \
             "
 
 #text_final = lib__agent_buildchronical.execute(prompt, '', text_veille, model)
-text_final = call_llm(prompt, text_veille, "", model, 12000)
+text_final = call_llm(prompt, text_veille, "", model, 14000)
 
 print(text_final)
 
@@ -269,7 +269,7 @@ titre = "L'IA aujourd'hui épisode du " + str(date.today())
 text = text_final
 audio = final_filename
 email = "michel@brightness.fr"  # Remplacez 'destinataire' par 'email'
-
+subtitle = "L'IA aujourd'hui : le podcast de l'IA par l'IA qui vous permet de rester à la page !"
 # Appel de la fonction mailaudio
 lib__agent_buildchronical.mailaudio(titre, audio, text, email)
 
@@ -302,8 +302,9 @@ print("/n/n/n")
 # Charge utile
 payload = {
     'title': titre,
-    'subtitle': text,
-    'status': 'published'
+    'subtitle': subtitle,
+    'status': 'published',
+    'summary': text,    
 }
 
 
