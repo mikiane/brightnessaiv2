@@ -139,7 +139,7 @@ def texttospeech(text, voice_id, filename):
         "text": text,
         "model_id": "eleven_multilingual_v2",
         "voice_settings": {
-            "stability": 0.96,
+            "stability": 1,
             "similarity_boost": 1
             }
         }
