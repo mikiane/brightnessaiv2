@@ -133,7 +133,6 @@ def call_llm(prompt, context, input_data, model=DEFAULT_MODEL, max_tokens=10000)
 
 
 
-
 from pydub import AudioSegment
 import os
 
@@ -231,7 +230,6 @@ text_final = call_llm(prompt, text_veille, "", model, 14000)
 
 print(text_final)
 
-
 #envoi de la newsletter
 #title = "AI PODCAST : veille sur l'IA"
 #email = "contact@brightness.fr"
@@ -246,7 +244,7 @@ print(text_final)
 
 # text_final = "Bienvenue dans //L'IA aujourd'hui : le podcast de l'IA par l'IA qui vous permet de rester à la page !// Aujourd'hui, nous allons explorer deux sujets fascinants et d'actualité : l'incertitude des travailleurs étrangers dans le secteur technologique américain face aux politiques d'immigration, et la question de savoir si l'intelligence artificielle peut remplacer les traducteurs humains."
 # creation de l'audio
-voice_id = "FL36qzLoYbdCLMM5R9rF" # MLP FL36qzLoYbdCLMM5R9rF
+voice_id = "eKZsbKN3buNViPVgJwQr" # MLP FL36qzLoYbdCLMM5R9rF
 # voice_id = "TxGEqnHWrfWFTfGW9XjX" # Josh
 # randint = randint(0, 100000)
 # filename = PODCASTS_PATH + "podcast" + str(randint) + ".mp3"
