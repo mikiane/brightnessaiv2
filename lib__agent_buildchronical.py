@@ -137,10 +137,10 @@ def texttospeech(text, voice_id, filename):
 
         data = {
         "text": text,
-        "model_id": "eleven_multilingual_v2",
+        "model_id": "eleven_multilingual_v1",
         "voice_settings": {
                 "stability": 1,
-                "similarity_boost": 0,
+                "similarity_boost": 0.3,
                 "style": 0,
                 "use_speaker_boost": False
             }
