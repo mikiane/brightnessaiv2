@@ -335,7 +335,7 @@ output_file = input_file
 # Appel de la fonction de Conversion
 #converted_file = convert_audio_to_acast_format(input_file, output_file)
 
-"""
+
 #POST D'UN EPISODE SUR ACAST
 print(f"Clé API utilisée : {ACAST_API_KEY}")
 print("\n\n\n")
@@ -394,4 +394,3 @@ print(f"Réponse : {response.text}")
 
 
 
-"""
