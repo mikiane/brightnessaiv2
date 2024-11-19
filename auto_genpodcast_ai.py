@@ -306,7 +306,7 @@ randint = random.randint(0, 100000)
 final_filename = PODCASTS_PATH + "final_podcast" + str(randint) + str(date.today()) + ".mp3"
 
 # gestion des intonations.
-lib__agent_buildchronical.split_text(text_final, limit=300)
+lib__agent_buildchronical.split_text(text_final, 500)
 lib__agent_buildchronical.convert_and_merge(lib__agent_buildchronical.replace_numbers_with_text(text_final), voice_id, final_filename)
 
 # titre = "Dailywatch \n du \n" + str(date.today())

@@ -140,11 +140,11 @@ def texttospeech(text, voice_id, filename):
         "model_id": "eleven_multilingual_v2",
         "voice_settings": {
                 "stability": 1,
-                "similarity_boost": 0.3,
+                "similarity_boost": 0,
                 "style": 0,
                 "use_speaker_boost": False
-            }
-        
+            },
+        "apply_text_normalization": "auto"
         }
 
         response = requests.post(url, json=data, headers=headers)
