@@ -343,13 +343,10 @@ headers = {
     "x-api-key": ACAST_API_KEY
 }
 
+
 # URL de l'API Acast
 url = "https://open.acast.com/rest/shows/67328a919e7b27e0ac078578/episodes"
-
-response = requests.get("https://open.acast.com/rest/shows/67328a919e7b27e0ac078578", headers=headers)
-print(response.status_code, response.text)
-print("/n/n/n")
-
+print("Début de post de podcast")
 
 # Charge utile
 payload = {
@@ -358,8 +355,6 @@ payload = {
     'status': 'published',
     'summary': text,    
 }
-
-
 
 
 # Fichier audio à envoyer (fichier converti)
@@ -382,8 +377,11 @@ files = [
     ('audio', (os.path.basename(file_path), open(file_path, 'rb'), 'audio/mpeg'))
 ]
 
+
+print("début d'envoi de podcast")
 # Effectuez la requête
 response = requests.post(url, headers=headers, data=payload, files=files)
+print("fin d'envoi de podcast")
 
 # Affichez la réponse
 print(f"Statut : {response.status_code}")
