@@ -139,9 +139,9 @@ def texttospeech(text, voice_id, filename):
         "text": text,
         "model_id": "eleven_multilingual_v2",
         "voice_settings": {
-                "stability": 1,
-                "similarity_boost": 1,
-                "style": 0,
+                "stability": 0.75,
+                "similarity_boost": 0.75,
+                "style": 0.05,
                 "use_speaker_boost": True
             },
         "apply_text_normalization": "auto"
