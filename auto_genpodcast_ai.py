@@ -166,7 +166,6 @@ def convert_audio_to_acast_format(input_file, output_file):
 
 
 
-
 ## PODCAST VEILLE #1 ##
 # Génération d'une liste de livres pour veille podcast
 url_list = ["https://www.artificialintelligence-news.com/"
@@ -293,7 +292,6 @@ print(text_final)
 # Appeler l'API elevenLabs et construire un podcast
 
 
-
 # text_final = "Bienvenue dans //L'IA aujourd'hui : le podcast de l'IA par l'IA qui vous permet de rester à la page !// Aujourd'hui, nous allons explorer deux sujets fascinants et d'actualité : l'incertitude des travailleurs étrangers dans le secteur technologique américain face aux politiques d'immigration, et la question de savoir si l'intelligence artificielle peut remplacer les traducteurs humains."
 # creation de l'audio
 voice_id = "QZ76fO3EJjkwPQ8y1Yel" # MLP   eKZsbKN3buNViPVgJwQr
@@ -304,10 +302,15 @@ voice_id = "QZ76fO3EJjkwPQ8y1Yel" # MLP   eKZsbKN3buNViPVgJwQr
 
 randint = random.randint(0, 100000)
 final_filename = PODCASTS_PATH + "final_podcast" + str(randint) + str(date.today()) + ".mp3"
-
+combined = AudioSegment.from_mp3(str(LOCALPATH) + "sounds/intro.mp3")
 # gestion des intonations.
-lib__agent_buildchronical.split_text(text_final, 500)
-lib__agent_buildchronical.convert_and_merge(lib__agent_buildchronical.replace_numbers_with_text(text_final), voice_id, final_filename)
+lib__agent_buildchronical.texttospeech(text_final, voice_id, final_filename)
+audio_segment = AudioSegment.from_mp3(final_filename)
+combined += audio_segment
+combined += AudioSegment.from_mp3(str(LOCALPATH) + "sounds/outro.mp3")
+
+# Save the final concatenated audio file
+combined.export(final_filename, format='mp3')
 
 # titre = "Dailywatch \n du \n" + str(date.today())
 # input_audiofile = filename
