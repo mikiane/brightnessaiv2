@@ -36,6 +36,13 @@ import random
 
 from dotenv import load_dotenv
 import os
+import lib_vectorize_context
+import os
+# load_dotenv(DOTENVPATH)
+# Load the environment variables from the .env file
+load_dotenv(".env")
+VECTORIZE_TOKEN = os.environ.get("VECTORIZE_TOKEN")
+
 
 # Load the environment variables from the .env file
 load_dotenv(".env")
@@ -228,6 +235,40 @@ def handle_stream_tasks():
     except Exception as e:
         # une erreur s'est produite lors de l'exécution des tâches
         return jsonify({"error": str(e)}), 500
+
+
+
+
+# API searchcontext : to search the context of a request in the index (brain id and request are passed in the POST request) 
+@app.route('/getvector', methods=['POST'])
+def handle_req():
+    """
+    This function searches for the context of a request in the index.
+    It retrieves the text and index parameters from the POST request form.
+    The index filename is constructed based on the provided index parameter.
+    It calls the `find_context` function from the `lib__embedded_context` module
+    with the text, index filename, and number of results.
+    The function returns a JSON response containing the search results.
+
+    :return: A JSON response with the search results.
+    """
+    
+    question = request.form.get('question')
+    vectordb = request.form.get('vectordb')
+    # model = request.form.get('model', DEFAULT_MODEL) 
+    num_results = request.form.get('num_results', 5)
+    retrieval_endpoint = "https://client.app.vectorize.io/api/gateways/service/" + vectordb + "/retrieve"
+    
+    context = lib_vectorize_context.retrieve_and_concatenate_texts(retrieval_endpoint, question, VECTORIZE_TOKEN, int(num_results))
+    
+    # si le brain_id a la forme d'une url (http ou https), on crée un index specifique à l'url
+    
+    res = [{'id':1,'request':'searchcontext','answer':context}]
+    response = jsonify(res)
+    response.headers['Content-Type'] = 'application/json'
+    return(response)
+    
+
 
 
 if __name__ == '__main__':
