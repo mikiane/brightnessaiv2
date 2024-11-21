@@ -241,7 +241,7 @@ def handle_stream_tasks():
 
 # API searchcontext : to search the context of a request in the index (brain id and request are passed in the POST request) 
 @app.route('/getvector', methods=['POST'])
-def handle_req():
+def getvector():
     """
     This function searches for the context of a request in the index.
     It retrieves the text and index parameters from the POST request form.
