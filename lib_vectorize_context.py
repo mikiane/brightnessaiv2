@@ -59,7 +59,7 @@ def retrieve_and_concatenate_texts(endpoint, question, token, num_results=5):
     except Exception as e:
         return f"Erreur inattendue: {e}"
 
-
+"""
 
 # Exemple d'utilisation de la fonction
 # Remplacez par votre token réel
@@ -69,3 +69,4 @@ retrieval_endpoint = "https://client.app.vectorize.io/api/gateways/service/o38d-
 result = retrieve_and_concatenate_texts(retrieval_endpoint, question, VECTORIZE_TOKEN)
 print(result)
 
+"""

@@ -220,10 +220,10 @@ def texttospeech(text, voice_id, filename):
 
         data = {
         "text": text,
-        "model_id": "eleven_multilingual_v1",
+        "model_id": "eleven_multilingual_v2",
         "voice_settings": {
             "stability": 0.95,
-            "similarity_boost": 1
+            "similarity_boost": 0.2
             }
         }
 
@@ -277,7 +277,7 @@ def convert_and_merge(text, voice_id, final_filename):
 #voice_id = "TxGEqnHWrfWFTfGW9XjX"  # Josh
 
 
-def synthesize_multi(text, voice_id="FL36qzLoYbdCLMM5R9rF"):
+def synthesize_multi(text, voice_id="Fgn8wInzqZU1U5EP2qp0"):
     load_dotenv(".env") # Load the environment variables from the .env file.
     PODCASTS_PATH = os.environ.get("PODCASTS_PATH")
 
