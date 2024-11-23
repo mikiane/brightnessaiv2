@@ -310,7 +310,7 @@ Consignes spécifiques :
   - Informé et crédible : Appuyez-vous sur des faits solides, sourcés et vérifiés, en évitant les conjectures.
   - Sans redondance : Limitez les répétitions ou les apartés trop longs.
   - Unifier les thématiques : Lorsque possible, établissez des liens entre les sujets pour créer une narration cohérente et captivante.
-
+  - N"utilise pas de titre pour chaque news.
 Exemple de début de script attendu :
 *"Bonjour à toutes et à tous, bienvenue dans *L’IA Aujourd’hui*, le podcast de l’IA par l’IA qui vous permet de rester à la page ! Aujourd’hui : des décisions politiques influencées par des modèles d’IA, l’audacieuse expansion de GitHub vers des outils multi-modèles, et une analyse des tensions croissantes au sein des grandes entreprises technologiques. C’est parti !"*
 
@@ -319,14 +319,6 @@ Objectif final : Produire un script détaillé, prêt à être lu, d’une duré
 Instructions pour les actualités fournies :
 1. Développez chaque sujet avec rigueur en exploitant les détails, les chiffres et les exemples fournis dans les sources.
 2. Ignorez les actualités génériques ou manquant d’informations pertinentes.
-3. Proposez une **question ouverte** en conclusion pour stimuler l’interaction avec les auditeurs.
-
-Note sur les révisions attendues :
-Ce prompt intègre les éléments suivants :  
-- La simplicité et la fluidité du discours, sans excès de style ou de questions rhétoriques.  
-- Une analyse détaillée et crédible des sujets pour captiver un auditoire curieux.  
-- Des transitions claires et variées entre les actualités.  
-- Une structure équilibrée avec des informations substantielles, tout en restant accessible.
 """
 
 
