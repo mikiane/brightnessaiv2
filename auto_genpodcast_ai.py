@@ -223,9 +223,9 @@ prompt =    "A partir du texte suivant générer un script de podcast en frança
             "
 """
 
-
+"""
 # version askolovitch
-prompt = """
+prompt = 
 À partir du texte fourni, générer un script de podcast en français d'au moins 30000 signes pour 'L'IA aujourd'hui', présenté par Michel Lévy Provençal, avec l'introduction standard 'Bienvenue dans L'IA aujourd'hui : le podcast de l'IA par l'IA qui vous permet de rester à la page !...' proposer une phrase qui resume les sujets traités dans cette épisode. Attention l'intro doit etre courte. PLutot que "Aujourd'hui, un menu varié et captivant : des décisions politiques influencées par des hallucinations d’IA, l’expansion audacieuse de GitHub vers des outils multi-modèles, l’épineuse question de la gouvernance de l’IA ignorée par la plupart des entreprises, et des tensions au sein de grandes entreprises technologiques. Nous explorerons également les impacts sociétaux de l'IA, ses limites éthiques et sa place croissante dans nos vies. Préparez-vous à plonger dans l’univers fascinant et complexe de l’intelligence artificielle !" dire par exemple  "Aujourd'hui : des décisions politiques influencées par des hallucinations d’IA, l’expansion audacieuse de GitHub vers des outils multi-modèles, l’épineuse question de la gouvernance de l’IA ignorée par la plupart des entreprises, et des tensions au sein de grandes entreprises technologiques. C'est parti !" La conclusion standard doit etre 'Voilà qui conclut notre épisode d'aujourd'hui. Merci de nous avoir rejoints et n'oubliez pas de vous abonner. À très bientôt dans L'IA aujourd'hui !'. 
 Adopter un style de revue de presse dynamique avec un ton journalistique caractéristique de Claude Askolovitch sur France Inter (ne jamais citer cet élément). Chaque news doit être développée sur au moins 6000 signes, incluant contexte, détails et implications, en expliquant les termes techniques sans simplification excessive. Établir des liens pertinents entre les actualités pour créer une narration fluide. Ignorer les articles trop génériques ou manquant d'informations substantielles. Utiliser des transitions naturelles entre les sujets, des questions pour engager l'audience sur certains sujets qui s'y pretent. Ne pas le faire systematiquement. Le contenu doit être informatif et accessible, équilibrant faits techniques et analyse approfondie, en gardant toujours à l'esprit qu'il s'agit d'une revue de presse destinée à être écoutée. Le style de la revue de presse doit etre le suivant : 
 Respecter le style et le format specifiés
@@ -275,6 +275,62 @@ Toujours rédiger la revue de presse comme un script complet à lire, sans titre
 </format>"""
 
 
+
+prompt = """
+
+Contexte : Vous êtes chargé(e) d’écrire un script complet pour un podcast quotidien de revue de presse sur l’intelligence artificielle intitulé *L’IA Aujourd’hui*, présenté par Michel Lévy Provençal. Ce podcast doit être informatif, factuel et engageant, conçu pour un auditoire curieux mais non-expert. L’objectif est de fournir un contenu captivant et accessible tout en restant rigoureux.
+
+Consignes spécifiques :
+
+- Structure du script :
+  - Introduction :
+    - Courte et percutante, introduire le podcast avec la phrase standard :  
+      *"Bonjour à toutes et à tous, bienvenue dans *L’IA Aujourd’hui*, le podcast de l’IA par l’IA qui vous permet de rester à la page !"*  
+    - Suivre par une phrase résumant les sujets du jour, concise et dynamique :  
+      *"Aujourd’hui : [grandes thématiques du jour]. C’est parti !"*
+  - Les grandes actualités du jour :  
+    Développez chaque actualité en au moins **6000 signes**, en incluant :
+    - Contexte détaillé : origine, évolution du sujet.
+    - Explication claire des termes techniques, avec des exemples concrets si nécessaire.
+    - Analyse des implications (sociétales, technologiques, économiques).
+    - Citez systématiquement les **sources** utilisées.
+    - Évitez les actualités génériques ou redondantes, en privilégiant les informations originales et significatives.
+  - Focus thématique (facultatif) :  
+    Si un sujet particulier se prête à une analyse approfondie, développez un **segment dédié** (par exemple : un cas d’usage spécifique, une décision réglementaire majeure, ou une avancée technologique remarquable). Ce segment doit être construit comme une mini-enquête journalistique.
+  - Transitions :  
+    Utilisez des transitions naturelles entre les sujets, en assurant une narration fluide. Variez les styles pour éviter la répétition, mais restez sobre : pas d’abus de questions rhétoriques ou d’effets de style inutiles.
+  - Conclusion :  
+    Récapitulatif court, engageant et standardisé :  
+      *"Voilà qui conclut notre épisode d’aujourd’hui. Merci de nous avoir rejoints, et n’oubliez pas de vous abonner pour ne manquer aucune de nos discussions passionnantes. À très bientôt dans *L’IA Aujourd’hui* !"*
+
+- Ton et style :
+  - Accessible mais rigoureux : Évitez un ton trop technique ou professoral. Expliquez les concepts sans les simplifier à outrance.
+  - Engageant et fluide : Adoptez un style journalistique équilibré, dynamique mais sans excès d’emphase.
+  - Informé et crédible : Appuyez-vous sur des faits solides, sourcés et vérifiés, en évitant les conjectures.
+  - Sans redondance : Limitez les répétitions ou les apartés trop longs.
+  - Unifier les thématiques : Lorsque possible, établissez des liens entre les sujets pour créer une narration cohérente et captivante.
+
+Exemple de début de script attendu :
+*"Bonjour à toutes et à tous, bienvenue dans *L’IA Aujourd’hui*, le podcast de l’IA par l’IA qui vous permet de rester à la page ! Aujourd’hui : des décisions politiques influencées par des modèles d’IA, l’audacieuse expansion de GitHub vers des outils multi-modèles, et une analyse des tensions croissantes au sein des grandes entreprises technologiques. C’est parti !"*
+
+Objectif final : Produire un script détaillé, prêt à être lu, d’une durée de **10 à 15 minutes**, soit environ **30 000 signes**, en intégrant les actualités fournies de manière exhaustive et captivante.
+
+Instructions pour les actualités fournies :
+1. Développez chaque sujet avec rigueur en exploitant les détails, les chiffres et les exemples fournis dans les sources.
+2. Ignorez les actualités génériques ou manquant d’informations pertinentes.
+3. Proposez une **question ouverte** en conclusion pour stimuler l’interaction avec les auditeurs.
+
+Note sur les révisions attendues :
+Ce prompt intègre les éléments suivants :  
+- La simplicité et la fluidité du discours, sans excès de style ou de questions rhétoriques.  
+- Une analyse détaillée et crédible des sujets pour captiver un auditoire curieux.  
+- Des transitions claires et variées entre les actualités.  
+- Une structure équilibrée avec des informations substantielles, tout en restant accessible.
+"""
+
+
+
+
 #prompt = "À partir du texte fourni, générer un script de podcast en français d'au moins 30000 signes pour 'L'IA aujourd'hui', présenté par Michel Lévy Provençal, avec l'introduction standard 'Bienvenue dans L'IA aujourd'hui : le podcast de l'IA par l'IA qui vous permet de rester à la page ! Je suis Michel Lévy Provençal, votre hôte' et la conclusion standard 'Voilà qui conclut notre épisode d'aujourd'hui. Merci de nous avoir rejoints et n'oubliez pas de vous abonner pour ne manquer aucune de nos discussions passionnantes. À très bientôt dans L'IA aujourd'hui !'. Adopter un style de revue de presse dynamique avec un ton journalistique engageant caractéristique de Michel Lévy Provençal. Chaque news doit être développée sur au moins 6000 signes, incluant contexte, détails et implications, en expliquant les termes techniques sans simplification excessive. Établir des liens pertinents entre les actualités pour créer une narration fluide. Ignorer les articles trop génériques ou manquant d'informations substantielles. Utiliser des transitions naturelles entre les sujets, des questions rhétoriques pour maintenir l'engagement, et un style narratif incluant le 'nous' inclusif. Le contenu doit être informatif et accessible, équilibrant faits techniques et analyse approfondie, en gardant toujours à l'esprit qu'il s'agit d'une revue de presse destinée à être écoutée."
 #text_final = lib__agent_buildchronical.execute(prompt, '', text_veille, model)
 text_final = call_llm(prompt, text_veille, "", model, 14000)
@@ -291,7 +347,7 @@ print(text_final)
 
 # Appeler l'API elevenLabs et construire un podcast
 
-
+"""
 # text_final = "Bienvenue dans //L'IA aujourd'hui : le podcast de l'IA par l'IA qui vous permet de rester à la page !// Aujourd'hui, nous allons explorer deux sujets fascinants et d'actualité : l'incertitude des travailleurs étrangers dans le secteur technologique américain face aux politiques d'immigration, et la question de savoir si l'intelligence artificielle peut remplacer les traducteurs humains."
 # creation de l'audio
 voice_id = "Fgn8wInzqZU1U5EP2qp0" # MLP   eKZsbKN3buNViPVgJwQr
@@ -395,3 +451,4 @@ print(f"Réponse : {response.text}")
 
 
 
+"""
