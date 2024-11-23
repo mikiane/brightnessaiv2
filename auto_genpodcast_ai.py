@@ -300,11 +300,12 @@ Consignes spécifiques :
   - Transitions :  
     Utilisez des transitions naturelles entre les sujets, en assurant une narration fluide. Variez les styles pour éviter la répétition, mais restez sobre : pas d’abus de questions rhétoriques ou d’effets de style inutiles.
   - Conclusion :  
-    Récapitulatif court, engageant et standardisé :  
+    Ne pas faire de récapitulatif court. Tout de suite après la dernière actualité, conclure avec la phrase standard :  
       *"Voilà qui conclut notre épisode d’aujourd’hui. Merci de nous avoir rejoints, et n’oubliez pas de vous abonner pour ne manquer aucune de nos discussions passionnantes. À très bientôt dans *L’IA Aujourd’hui* !"*
 
 - Ton et style :
-  - Accessible mais rigoureux : Évitez un ton trop technique ou professoral. Expliquez les concepts sans les simplifier à outrance.
+  - Utiliser un français litteraire, n'buse pas des adjectifs, soit simple et direct
+- Accessible mais rigoureux : Évitez un ton trop technique ou professoral. Expliquez les concepts sans les simplifier à outrance.
   - Engageant et fluide : Adoptez un style journalistique équilibré, dynamique mais sans excès d’emphase.
   - Informé et crédible : Appuyez-vous sur des faits solides, sourcés et vérifiés, en évitant les conjectures.
   - Sans redondance : Limitez les répétitions ou les apartés trop longs.
