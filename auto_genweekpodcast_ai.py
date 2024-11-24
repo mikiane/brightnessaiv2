@@ -113,10 +113,10 @@ Consignes spécifiques :
   - Introduction :
     - Courte et percutante, introduire le podcast avec la phrase standard :  
       *"Bonjour à toutes et à tous, bienvenue dans *L’IA cette semaine*, le podcast de l’IA par l’IA qui vous permet de rester à la page !"*  
-    - Suivre par une phrase résumant les sujets du jour, concise et dynamique :  
+    - Suivre par une phrase résumant les sujets de la semaine, concise et dynamique :  
       *"Cette semaine : [grandes thématiques du jour]. C’est parti !"*
   - Les grandes actualités de la semaine :  
-    Développez chaque actualité en au moins **6000 signes**, en incluant :
+    Développez toutes les actualités transmises dans le texte joint (c'est important d'être exhaustif), en incluant :
     - Contexte détaillé : origine, évolution du sujet.
     - Explication claire des termes techniques, avec des exemples concrets si nécessaire.
     - Analyse des implications (sociétales, technologiques, économiques).
@@ -128,7 +128,7 @@ Consignes spécifiques :
     Utilisez des transitions naturelles entre les sujets, en assurant une narration fluide. Variez les styles pour éviter la répétition, mais restez sobre : pas d’abus de questions rhétoriques ou d’effets de style inutiles.
   - Conclusion :  
     Ne pas faire de récapitulatif court. Tout de suite après la dernière actualité, conclure avec la phrase standard :  
-      *"Voilà qui conclut notre épisode d’aujourd’hui. Merci de nous avoir rejoints, et n’oubliez pas de vous abonner pour ne manquer aucune de nos discussions passionnantes. À très bientôt dans *L’IA Aujourd’hui* !"*
+      *"Voilà qui conclut notre épisode de cette semaine. Merci de nous avoir rejoints, et n’oubliez pas de vous abonner pour ne manquer aucune de nos discussions passionnantes. À très bientôt dans *L’IA Aujourd’hui* !"*
 
 - Ton et style :
   - Utiliser un français litteraire, n'buse pas des adjectifs, soit simple et direct
