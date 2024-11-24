@@ -105,10 +105,10 @@ text_veille = result
 
 prompt = """
 
-Contexte : Vous êtes chargé(e) d’écrire un script complet pour la version hebdomadaire du podcast L'IA Aujorud'hui. C'est une revue de presse sur l’intelligence artificielle intitulé *L’IA cette semaine*, présenté par Michel Lévy Provençal. Ce podcast doit être informatif, factuel et engageant, conçu pour un auditoire curieux mais non-expert. L’objectif est de fournir un contenu captivant et accessible tout en restant rigoureux.
+Contexte : Vous êtes chargé(e) d’écrire un script complet pour la version hebdomadaire du podcast L'IA Aujourd'hui. C'est une revue de presse sur l’intelligence artificielle intitulé *L’IA cette semaine*, présenté par Michel Lévy Provençal. Ce podcast doit être informatif, factuel et engageant, conçu pour un auditoire curieux mais non-expert. L’objectif est de fournir un contenu captivant et accessible tout en restant rigoureux.
 
 Consignes spécifiques :
-
+Le texte fourni correspond au script des 6 derniers jours d'actu de l'IA. Vous devez rédiger un script de podcast complet, comprenant une introduction, toutes les actualités de la semaine (reprendre le contenu de chacun des jours), et une conclusion. Voici les consignes détaillées :
 - Structure du script :
   - Introduction :
     - Courte et percutante, introduire le podcast avec la phrase standard :  
@@ -116,14 +116,8 @@ Consignes spécifiques :
     - Suivre par une phrase résumant les sujets de la semaine, concise et dynamique :  
       *"Cette semaine : [grandes thématiques du jour]. C’est parti !"*
   - Les grandes actualités de la semaine :  
-    Développez toutes les actualités transmises dans le texte joint (c'est important d'être exhaustif), en incluant :
-    - Contexte détaillé : origine, évolution du sujet.
-    - Explication claire des termes techniques, avec des exemples concrets si nécessaire.
-    - Analyse des implications (sociétales, technologiques, économiques).
-    - Citez systématiquement les **sources** utilisées.
-    - Évitez les actualités génériques ou redondantes, en privilégiant les informations originales et significatives.
-  - Focus thématique (facultatif) :  
-    Si un sujet particulier se prête à une analyse approfondie, développez un **segment dédié** (par exemple : un cas d’usage spécifique, une décision réglementaire majeure, ou une avancée technologique remarquable). Ce segment doit être construit comme une mini-enquête journalistique.
+    Reprendre le script de chaque jour.
+    Ne résume pas, ne tronque pas, ne simplifie pas. Reprendre chaque news dans son intégralité.
   - Transitions :  
     Utilisez des transitions naturelles entre les sujets, en assurant une narration fluide. Variez les styles pour éviter la répétition, mais restez sobre : pas d’abus de questions rhétoriques ou d’effets de style inutiles.
   - Conclusion :  
