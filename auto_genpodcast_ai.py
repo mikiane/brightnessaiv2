@@ -75,7 +75,8 @@ command = "Nous sommes le " + formatted_date + "\nA partir du texte suivant entr
      
 #generation de la veille
 model=DEFAULT_MODEL
-responses = [process_url(command, url, model,"","") for url in url_list]
+
+responses = [lib_genpodcasts.process_url(command, url, model,"","") for url in url_list]
 res = "<br><br>".join(responses)
 
 text_veille = str(res.replace("```html", "")).replace("```", "")
