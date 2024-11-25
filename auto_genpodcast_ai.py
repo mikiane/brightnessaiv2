@@ -156,15 +156,14 @@ Consignes spécifiques :
 - Structure du script :
   - Introduction :
     - Courte et percutante, introduire le podcast avec la phrase standard :  
-      *"Bonjour à toutes et à tous, bienvenue dans *L’IA Aujourd’hui*, le podcast de l’IA par l’IA qui vous permet de rester à la page !"*  
+      "Bonjour à toutes et à tous, bienvenue dans L’IA Aujourd’hui, le podcast de l’IA par l’IA qui vous permet de rester à la page !"  
     - Suivre par une phrase résumant les sujets du jour, concise et dynamique :  
-      *"Aujourd’hui : [grandes thématiques du jour]. C’est parti !"*
+      "Aujourd’hui : [grandes thématiques du jour]. C’est parti !"
   - Les grandes actualités du jour :  
-    Développez chaque actualité en au moins **6000 signes**, en incluant :
+    Développez chaque actualité en au moins 6000 signes, en incluant :
     - Contexte détaillé : origine, évolution du sujet.
-    - Explication claire des termes techniques, avec des exemples concrets si nécessaire.
-    - Analyse des implications (sociétales, technologiques, économiques).
-    - Citez systématiquement les **sources** utilisées.
+    - Détails et implications : chiffres, exemples, conséquences.
+    - Citez systématiquement les sources utilisées.
     - Évitez les actualités génériques ou redondantes, en privilégiant les informations originales et significatives.
   - Focus thématique (facultatif) :  
     Si un sujet particulier se prête à une analyse approfondie, développez un **segment dédié** (par exemple : un cas d’usage spécifique, une décision réglementaire majeure, ou une avancée technologique remarquable). Ce segment doit être construit comme une mini-enquête journalistique.
@@ -185,7 +184,7 @@ Consignes spécifiques :
   - N'insiste pas sur les questions rhétoriques pour chaque news et n'abuse pas des commentaires génériques relatifs à des questions, ethiques, philosophiques ou politiques liées à ces news. 
   - Contente toi de donner les faits.
 Exemple de début de script attendu :
-*"Bonjour à toutes et à tous, bienvenue dans *L’IA Aujourd’hui*, le podcast de l’IA par l’IA qui vous permet de rester à la page ! Aujourd’hui : des décisions politiques influencées par des modèles d’IA, l’audacieuse expansion de GitHub vers des outils multi-modèles, et une analyse des tensions croissantes au sein des grandes entreprises technologiques. C’est parti !"*
+*"Bonjour à toutes et à tous, bienvenue dans L’IA Aujourd’hui*, le podcast de l’IA par l’IA qui vous permet de rester à la page ! Aujourd’hui : des décisions politiques influencées par des modèles d’IA, l’audacieuse expansion de GitHub vers des outils multi-modèles, et une analyse des tensions croissantes au sein des grandes entreprises technologiques. C’est parti !"
 
 Objectif final : Produire un script détaillé, prêt à être lu, d’une durée de **10 à 15 minutes**, soit environ **30 000 signes**, en intégrant les actualités fournies de manière exhaustive et captivante.
 
