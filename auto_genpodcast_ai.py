@@ -32,8 +32,8 @@ DESTINATAIRES_TECH = os.environ.get("DESTINATAIRES_TECH")
 PODCASTS_PATH = os.environ.get("PODCASTS_PATH")
 DEFAULT_MODEL = os.environ.get("DEFAULT_MODEL")
 ACAST_API_KEY = os.environ.get("ACAST_API_KEY")
-model = DEFAULT_MODEL
-
+#model = DEFAULT_MODEL
+model = "o1-preview"
 
 
 ## PODCAST VEILLE #1 ##
@@ -63,15 +63,13 @@ current_date = datetime.now()
 formatted_date = current_date.strftime("%d %B %Y")
         
 command = "Nous sommes le " + formatted_date + "\nA partir du texte suivant entre ___ , contenant les derniers articles sur l'IA, \
-        extraire TOUS les articles datant d'il y a moins de 24 heures et les traduire en français. \
-        La traduction doit avoir pour longueur le nombre de signes approximatif de l'article source. \
+        extraire TOUS les articles datant d'il y a moins de 48 heures. \
         Commencer par le titre traduit en français et la date de l'article. Citer la source. \
-        Toujours utiliser la forme d'un contenu journalistique pour la traduction. \
         N'hésite pas à développer si besoin afin d'expliquer les termes techniques ou jargonneux à une audience grand public \
-        Aucun article datant de moins de 24 heures ne doit etre oublié. Ne converse pas. Ne conclue pas. \
-        Ne pas générer d'introduction ni de conclusion, juste l'articke traduit'. \
+        Aucun article datant de moins de 48 heures ne doit etre oublié. Ne converse pas. Ne conclue pas. \
+        Ne pas générer d'introduction ni de conclusion, juste l'article'. \
         Si il n'y a pas d'article, ne pas dire qu'il n'y pas d'article, renvoyer une chaine vide.\
-        Ne pas commencer par Voici le compte rendu de l'artcie... Mais directement démarrer par l'article'. Respecter ces consignes strictement. "
+        Ne pas commencer par Voici l'artcie... Mais directement démarrer par l'article'. Respecter ces consignes strictement. "
      
 #generation de la veille
 model=DEFAULT_MODEL
@@ -149,7 +147,7 @@ Toujours rédiger la revue de presse comme un script complet à lire, sans titre
 
 prompt = """
 
-Contexte : Vous êtes chargé(e) d’écrire un script complet pour un podcast quotidien de revue de presse sur l’intelligence artificielle intitulé *L’IA Aujourd’hui*, présenté par Michel Lévy Provençal. Ce podcast doit être informatif, factuel et engageant, conçu pour un auditoire curieux mais non-expert. L’objectif est de fournir un contenu captivant et accessible tout en restant rigoureux.
+Contexte : Vous êtes chargé(e) d’écrire un script en français complet pour un podcast quotidien de revue de presse sur l’intelligence artificielle intitulé L’IA Aujourd’hui, présenté par Michel Lévy Provençal. Ce podcast doit être informatif, factuel et engageant, conçu pour un auditoire curieux mais non-expert. L’objectif est de fournir un contenu captivant et accessible tout en restant rigoureux.
 
 Consignes spécifiques :
 
@@ -163,15 +161,15 @@ Consignes spécifiques :
     Développez chaque actualité en au moins 6000 signes, en incluant :
     - Contexte détaillé : origine, évolution du sujet.
     - Détails et implications : chiffres, exemples, conséquences.
-    - Citez systématiquement les sources utilisées.
+    - Citez les sources utilisées.
     - Évitez les actualités génériques ou redondantes, en privilégiant les informations originales et significatives.
   - Focus thématique (facultatif) :  
-    Si un sujet particulier se prête à une analyse approfondie, développez un **segment dédié** (par exemple : un cas d’usage spécifique, une décision réglementaire majeure, ou une avancée technologique remarquable). Ce segment doit être construit comme une mini-enquête journalistique.
+    Si un sujet particulier se prête à une analyse approfondie, développez un segment dédié (par exemple : un cas d’usage spécifique, une décision réglementaire majeure, ou une avancée technologique remarquable). Ce segment doit être construit comme une mini-enquête journalistique.
   - Transitions :  
     Utilisez des transitions naturelles entre les sujets, en assurant une narration fluide. Variez les styles pour éviter la répétition, mais restez sobre : pas d’abus de questions rhétoriques ou d’effets de style inutiles.
   - Conclusion :  
     Ne pas faire de récapitulatif court. Tout de suite après la dernière actualité, conclure avec la phrase standard :  
-      *"Voilà qui conclut notre épisode d’aujourd’hui. Merci de nous avoir rejoints, et n’oubliez pas de vous abonner pour ne manquer aucune de nos discussions passionnantes. À très bientôt dans *L’IA Aujourd’hui* !"*
+      "Voilà qui conclut notre épisode d’aujourd’hui. Merci de nous avoir rejoints, et n’oubliez pas de vous abonner pour ne manquer aucune de nos discussions passionnantes. À très bientôt dans L’IA Aujourd’hui !"
 
 - Ton et style :
   - Utiliser un français litteraire, n'buse pas des adjectifs, soit simple et direct
@@ -184,7 +182,7 @@ Consignes spécifiques :
   - N'insiste pas sur les questions rhétoriques pour chaque news et n'abuse pas des commentaires génériques relatifs à des questions, ethiques, philosophiques ou politiques liées à ces news. 
   - Contente toi de donner les faits.
 Exemple de début de script attendu :
-*"Bonjour à toutes et à tous, bienvenue dans L’IA Aujourd’hui*, le podcast de l’IA par l’IA qui vous permet de rester à la page ! Aujourd’hui : des décisions politiques influencées par des modèles d’IA, l’audacieuse expansion de GitHub vers des outils multi-modèles, et une analyse des tensions croissantes au sein des grandes entreprises technologiques. C’est parti !"
+"Bonjour à toutes et à tous, bienvenue dans L’IA Aujourd’hui, le podcast de l’IA par l’IA qui vous permet de rester à la page ! Aujourd’hui : des décisions politiques influencées par des modèles d’IA, l’audacieuse expansion de GitHub vers des outils multi-modèles, et une analyse des tensions croissantes au sein des grandes entreprises technologiques. C’est parti !"
 
 Objectif final : Produire un script détaillé, prêt à être lu, d’une durée de **10 à 15 minutes**, soit environ **30 000 signes**, en intégrant les actualités fournies de manière exhaustive et captivante.
 
