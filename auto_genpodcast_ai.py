@@ -33,7 +33,6 @@ PODCASTS_PATH = os.environ.get("PODCASTS_PATH")
 DEFAULT_MODEL = os.environ.get("DEFAULT_MODEL")
 ACAST_API_KEY = os.environ.get("ACAST_API_KEY")
 #model = DEFAULT_MODEL
-model = "o1-preview"
 
 
 ## PODCAST VEILLE #1 ##
@@ -161,7 +160,7 @@ Consignes spécifiques :
     Développez chaque actualité en au moins 6000 signes, en incluant :
     - Contexte détaillé : origine, évolution du sujet.
     - Détails et implications : chiffres, exemples, conséquences.
-    - Citez les sources utilisées.
+    - Citez les sources utilisées mais ne jamais citer les URLs des articles
     - Évitez les actualités génériques ou redondantes, en privilégiant les informations originales et significatives.
   - Focus thématique (facultatif) :  
     Si un sujet particulier se prête à une analyse approfondie, développez un segment dédié (par exemple : un cas d’usage spécifique, une décision réglementaire majeure, ou une avancée technologique remarquable). Ce segment doit être construit comme une mini-enquête journalistique.

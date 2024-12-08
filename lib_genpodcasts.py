@@ -121,7 +121,7 @@ def call_llm(prompt, context, input_data, model=DEFAULT_MODEL, max_tokens=10000)
                 ]
             )
             message = response.choices[0].message.content
-            print(str(datetime.now()) + " : " + "Réponse : " + str(message) + "\n\n")
+            #print(str(datetime.now()) + " : " + "Réponse : " + str(message) + "\n\n")
             return message.strip()
 
         except Exception as e:
