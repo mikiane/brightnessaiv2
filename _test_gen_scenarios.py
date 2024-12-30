@@ -38,9 +38,9 @@ ACAST_API_KEY = os.environ.get("ACAST_API_KEY")
 model = DEFAULT_MODEL
 
 
-secteur = "Aéronautique et défense"
+secteur = "Techonologies de l'information"
 horizon = "2035"
-precisions = "ATTENTION : Prendre en compte les aspects géopolitiques est fondamental pour ce secteur."
+precisions = "ATTENTION : Prendre en compte les aspects géopolitiques est fondamental pour ce secteur. La question de la souveraineté (ou non) également. "
 
 ## TENDANCES ##
 
@@ -102,20 +102,14 @@ def generate_result (prompt, model="gpt-4o"):
         res=lib_genpodcasts.call_llm(prompt, "", "", model, 14000)
     return(str(res))
 
-prompt1 = f"Je voudrais que tu identifier 5 tendances majeures (S: Sociale, T: Technologique, E: Economique, E: Environnemental, P: Politique) \
+prompt1 = f"Je voudrais que tu identifier 5 tendances majeures et disruptives (S: Sociale, T: Technologique, E: Economique, E: Environnemental, P: Politique) \
     succebtibles d'impacter de manière significative les entreprises française du secteur suivant : {secteur} à l'horizon temporel {horizon}. Les tendances doivent etre \
     les plus impactantes et plausibles. Il faut etre précis sur les tendances et surtout donner \
-    quelques exemples de signaux qui motivent le choix de ces tendances. \n\n{precisions}"
-res1 = generate_result(prompt1)
+    quelques exemples de signaux qui motivent le choix de ces tendances. \n\n{precisions}\n\n"
 
 
 
-prompt2 = f"Propose des tendances plus disruptives que : \n {res1}\n\n. Celles ci sont très actuelles. Je voudrais que tu te projettes en {horizon}.\n\n{precisions}"
-res2 = generate_result(prompt2)
-
-
-prompt3 = f"Voici les tendances : \n\n {res1}\n\n {res2}\n\nPeux tu faire une synthèse de toutes ces tendances en regroupant ce qui peut l'être ou en complétant avec des tendances qui n'ont pas été identifiées mais qui sont majeures pour {horizon}.\n\n{precisions}"
-res3 = generate_result(prompt3)
+res3 = generate_result(prompt1)
 
 
 
@@ -128,6 +122,8 @@ res4 = generate_result(prompt4)
 prompt5 = f"Peux tu  dégager de cette liste les 4 tendances qui te semblent les plus disruptives et mais les plus plausibles à l’horizon {horizon} pour le secteur de {secteur} <listes>\n\n{res4}\n\n</listes>\n\n{precisions}"
 res5 = generate_result(prompt5)
 
+
+print("#### Voici les tendances identifiées : \n\n" + res3 + "\n\n" + res4 + "\n\n" + res5 + "\n\n\n\n")
 
 ### SCENARIOS ###
 
@@ -146,11 +142,10 @@ prompt6 = f"A partir des tendances prioritaires selectionnées, peux tu élabore
 
 res6 = generate_result(prompt6)
 
-
     
-prompt6bis = f"A partir des tendances prioritaires selectionnées, peux tu élaborer un scenario disruptif pour le secteur de {secteur} à l'horizon {horizon} \
-    Pour élaborer un scenario disruptif  tu peux croiser des tendances parmi celles citées en considérant l’environnement dans lequel on se trouvait si ces tendances se réalisaient de manière radicale et :\
-    - Il es très important que le scénario généré soit consistant et pas une simple juxtaposition de tendances. Il faut de la cohérence par rapport aux enjeux et la culture du secteur.\
+prompt6bis = f"Voici un premier scenario développé : \n\n {res6}\n\n{precisions}" + "Peux tu maintenant développer un autre scénario, complètement différent, en te basant sur certaines des tendances citées ou leur inverse (des tendances inverses à celles selectionnées), peux tu élaborer un scenario disruptif pour le secteur de {secteur} à l'horizon {horizon} \
+    Pour élaborer ce nouveau scenario disruptif il faut croiser les tendances (ou leur inverse) parmi celles citées (mais sans aboutir à un scénario équivalent au précédent) en considérant l’environnement dans lequel on se trouvait si ces tendances se réalisaient de manière radicale et :\
+    - Il es très important que le scénario généré soit consistant et pas une simple juxtaposition de tendances. Il faut qu'il soit crédible. Il faut de la cohérence par rapport aux enjeux et la culture du secteur.\
     - imaginer et décrive l’environnement dans lequel on se trouve en {horizon}, en France... Cet environnement est le produit de la réalisation des tendances identifiées. \
     Ces deux tendances se sont trés largement développées. Elles se sont installées.\
     - raconter une courte histoire de ce qui s'est passé pendant une periode de dix ans et qui explique comment, au travers de quels événements, ce scenario s'est installé. \
@@ -159,10 +154,10 @@ prompt6bis = f"A partir des tendances prioritaires selectionnées, peux tu élab
     - Sois le plus précis possible, essaie de donner des exemples concrets, précis et disruptifs mais très plausibles. Il faut qu'un expert du secteur trouve ce scenario crédible.\
     Précise les tendances choisis pour élaborer le scénario.\
     Donne un titre à ce scenario.\
-    Voici les tendances selectionnées <tendances>{res5}</tendances>\
-    Attention à développer un scenario différent de celui précédemment généré.\
-    Voici le scenario précédent : \n\n {res6}\n\n{precisions}"
+    Voici les tendances selectionnées <tendances>{res5}</tendances>"    
 res6bis = generate_result(prompt6bis)
+
+print ("### Voici les scenarios" + res6 + "\n\n" + res6bis + "\n\n\n\n\n")
 
 
 ### ARTICLE SCENARIOS   
@@ -252,6 +247,9 @@ Voici la structure d’article que je souhaite que tu utilises. l’article suiv
 res7bis = generate_result(prompt7bis)
 
 
+print("#### Voici les article concernant les scénarios" + res7 + "\n\n" + res7bis + "\n\n\n\n\n")
+
+
 ### RESUME SCEN
 
 prompt8 = f"peux tu résumer ce scenario en 3 phrases, sans bullet point. En faire un abstract pour le présenter à un public de non spécialistes. <scenario>{res7}</scenario>\n\n{precisions}"
@@ -261,6 +259,10 @@ res8 = generate_result(prompt8)
 prompt8bis = f"peux tu résumer ce scenario en 3 phrases, sans bullet point. En faire un abstract pour le présenter à un public de non spécialistes. <scenario>{res7bis}</scenario>\n\n{precisions}"
 res8bis = generate_result(prompt8bis)
 
+
+print("#### Voici les abstracts de scenarios. \n\n SCENARIO 1 : \n" + res8 + "\n\nSCENARIO 2 : \n" + res8bis + "\n\n\n\n\n")
+
+
 ### SWOT ###
 
 prompt9 = f"Immergeons-nous dans un scénario futuriste pour le secteur de {secteur} à l'horizon {horizon}, où nous explorerons les transformations de ce secteur en France et en Europe. Voici un scenario surlequel travailler : {res7}\n{res6}. Imagine un monde où ces changements prennent forme. Quels seraient les risques et les opportunités pour les acteurs de ce secteur ? Utilisons la matrice SWOT pour une analyse fine. Détaille chaque élément de cette matrice par des exemples concrets, en scrutant les forces, les faiblesses, mais aussi les menaces et les opportunités qui pourraient émerger. Sois précis, documente ton argumentaire et pousse la réflexion pour anticiper les impacts tangibles sur l'industrie. Ton analyse doit non seulement esquisser les contours de ce futur possible mais aussi offrir des pistes de réflexion solidement ancrées dans une prospective éclairée et audacieuse.\n\n{precisions}"
@@ -269,6 +271,7 @@ res9 = generate_result(prompt9)
 prompt9bis = f"Immergeons-nous dans un scénario futuriste pour le secteur de {secteur} à l'horizon {horizon}, où nous explorerons les transformations de ce secteur en France et en Europe. Voici un scenario surlequel travailler : {res7bis}\n{res6bis}. Imagine un monde où ces changements prennent forme. Quels seraient les risques et les opportunités pour les acteurs de ce secteur ? Utilisons la matrice SWOT pour une analyse fine. Détaille chaque élément de cette matrice par des exemples concrets, en scrutant les forces, les faiblesses, mais aussi les menaces et les opportunités qui pourraient émerger. Sois précis, documente ton argumentaire et pousse la réflexion pour anticiper les impacts tangibles sur l'industrie. Ton analyse doit non seulement esquisser les contours de ce futur possible mais aussi offrir des pistes de réflexion solidement ancrées dans une prospective éclairée et audacieuse.\n\n{precisions}"
 res9bis = generate_result(prompt9bis)
 
+print("#### Voici les analyses SWOT des scenarios. \n\n SCENARIO 1 : \n" + res9 + "\n\nSCENARIO 2 : \n" + res9bis + "\n\n\n\n\n")
 
 
 ### ACTIONS / PROJETS
@@ -278,13 +281,7 @@ res10 = generate_result(prompt10)
 prompt10bis = f"Imaginons le secteur de {secteur} en {horizon}, et explorons les risques et opportunités qui pourraient se dessiner pour les acteurs clés de ce domaine. Sur la base de ces projections, propose des actions innovantes et réalistes qu'un grand acteur du secteur devrait envisager dès 2025 pour se préparer à ce futur. Pour étayer ta proposition, recherche des initiatives internationales lancées après 2023 par des acteurs de ce secteur, qui pourraient servir de modèle. Utilise ces exemples pour rédiger un article dans le style d'un journalisme d'investigation, en intégrant des exemples supplémentaires d'actions pertinentes et en développant un paragraphe sur des projets spécifiques qui illustrent ces stratégies en action. Voici le scénario à étudier : {res7bis}\n{res6bis}. Et voici les résultats de l'analyse SWOT de ce scénario: {res9bis}.\n\n{precisions}" 
 res10bis = generate_result(prompt10bis)
 
-resultat = "#### Voici les tendances identifiées : \n\n" + res1 + "\n\n" + res2 + "\n\n" + res3 + "\n\n" + res4 + "\n\n" + res5 + "\n\n\n\n\
-    ### Voici les scenarios" + res6 + "\n\n" + res6bis + "\n\n\
-    #### Voici les article concernant les scénarios" + res7 + "\n\n" + res7bis + "\n\n\
-    #### Voici les abstracts de scenarios. \n\n SCENARIO 1 : \n" + res8 + "\n\nSCENARIO 2 : \n" + res8bis + "\n\n\
-    #### Voici les analyses SWOT des scenarios. \n\n SCENARIO 1 : \n" + res9 + "\n\nSCENARIO 2 : \n" + res9bis + "\n\n\
-    #### Voici les actions et projets à envisager. \n\n SCENARIO 1 : \n" + res10 + "\n\nSCENARIO 2 : \n" + res10bis + "\n\n"
+print("#### Voici les actions et projets à envisager. \n\n SCENARIO 1 : \n" + res10 + "\n\nSCENARIO 2 : \n" + res10bis + "\n\n\n\n\n")
     
     
-print(resultat)
 
