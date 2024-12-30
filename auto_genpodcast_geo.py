@@ -212,7 +212,7 @@ print(text_final)
 # text_final = "Bienvenue dans //L'IA aujourd'hui : le podcast de l'IA par l'IA qui vous permet de rester à la page !// Aujourd'hui, nous allons explorer deux sujets fascinants et d'actualité : l'incertitude des travailleurs étrangers dans le secteur technologique américain face aux politiques d'immigration, et la question de savoir si l'intelligence artificielle peut remplacer les traducteurs humains."
 # creation de l'audio
 # voice_id = "Fgn8wInzqZU1U5EP2qp0" # MLP   eKZsbKN3buNViPVgJwQr
-voice_id = "TxGEqnHWrfWFTfGW9XjX" # Josh
+voice_id = "1e772jvf7it56XMrbdci" # Marco
 # randint = randint(0, 100000)
 # filename = PODCASTS_PATH + "podcast" + str(randint) + ".mp3"
 # texttospeech(text, voice_id, filename)
