@@ -64,7 +64,7 @@ formatted_date = current_date.strftime("%d %B %Y")
         
 command = "Nous sommes le " + formatted_date + "\nA partir du texte suivant entre ___ , contenant les derniers articles sur la géopolitique, \
         extraire TOUS les articles datant d'il y a moins de 48 heures. \
-        Commencer par le titre traduit en français et la date de l'article. Citer la source. \
+        Commencer par le titre traduit en français et la date de l'article.  \
         N'hésite pas à développer si besoin afin d'expliquer les termes techniques ou jargonneux à une audience grand public \
         Aucun article datant de moins de 48 heures ne doit etre oublié. Ne converse pas. Ne conclue pas. \
         Ne pas générer d'introduction ni de conclusion, juste l'article'. \
@@ -85,7 +85,7 @@ print(text_veille)
 
 prompt =    "A partir du texte suivant générer un script de podcast en français d'au moins 30000 signes, \
             pret à etre lu par le host de //Dans le monde aujourd'hui : le podcast géopolitique par l'IA qui vous permet de rester à la page !// \
-            Chaque news doit etre assez développée au moins 6000 signes, elle doit contenr les détails, exemples, sources contenues dans la news originale pour être pertinente et compréhensible par un auditeur non expert. Si besoin expliquer les acronymes ou les termes techniques sans résumer chaque article. \
+            Chaque news doit etre assez développée au moins 6000 signes, elle doit contenir les détails, exemples, contenues dans la news originale pour être pertinente et compréhensible par un auditeur non expert. Si besoin expliquer les acronymes ou les termes techniques sans résumer chaque article. \
             Si tu n'as pas assez d'info sur un article, le zapper. Attention si la news n'est pas originale, c'est à dire qu'elle traite d'information générique, la zapper. \
             Toujours démarrer par cette petite introduction, puis enchainer tout de suite aprés sur le script. Attention, ne jamais démarrer en disant, voici le script du podcast. toujours démarrer directement. \
             La conclusion du script doit etre courte et toujours sous cette forme : //Voilà qui conclut notre épisode d'aujourd'hui. Merci de nous avoir rejoints et n'oubliez pas de vous abonner pour ne manquer aucune de nos discussions passionnantes. À très bientôt dans Le monde aujourd'hui !// \
@@ -162,7 +162,6 @@ Consignes spécifiques :
     - Contexte détaillé : origine, évolution du sujet.
     - Détails et implications : chiffres, exemples, conséquences.
     - Etre précis dans le compte rendu des infos. Pas d'information générique ou vague.
-    - Citez les sources utilisées mais ne jamais citer les URLs des articles
     - Évitez les actualités génériques ou redondantes, en privilégiant les informations originales et significatives.
   - Focus thématique (facultatif) :  
     Si un sujet particulier se prête à une analyse approfondie, développez un segment dédié (par exemple : un événement spécifique, une décision réglementaire majeure, ou une avancée géopolitique remarquable). Ce segment doit être construit comme une mini-enquête journalistique.
