@@ -163,6 +163,7 @@ Consignes spécifiques :
     - Détails et implications : chiffres, exemples, conséquences.
     - Etre précis dans le compte rendu des infos. Pas d'information générique ou vague.
     - Évitez les actualités génériques ou redondantes, en privilégiant les informations originales et significatives.
+    
   - Focus thématique (facultatif) :  
     Si un sujet particulier se prête à une analyse approfondie, développez un segment dédié (par exemple : un événement spécifique, une décision réglementaire majeure, ou une avancée géopolitique remarquable). Ce segment doit être construit comme une mini-enquête journalistique.
   - Transitions :  
@@ -181,6 +182,8 @@ Consignes spécifiques :
   - N"utilise pas de titre pour chaque news.
   - N'insiste pas sur les questions rhétoriques pour chaque news et n'abuse pas des commentaires génériques relatifs à des questions, ethiques, philosophiques ou politiques liées à ces news. 
   - Contente toi de donner les faits.
+  - Eviter les mots comme : "crucial", "important", "essentiel", "fondamental", "révolutionnaire", "extraordinaire", "incroyable", "exceptionnel", "fantastique", "génial", "fabuleux", "merveilleux", "formidable", "superbe", "extraordinaire", "époustouflant", "étonnant", "impressionnant", "phénoménal", "stupéfiant", "miraculeux", "prodigieux", "sensationnel", "sublime", "grandiose", "majestueux", "magnifique", "splendide", "éblouissant", "éclatant", "radieux", "rayonnant", "resplendissant", "scintillant", "étincelant", "chatoyant", "coloré", "vif", "éclatant" et éviter les superlatifs.
+
 Objectif final : Produire un script détaillé, prêt à être lu, d’une durée de **10 à 15 minutes**, soit environ **30 000 signes**, en intégrant les actualités fournies de manière exhaustive et captivante.
 
 Instructions pour les actualités fournies :
