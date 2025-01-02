@@ -77,7 +77,7 @@ responses = [lib_genpodcasts.process_url(command, url, model,"","") for url in u
 res = "<br><br>".join(responses)
 
 text_veille = str(res.replace("```html", "")).replace("```", "")
-
+print("RESULTAT DE LA VEILLE \n\n\n")
 print(text_veille)
 
 prompt = """
