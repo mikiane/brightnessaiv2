@@ -98,8 +98,7 @@ Consignes spécifiques :
     - Détails et implications : chiffres, exemples, conséquences.
     - Etre précis dans le compte rendu des infos. Pas d'information générique ou vague.
     - Évitez les actualités génériques ou redondantes, en privilégiant les informations originales et significatives.
-  - Focus thématique (facultatif) :  
-    Si un sujet particulier se prête à une analyse approfondie, développez un segment dédié (par exemple : un événement spécifique, une décision réglementaire majeure, ou une avancée technologique remarquable). Ce segment doit être construit comme une mini-enquête journalistique.
+    - être exhaustif dans la description de l'article (fournir les détails, les chiffres, les exemples, les conséquences cités dans l'article)
   - Transitions :  
     Utilisez des transitions naturelles entre les sujets, en assurant une narration fluide. Variez les styles pour éviter la répétition, mais restez sobre : pas d’abus de questions rhétoriques ou d’effets de style inutiles.
   - Conclusion :  
@@ -107,7 +106,7 @@ Consignes spécifiques :
       "Voilà qui conclut notre épisode d’aujourd’hui. Merci de nous avoir rejoints, et n’oubliez pas de vous abonner pour ne manquer aucune de nos discussions passionnantes. À très bientôt dans L'IA Aujourd’hui !"
 
 - Ton et style :
-  - Utiliser un français litteraire, n'buse pas des adjectifs, soit simple et direct
+  - Utiliser un français journalistique, n'abuse pas des adjectifs, soit simple et direct
 - Accessible mais rigoureux : Évitez un ton trop technique ou professoral. Expliquez les concepts sans les simplifier à outrance.
   - Engageant et fluide : Adoptez un style journalistique équilibré, dynamique mais sans excès d’emphase.
   - Informé et crédible : Appuyez-vous sur des faits en évitant les conjectures.
@@ -115,7 +114,7 @@ Consignes spécifiques :
   - Unifier les thématiques : Lorsque possible, établissez des liens entre les sujets pour créer une narration cohérente et captivante.
   - N"utilise pas de titre pour chaque news.
   - N'insiste pas sur les questions rhétoriques pour chaque news et n'abuse pas des commentaires génériques relatifs à des questions, ethiques, philosophiques ou politiques liées à ces news. 
-  - Contente toi de donner les faits.
+  - Contente toi de donner les faits mais détaille les bien.
   - inutile de citer auteur et source
   - Eviter les mots comme : "crucial", "important", "essentiel", "fondamental", "révolutionnaire", "extraordinaire", "incroyable", "exceptionnel", "fantastique", "génial", "fabuleux", "merveilleux", "formidable", "superbe", "extraordinaire", "époustouflant", "étonnant", "impressionnant", "phénoménal", "stupéfiant", "miraculeux", "prodigieux", "sensationnel", "sublime", "grandiose", "majestueux", "magnifique", "splendide", "éblouissant", "éclatant", "radieux", "rayonnant", "resplendissant", "scintillant", "étincelant", "chatoyant", "coloré", "vif", "éclatant" et éviter les superlatifs.
 
