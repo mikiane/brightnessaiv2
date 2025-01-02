@@ -63,7 +63,7 @@ formatted_date = current_date.strftime("%d %B %Y")
         
 command = "Nous sommes le " + formatted_date + "\nA partir du texte suivant entre ___ , contenant les derniers articles sur l'IA, \
         extraire TOUS les articles datant d'il y a moins de 48 heures. \
-        Commencer par le titre traduit en français et la date de l'article. Citer la source. \
+        Commencer par le titre traduit en français et la date de l'article. \
         N'hésite pas à développer si besoin afin d'expliquer les termes techniques ou jargonneux à une audience grand public \
         Aucun article datant de moins de 48 heures ne doit etre oublié. Ne converse pas. Ne conclue pas. \
         Ne pas générer d'introduction ni de conclusion, juste l'article'. \
@@ -110,18 +110,19 @@ Consignes spécifiques :
   - Utiliser un français litteraire, n'buse pas des adjectifs, soit simple et direct
 - Accessible mais rigoureux : Évitez un ton trop technique ou professoral. Expliquez les concepts sans les simplifier à outrance.
   - Engageant et fluide : Adoptez un style journalistique équilibré, dynamique mais sans excès d’emphase.
-  - Informé et crédible : Appuyez-vous sur des faits solides, sourcés et vérifiés, en évitant les conjectures.
+  - Informé et crédible : Appuyez-vous sur des faits en évitant les conjectures.
   - Sans redondance : Limitez les répétitions ou les apartés trop longs.
   - Unifier les thématiques : Lorsque possible, établissez des liens entre les sujets pour créer une narration cohérente et captivante.
   - N"utilise pas de titre pour chaque news.
   - N'insiste pas sur les questions rhétoriques pour chaque news et n'abuse pas des commentaires génériques relatifs à des questions, ethiques, philosophiques ou politiques liées à ces news. 
   - Contente toi de donner les faits.
+  - inutile de citer auteur et source
   - Eviter les mots comme : "crucial", "important", "essentiel", "fondamental", "révolutionnaire", "extraordinaire", "incroyable", "exceptionnel", "fantastique", "génial", "fabuleux", "merveilleux", "formidable", "superbe", "extraordinaire", "époustouflant", "étonnant", "impressionnant", "phénoménal", "stupéfiant", "miraculeux", "prodigieux", "sensationnel", "sublime", "grandiose", "majestueux", "magnifique", "splendide", "éblouissant", "éclatant", "radieux", "rayonnant", "resplendissant", "scintillant", "étincelant", "chatoyant", "coloré", "vif", "éclatant" et éviter les superlatifs.
 
 Objectif final : Produire un script détaillé, prêt à être lu, d’une durée de **10 à 15 minutes**, soit environ **30 000 signes**, en intégrant les actualités fournies de manière exhaustive et captivante.
 
 Instructions pour les actualités fournies :
-1. Développez chaque sujet avec rigueur en exploitant les détails, les chiffres et les exemples fournis dans les sources.
+1. Développez chaque sujet avec rigueur en exploitant les détails, les chiffres et les exemples fournis.
 2. Ignorez les actualités génériques ou manquant d’informations pertinentes.
 """
 
