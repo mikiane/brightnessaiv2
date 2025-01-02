@@ -37,7 +37,7 @@ ACAST_API_KEY = os.environ.get("ACAST_API_KEY")
 
 ## PODCAST VEILLE #1 ##
 # Génération d'une liste de livres pour veille podcast
-url_list = ["https://www.artificialintelligence-news.com/"
+"""url_list = ["https://www.artificialintelligence-news.com/"
             , "https://venturebeat.com/category/ai/"
             , "https://www.wired.com/tag/artificial-intelligence/"
             , "https://www.forbes.com/ai/"
@@ -48,6 +48,24 @@ url_list = ["https://www.artificialintelligence-news.com/"
             , "https://neurips.cc/"
             , "https://www.theverge.com/ai-artificial-intelligence"
             , "https://techcrunch.com/tag/artificial-intelligence/"]
+"""
+
+
+
+
+url_list = ["https://www.artificialintelligence-news.com/"
+            , "https://techcrunch.com/category/artificial-intelligence/"
+            , "https://www.wsj.com/tech/ai"
+            , "https://www.reuters.com/technology/artificial-intelligence/"
+            , "https://venturebeat.com/category/ai/"
+            , "https://www.lemondeinformatique.fr/intelligence-artificielle-154.html"
+            , "https://insideainews.com/"
+            , "https://openai.com/news/"
+            , "https://neurips.cc/"
+            , "https://www.theverge.com/ai-artificial-intelligence"]
+
+
+
 
 
 # Setting the locale to French
