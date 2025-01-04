@@ -105,7 +105,7 @@ formatted_date = current_date.strftime("%d %B %Y")
         
 command = "A partir du texte suivant, \
         - rédige une section de script de podcast en français pour un podcast quotidien de revue de presse sur l'Intelligence Artificielle \
-        - le contenu doit etre traduit en français \
+        - le contenu doit le plus complet possible par rapport au texte source mais etre traduit en français \
         - développe afin d'expliquer les termes techniques ou jargonneux à une audience grand public \
         Ne converse pas. Ne conclue pas. \
         Ne pas générer d'introduction ni de conclusion à cette section, juste le contenu. \
