@@ -104,14 +104,26 @@ current_date = datetime.now()
 formatted_date = current_date.strftime("%d %B %Y")
         
 command = "A partir du texte suivant, \
-        - rédige une section de script de podcast en français \
+        - rédige une section de script de podcast en français d'une longueur de 2000 à 3000 signes \
         - le contenu doit le plus complet possible par rapport au texte source mais etre traduit en français \
         - développe afin d'expliquer les termes techniques ou jargonneux à une audience grand public \
         Ne converse pas. Ne conclue pas. \
         Ne pas générer d'introduction ni de conclusion à cette section, juste le contenu. Ne pas commencer par Aujourd'hui nous allons parler de... Mais directement le contenu.\
         Si il n'y a pas d'article, ne pas dire qu'il n'y pas d'article, renvoyer une chaine vide.\
-        Ne pas commencer par Voici la section ou voici le texte généré... Mais directement démarrer par le resultat. Respecter ces consignes strictement. "
-     
+        Ne pas commencer par Voici la section ou voici le texte généré... Mais directement démarrer par le resultat. Respecter ces consignes strictement. \
+        ton et style : \
+  - Utiliser un français journalistique, n'abuse pas des adjectifs, soit simple et direct \
+- Accessible mais rigoureux : Évitez un ton trop technique ou professoral. Expliquez les concepts sans les simplifier à outrance. \
+  - Engageant et fluide : Adoptez un style journalistique équilibré, dynamique mais sans excès d’emphase. \
+  - Informé et crédible : Appuyez-vous sur des faits en évitant les conjectures. \
+  - Sans redondance : Limitez les répétitions ou les apartés trop longs. \
+  - Unifier les thématiques : Lorsque possible, établissez des liens entre les sujets pour créer une narration cohérente et captivante. \
+  - N'utilise pas de titre pour chaque news. \
+  - N'insiste pas sur les questions rhétoriques pour chaque news et n'abuse pas des commentaires génériques relatifs à des questions, ethiques, philosophiques ou politiques liées à ces news. \
+  - Contente toi de donner les faits mais détaille les bien. \
+  - inutile de citer auteur et source \
+  - Bannir les mots comme : crucial, important, essentiel, fondamental, révolutionnaire, extraordinaire et tout superlatif"
+  
 
 responses = [lib_genpodcasts.process_url(command, url, model,"","") for url in url_list]
 res = "<br><br>".join(responses)
@@ -123,29 +135,24 @@ print("FIN VEILLE \n\n\n")
 
 
 
-prompt = """ Vous  trouverez dasn le context précédent, le texte surlequel baser le script du podcast à écrire."
+prompt = """ Vous  trouverez dans le context précédent, le texte surlequel baser le script du podcast à écrire."
 Vous êtes chargé(e) d’écrire un script en français complet pour un podcast quotidien de revue de presse sur l'Intelligence Artificielle intitulé L'IA Aujourd’hui. Ce podcast doit être informatif, factuel et engageant, conçu pour un auditoire curieux mais non-expert. L’objectif est de fournir un contenu captivant et accessible tout en restant rigoureux.
-A partir des contenus suivant générer un script qui réponde aux caractéristiques suivantes :
-- Structure du script :
+A partir des contenus suivant générer une introduction qui réponde aux caractéristiques suivantes :
   - Introduction :
     - Courte et percutante, introduire le podcast avec la phrase standard :  
       "Bonjour à toutes et à tous, bienvenue dans L'IA Aujourd’hui, le podcast de l'IA par l’IA qui vous permet de rester à la page !"  
     - Suivre par une phrase résumant les sujets du jour, concise et dynamique :  
       "Aujourd’hui : [grandes thématiques du jour]. C’est parti !"
-  - Les grandes actualités du jour :  
-    Développez chaque contenu fourni comme une actualité. TOUTES LES ACTULITES FOURNIES DOIVENT ETRE TRAITEES DANS LE SCRIPT. Les traiter, en incluant :
-    - Contexte détaillé : origine, évolution du sujet.
-    - Détails et implications : chiffres, exemples, conséquences.
-    - Etre précis dans le compte rendu des infos. Pas d'information générique ou vague.
-    - Évitez les actualités génériques ou redondantes, en privilégiant les informations originales et significatives.
-    - être exhaustif dans la description de l'article (fournir les détails, les chiffres, les exemples, les conséquences cités dans l'article)
-  - Transitions :  
+  
+  - Puis coller le contenu fourni dans le context afin de constituer le coeur du sript. Ne pas modifier le contenu fourni dans le contexte, éventuellement corriger les fautes d'orthographe ou de grammaire.
+  et insérer des transitions entre chaque partie pour assurer une narration fluide.:  
     Utilisez des transitions naturelles entre les sujets, en assurant une narration fluide. Variez les styles pour éviter la répétition, mais restez sobre : pas d’abus de questions rhétoriques ou d’effets de style inutiles.
+  
   - Conclusion :  
     Ne pas faire de récapitulatif court. Tout de suite après la dernière actualité, conclure avec la phrase standard :  
       "Voilà qui conclut notre épisode d’aujourd’hui. Merci de nous avoir rejoints, et n’oubliez pas de vous abonner pour ne manquer aucune de nos discussions passionnantes. À très bientôt dans L'IA Aujourd’hui !"
 
-- Ton et style :
+- Pour la redaction de l'intro, les transitions et la conclusion utiliser un ton et style :
   - Utiliser un français journalistique, n'abuse pas des adjectifs, soit simple et direct
 - Accessible mais rigoureux : Évitez un ton trop technique ou professoral. Expliquez les concepts sans les simplifier à outrance.
   - Engageant et fluide : Adoptez un style journalistique équilibré, dynamique mais sans excès d’emphase.
@@ -156,13 +163,9 @@ A partir des contenus suivant générer un script qui réponde aux caractéristi
   - N'insiste pas sur les questions rhétoriques pour chaque news et n'abuse pas des commentaires génériques relatifs à des questions, ethiques, philosophiques ou politiques liées à ces news. 
   - Contente toi de donner les faits mais détaille les bien.
   - inutile de citer auteur et source
-  - Eviter les mots comme : "crucial", "important", "essentiel", "fondamental", "révolutionnaire", "extraordinaire", "incroyable", "exceptionnel", "fantastique", "génial", "fabuleux", "merveilleux", "formidable", "superbe", "extraordinaire", "époustouflant", "étonnant", "impressionnant", "phénoménal", "stupéfiant", "miraculeux", "prodigieux", "sensationnel", "sublime", "grandiose", "majestueux", "magnifique", "splendide", "éblouissant", "éclatant", "radieux", "rayonnant", "resplendissant", "scintillant", "étincelant", "chatoyant", "coloré", "vif", "éclatant" et éviter les superlatifs.
+  - Bannir les mots comme : "crucial", "important", "essentiel", "fondamental", "révolutionnaire", "extraordinaire", "incroyable", "exceptionnel", "fantastique", "génial", "fabuleux", "merveilleux", "formidable", "superbe", "extraordinaire", "époustouflant", "étonnant", "impressionnant", "phénoménal", "stupéfiant", "miraculeux", "prodigieux", "sensationnel", "sublime", "grandiose", "majestueux", "magnifique", "splendide", "éblouissant", "éclatant", "radieux", "rayonnant", "resplendissant", "scintillant", "étincelant", "chatoyant", "coloré", "vif", "éclatant" et éviter les superlatifs.
 
 Objectif final : Produire un script détaillé, prêt à être lu, en intégrant TOUTES les actualités fournies de manière exhaustive et captivante.
-
-Instructions pour les actualités fournies :
-1. Développez chaque sujet avec rigueur en exploitant les détails, les chiffres et les exemples fournis.
-2. Ignorez les actualités génériques ou manquant d’informations pertinentes.
 """
 
 
