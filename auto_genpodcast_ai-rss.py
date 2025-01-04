@@ -54,7 +54,7 @@ def process_rss(command, url, model, site="", input_data=""):
     content = lib__agent_buildchronical.fetch_and_parse_rss_to_string(url)
     content = content.replace('\n', '')
     prompt = command + "\n ___ " + content + "\n ___ \n"
-    print("Prompt : " + prompt)
+    # print("Prompt : " + prompt)
     input_data = ""
     site = ""
     model=model
@@ -65,13 +65,11 @@ def process_rss(command, url, model, site="", input_data=""):
 # Formatting the date as "dd month yyyy"
 formatted_date = current_date.strftime("%d %B %Y")
         
-command = "Extraire TOUS les articles. \
-        Commencer par le titre traduit en français et la date de l'article. \
-        N'hésite pas à développer si besoin afin d'expliquer les termes techniques ou jargonneux à une audience grand public \
-        Aucun article datant de moins de 48 heures ne doit etre oublié. Ne converse pas. Ne conclue pas. \
-        Ne pas générer d'introduction ni de conclusion, juste l'article'. \
-        Si il n'y a pas d'article, ne pas dire qu'il n'y pas d'article, renvoyer une chaine vide.\
-        Ne pas commencer par Voici l'artcie... Mais directement démarrer par l'article'. Respecter ces consignes strictement. "
+command = "Extraire de ce texte : \
+        - le titre de l'article traduit en français et la date de l'article. \
+        - le contenu détaillé de l'article en français  (expliquer les termes techniques ou jargonneux à une audience grand public si besoin) \
+        - Si il n'y a pas d'article, ne pas dire qu'il n'y pas d'article, renvoyer une chaine vide.\
+        Ne pas commencer par 'Voici l'artcie...' Mais directement démarrer par le titre et le contenu de l'article'. Respecter ces consignes strictement. "
      
 #generation de la veille
 model=DEFAULT_MODEL
