@@ -34,7 +34,7 @@ DESTINATAIRES_TECH = os.environ.get("DESTINATAIRES_TECH")
 PODCASTS_PATH = os.environ.get("PODCASTS_PATH")
 DEFAULT_MODEL = os.environ.get("DEFAULT_MODEL")
 ACAST_API_KEY = os.environ.get("ACAST_API_KEY")
-#model = DEFAULT_MODEL
+model = "gpt-4o"
 
 
 ## PODCAST VEILLE #1 ##
@@ -125,10 +125,9 @@ print("FIN VEILLE \n\n\n")
 
 
 
-prompt = """
-
-Contexte : Vous êtes chargé(e) d’écrire un script en français complet pour un podcast quotidien de revue de presse sur l'Intelligence Artificielle intitulé L'IA Aujourd’hui. Ce podcast doit être informatif, factuel et engageant, conçu pour un auditoire curieux mais non-expert. L’objectif est de fournir un contenu captivant et accessible tout en restant rigoureux.
-A parttir des contenus suivant générer un script qui réponde aux caractéristiques suivantes :
+prompt = """ Vous  trouverez dasn le context précédent, le texte surlequel baser le script du podcast à écrire."
+Vous êtes chargé(e) d’écrire un script en français complet pour un podcast quotidien de revue de presse sur l'Intelligence Artificielle intitulé L'IA Aujourd’hui. Ce podcast doit être informatif, factuel et engageant, conçu pour un auditoire curieux mais non-expert. L’objectif est de fournir un contenu captivant et accessible tout en restant rigoureux.
+A partir des contenus suivant générer un script qui réponde aux caractéristiques suivantes :
 - Structure du script :
   - Introduction :
     - Courte et percutante, introduire le podcast avec la phrase standard :  
