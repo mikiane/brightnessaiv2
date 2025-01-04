@@ -159,6 +159,13 @@ A partir des contenus suivant générer un script qui réponde aux caractéristi
   - Bannir les mots comme : "crucial", "important", "essentiel", "fondamental", "révolutionnaire", "extraordinaire", "incroyable", "exceptionnel", "fantastique", "génial", "fabuleux", "merveilleux", "formidable", "superbe", "extraordinaire", "époustouflant", "étonnant", "impressionnant", "phénoménal", "stupéfiant", "miraculeux", "prodigieux", "sensationnel", "sublime", "grandiose", "majestueux", "magnifique", "splendide", "éblouissant", "éclatant", "radieux", "rayonnant", "resplendissant", "scintillant", "étincelant", "chatoyant", "coloré", "vif", "éclatant" et éviter les superlatifs.
 
 Objectif final : Produire un script détaillé de moins de 4500 signes (c'est trés important que le script fasse entre 4400 et 4500 signes), prêt à être lu, en intégrant TOUTES les actualités fournies de manière exhaustive et captivante.
+TRES IMPORTANT : NE PAS DEMARRER LA REPONSE PAR UN MESSAGE COMME "Le client souhaite un script de podcast de revue de presse sur l'IA, concis (4400-4500 signes), informatif et engageant pour un public non-expert. Je dois intégrer TOUTES les actualités fournies de manière détaillée et factuelle, en respectant une structure précise et un ton journalistique.
+**Plan d'action :**...
+**Points d'attention :**...
+**Itération mentale :**...
+**Confiance :**  ...
+**Début de la génération du script.**"
+Démarrer directement par le contenu du script.
 """
 
 
