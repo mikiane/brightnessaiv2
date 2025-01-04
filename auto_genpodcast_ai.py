@@ -171,7 +171,8 @@ Démarrer directement par le contenu du script généré et donc par "Bonjour à
 #text_final = lib__agent_buildchronical.execute(prompt, '', text_veille, model)
 # text_final = lib_genpodcasts.call_llm(prompt, text_veille, "", model, 16000)
 
-model_synthese = "o1-preview"
+#model_synthese = "o1-preview"
+model_synthese = "deepseek-chat"
 
 if model_synthese=="google":
   text_final = lib_genpodcasts.call_google_llm(prompt, text_veille, "")
