@@ -172,6 +172,14 @@ Démarrer directement par le contenu du script généré et donc par "Bonjour à
 # text_final = lib_genpodcasts.call_llm(prompt, text_veille, "", model, 16000)
 text_final = lib_genpodcasts.call_google_llm(prompt, text_veille, "")
 
+start_marker = "Bonjour à toutes et à tous"
+end_marker = "À très bientôt dans L'IA Aujourd’hui !"
+start_index = text_final.find(start_marker)
+end_index = text_final.find(end_marker)
+
+if start_index != -1 and end_index != -1:
+  text_final = text_final[start_index:end_index + len(end_marker)]
+
 print("\n\n\n ----- RESULTAT DU SCRIPT DE PODCAST 1----- \n\n\n")
 print(text_final)
 # prompt_net = "A partir de ce texte, retirer l'éventuelle introduction qui dit 'Here's the plan to generate the script' et renvoyer directement le script qui débute par 'Bonjour à toutes et à tous...' et qui finit par 'À très bientôt dans L'IA aujourd'hui !'."
