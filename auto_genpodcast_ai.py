@@ -124,7 +124,7 @@ print("FIN VEILLE \n\n\n")
 
 
 prompt = """ Vous  trouverez dasn le context précédent, le texte surlequel baser le script du podcast à écrire."
-Vous êtes chargé(e) d’écrire un script en français complet pour un podcast quotidien de revue de presse sur l'Intelligence Artificielle intitulé L'IA Aujourd’hui. Ce podcast doit être informatif, factuel et engageant, conçu pour un auditoire curieux mais non-expert. L’objectif est de fournir un contenu captivant et accessible tout en restant rigoureux.
+Vous êtes chargé(e) d’écrire un script en français complet en moins de 4500 signes pour un podcast quotidien de revue de presse sur l'Intelligence Artificielle intitulé L'IA Aujourd’hui. Ce podcast doit être informatif, factuel et engageant, conçu pour un auditoire curieux mais non-expert. L’objectif est de fournir un contenu captivant et accessible tout en restant rigoureux.
 A partir des contenus suivant générer un script qui réponde aux caractéristiques suivantes :
 - Structure du script :
   - Introduction :
@@ -158,11 +158,7 @@ A partir des contenus suivant générer un script qui réponde aux caractéristi
   - inutile de citer auteur et source
   - Bannir les mots comme : "crucial", "important", "essentiel", "fondamental", "révolutionnaire", "extraordinaire", "incroyable", "exceptionnel", "fantastique", "génial", "fabuleux", "merveilleux", "formidable", "superbe", "extraordinaire", "époustouflant", "étonnant", "impressionnant", "phénoménal", "stupéfiant", "miraculeux", "prodigieux", "sensationnel", "sublime", "grandiose", "majestueux", "magnifique", "splendide", "éblouissant", "éclatant", "radieux", "rayonnant", "resplendissant", "scintillant", "étincelant", "chatoyant", "coloré", "vif", "éclatant" et éviter les superlatifs.
 
-Objectif final : Produire un script détaillé, prêt à être lu, en intégrant TOUTES les actualités fournies de manière exhaustive et captivante.
-
-Instructions pour les actualités fournies :
-1. Développez chaque sujet avec rigueur en exploitant les détails, les chiffres et les exemples fournis.
-2. Ignorez les actualités génériques ou manquant d’informations pertinentes.
+Objectif final : Produire un script détaillé de moins de 4500 signes (c'est trés important que le script fasse entre 4400 et 4500 signes), prêt à être lu, en intégrant TOUTES les actualités fournies de manière exhaustive et captivante.
 """
 
 
@@ -176,7 +172,6 @@ text_final = lib_genpodcasts.call_google_llm(prompt, text_veille, "")
 print("\n\n\n ----- RESULTAT DU SCRIPT DE PODCAST ----- \n\n\n")
 print(text_final)
 
-exit()
 #envoi de la newsletter
 #title = "AI PODCAST : veille sur l'IA"
 #email = "contact@brightness.fr"
