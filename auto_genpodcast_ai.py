@@ -26,6 +26,8 @@ from googleapiclient.http import MediaFileUpload
 from google.oauth2.service_account import Credentials
 from googleapiclient.discovery import build
 import requests
+import feedparser
+
 
 load_dotenv(".env")
 DESTINATAIRES_TECH = os.environ.get("DESTINATAIRES_TECH")
@@ -53,7 +55,7 @@ ACAST_API_KEY = os.environ.get("ACAST_API_KEY")
 
 
 
-url_list = ["https://www.artificialintelligence-news.com/"
+"""url_list = ["https://www.artificialintelligence-news.com/"
             , "https://techcrunch.com/category/artificial-intelligence/"
             , "https://www.wsj.com/tech/ai"
             , "https://www.reuters.com/technology/artificial-intelligence/"
@@ -63,8 +65,32 @@ url_list = ["https://www.artificialintelligence-news.com/"
             , "https://openai.com/news/"
             , "https://neurips.cc/"
             , "https://www.theverge.com/ai-artificial-intelligence"]
+"""
 
 
+
+url_list = ["https://flint.media/bots/feeds/eyJhbGciOiJIUzI1NiJ9.eyJib3RfaWQiOjEyNzYyLCJlZGl0aW9uIjoiY3VycmVudCJ9.K2pXIxZ9BLIxcrXAjoV76D0dLN-lUFJhh7cv2l2CDMw"]
+
+
+def get_urls_from_rss(rss_url: str) -> list:
+    """
+    Récupère les URLs contenues dans un flux RSS et les renvoie sous forme de liste.
+    """
+    # Parse du flux RSS
+    feed = feedparser.parse(rss_url)
+    
+    # Extraction des URLs dans une liste
+    urls = []
+    for entry in feed.entries:
+        # La plupart du temps, l'URL se trouve dans l'attribut 'link'
+        urls.append(entry.link)
+    
+    return urls
+
+if __name__ == "__main__":
+    rss_feed = "https://flint.media/bots/feeds/eyJhbGciOiJIUzI1NiJ9.eyJib3RfaWQiOjEyNzYyLCJlZGl0aW9uIjoiY3VycmVudCJ9.K2pXIxZ9BLIxcrXAjoV76D0dLN-lUFJhh7cv2l2CDMw"
+    urls_list = get_urls_from_rss(rss_feed)
+    print(urls_list)
 
 
 
