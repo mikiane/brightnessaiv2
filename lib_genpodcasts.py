@@ -36,7 +36,8 @@ DESTINATAIRES_TECH = os.environ.get("DESTINATAIRES_TECH")
 PODCASTS_PATH = os.environ.get("PODCASTS_PATH")
 DEFAULT_MODEL = os.environ.get("DEFAULT_MODEL")
 ACAST_API_KEY = os.environ.get("ACAST_API_KEY")
-
+XAI_KEY = os.environ.get("XAI_KEY")
+DEEPSEEK_KEY = os.environ.get("DEEPSEEK_KEY")
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
 model = DEFAULT_MODEL
 
@@ -114,13 +115,21 @@ def call_llm(prompt, context, input_data, model=DEFAULT_MODEL, max_tokens=10000)
 
     while attempts < 10:
         try:
-            response = client.chat.completions.create(
+            if model=="gpt-4o":
+                response = client.chat.completions.create(
                 model=model,
                 temperature=0.01,
                 max_tokens=max_tokens,
                 messages=[
                     {'role': 'user', 'content': execprompt},
                     {'role': 'system', 'content': system}
+                ]
+            )
+            else:
+                response = client.chat.completions.create(
+                model=model,
+                messages=[
+                    {'role': 'user', 'content': execprompt}
                 ]
             )
             message = response.choices[0].message.content
@@ -138,6 +147,54 @@ def call_llm(prompt, context, input_data, model=DEFAULT_MODEL, max_tokens=10000)
     sys.exit()
 
 
+def call_deepseek_llm(prompt, context, input_data, model=DEFAULT_MODEL, max_tokens=10000):
+
+    execprompt = "Context : " + context + "\n" + input_data + "\n" + "Query : " + prompt
+    system = "Je suis un assistant parlant parfaitement le français et l'anglais."
+
+    # Please install OpenAI SDK first: `pip3 install openai`
+    client = OpenAI(api_key=DEEPSEEK_KEY, base_url="https://api.deepseek.com")
+    response = client.chat.completions.create(
+        model="deepseek-chat",
+        messages=[
+            {"role": "system", "content": execprompt},
+            {"role": "user", "content": system},
+        ],
+        stream=False
+    )
+    message = response.choices[0].message.content
+    return message.strip()
+
+
+def call_grok_llm(prompt, context, input_data, model="grok-2-latest", max_tokens=8192):
+    from openai import OpenAI
+    # Remplacez par votre clé API
+    XAI_API_KEY = XAI_KEY
+    client = OpenAI(
+        api_key=XAI_API_KEY,
+        base_url="https://api.x.ai/v1",
+    )
+
+    # Exemple d'entrée pour le modèle
+    prompt = [
+        {"role": "system", "content": "Vous êtes un assistant."},
+        {"role": "user", "content": "Context : " + context + "\n" + input_data + "\n" + "Query : " + prompt}
+    ]
+
+    # Créez une complétion
+    completion = client.chat.completions.create(
+        model="grok-2-latest",  # Spécifiez le modèle ici
+        messages=prompt,
+        max_tokens=max_tokens,  # Limitez le nombre de tokens générés
+        temperature=0.2,  # Réglez la créativité du modèle
+        top_p=1.0,       # Utilisez la valeur top-p pour contrôler la diversité
+        n=1,             # Nombre de réponses à générer
+        stop=None        # Optionnel : spécifiez un ou plusieurs arrêts pour le texte
+    )
+
+    # Affichez la réponse générée
+    response_content = completion.choices[0].message.content
+    return str(response_content)
 
 
 def call_google_llm(prompt, context, input_data, model="gemini-2.0-flash-thinking-exp-1219", max_tokens=8192):
@@ -154,9 +211,9 @@ def call_google_llm(prompt, context, input_data, model="gemini-2.0-flash-thinkin
     }
 
     model = genai.GenerativeModel(
-    model_name="gemini-2.0-flash-thinking-exp-1219",
-    generation_config=generation_config,
-    system_instruction="À partir de maintenant, réponds directement à ma question sans introduction.\"",
+        model_name="gemini-2.0-flash-thinking-exp-1219",
+        generation_config=generation_config,
+        system_instruction="À partir de maintenant, réponds directement à ma question sans introduction.\"",
     )
 
     chat_session = model.start_chat(
