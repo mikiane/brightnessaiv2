@@ -128,9 +128,7 @@ print("FIN VEILLE \n\n\n")
 prompt = """
 
 Contexte : Vous êtes chargé(e) d’écrire un script en français complet pour un podcast quotidien de revue de presse sur l'Intelligence Artificielle intitulé L'IA Aujourd’hui. Ce podcast doit être informatif, factuel et engageant, conçu pour un auditoire curieux mais non-expert. L’objectif est de fournir un contenu captivant et accessible tout en restant rigoureux.
-
-Consignes spécifiques :
-
+A parttir des contenus suivant générer un script qui réponde aux caractéristiques suivantes :
 - Structure du script :
   - Introduction :
     - Courte et percutante, introduire le podcast avec la phrase standard :  
@@ -138,7 +136,7 @@ Consignes spécifiques :
     - Suivre par une phrase résumant les sujets du jour, concise et dynamique :  
       "Aujourd’hui : [grandes thématiques du jour]. C’est parti !"
   - Les grandes actualités du jour :  
-    Développez chaque actualité en au moins 6000 signes, en incluant :
+    Développez chaque contenu fourni comme une actualité. TOUTES LES ACTULITES FOURNIES DOIVENT ETRE TRAITEES DANS LE SCRIPT. Les traiter, en incluant :
     - Contexte détaillé : origine, évolution du sujet.
     - Détails et implications : chiffres, exemples, conséquences.
     - Etre précis dans le compte rendu des infos. Pas d'information générique ou vague.
@@ -163,7 +161,7 @@ Consignes spécifiques :
   - inutile de citer auteur et source
   - Eviter les mots comme : "crucial", "important", "essentiel", "fondamental", "révolutionnaire", "extraordinaire", "incroyable", "exceptionnel", "fantastique", "génial", "fabuleux", "merveilleux", "formidable", "superbe", "extraordinaire", "époustouflant", "étonnant", "impressionnant", "phénoménal", "stupéfiant", "miraculeux", "prodigieux", "sensationnel", "sublime", "grandiose", "majestueux", "magnifique", "splendide", "éblouissant", "éclatant", "radieux", "rayonnant", "resplendissant", "scintillant", "étincelant", "chatoyant", "coloré", "vif", "éclatant" et éviter les superlatifs.
 
-Objectif final : Produire un script détaillé, prêt à être lu, d’une durée de **10 à 15 minutes**, soit environ **30 000 signes**, en intégrant les actualités fournies de manière exhaustive et captivante.
+Objectif final : Produire un script détaillé, prêt à être lu, en intégrant TOUTES les actualités fournies de manière exhaustive et captivante.
 
 Instructions pour les actualités fournies :
 1. Développez chaque sujet avec rigueur en exploitant les détails, les chiffres et les exemples fournis.
@@ -175,7 +173,7 @@ Instructions pour les actualités fournies :
 
 #prompt = "À partir du texte fourni, générer un script de podcast en français d'au moins 30000 signes pour 'L'IA aujourd'hui', présenté par Michel Lévy Provençal, avec l'introduction standard 'Bienvenue dans L'IA aujourd'hui : le podcast de l'IA par l'IA qui vous permet de rester à la page ! Je suis Michel Lévy Provençal, votre hôte' et la conclusion standard 'Voilà qui conclut notre épisode d'aujourd'hui. Merci de nous avoir rejoints et n'oubliez pas de vous abonner pour ne manquer aucune de nos discussions passionnantes. À très bientôt dans L'IA aujourd'hui !'. Adopter un style de revue de presse dynamique avec un ton journalistique engageant caractéristique de Michel Lévy Provençal. Chaque news doit être développée sur au moins 6000 signes, incluant contexte, détails et implications, en expliquant les termes techniques sans simplification excessive. Établir des liens pertinents entre les actualités pour créer une narration fluide. Ignorer les articles trop génériques ou manquant d'informations substantielles. Utiliser des transitions naturelles entre les sujets, des questions rhétoriques pour maintenir l'engagement, et un style narratif incluant le 'nous' inclusif. Le contenu doit être informatif et accessible, équilibrant faits techniques et analyse approfondie, en gardant toujours à l'esprit qu'il s'agit d'une revue de presse destinée à être écoutée."
 #text_final = lib__agent_buildchronical.execute(prompt, '', text_veille, model)
-text_final = lib_genpodcasts.call_llm(prompt, text_veille, "", model, 14000)
+text_final = lib_genpodcasts.call_llm(prompt, text_veille, "", model, 80000)
 print("\n\n\n ----- RESULTAT DU SCRIPT DE PODCAST ----- \n\n\n")
 print(text_final)
 
