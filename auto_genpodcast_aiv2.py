@@ -104,12 +104,13 @@ current_date = datetime.now()
 formatted_date = current_date.strftime("%d %B %Y")
         
 command = "A partir du texte suivant, \
-        traduire le contenu en français \
-        développe afin d'expliquer les termes techniques ou jargonneux à une audience grand public \
+        - rédige une section de script de podcast en français pour un podcast quotidien de revue de presse sur l'Intelligence Artificielle \
+        - le contenu doit etre traduit en français \
+        - développe afin d'expliquer les termes techniques ou jargonneux à une audience grand public \
         Ne converse pas. Ne conclue pas. \
-        Ne pas générer d'introduction ni de conclusion, juste le contenu. \
+        Ne pas générer d'introduction ni de conclusion à cette section, juste le contenu. \
         Si il n'y a pas d'article, ne pas dire qu'il n'y pas d'article, renvoyer une chaine vide.\
-        Ne pas commencer par Voici l'artcie... Mais directement démarrer par l'article'. Respecter ces consignes strictement. "
+        Ne pas commencer par Voici la section ou voici le texte généré... Mais directement démarrer par le resultat. Respecter ces consignes strictement. "
      
 #generation de la veille
 model=DEFAULT_MODEL
