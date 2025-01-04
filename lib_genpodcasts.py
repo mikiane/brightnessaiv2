@@ -27,6 +27,7 @@ import requests
 from pydub import AudioSegment
 import os
 import google.generativeai as genai
+import anthropic
 
 
 # load_dotenv(DOTENVPATH)
@@ -39,6 +40,7 @@ ACAST_API_KEY = os.environ.get("ACAST_API_KEY")
 XAI_KEY = os.environ.get("XAI_KEY")
 DEEPSEEK_KEY = os.environ.get("DEEPSEEK_KEY")
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
+ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY")
 model = DEFAULT_MODEL
 
 
@@ -228,6 +230,21 @@ def call_google_llm(prompt, context, input_data, model="gemini-2.0-flash-thinkin
 
 
 
+def call_anthropic_llm(prompt, context, input_data, model="claude-3-5-sonnet-20241022", max_tokens=8192):
+
+    client = anthropic.Anthropic(
+        # defaults to os.environ.get("ANTHROPIC_API_KEY")
+        api_key=ANTHROPIC_API_KEY,
+    )
+    message = client.messages.create(
+        model=model,
+        max_tokens=max_tokens,
+        messages=[
+            {"role": "user", "content": "Context : " + context + "\n" + input_data + "\n" + "Query : " + prompt}
+        ]
+    )
+    print(message.content)
+    return message.content
 
 
 

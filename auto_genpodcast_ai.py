@@ -172,7 +172,7 @@ Démarrer directement par le contenu du script généré et donc par "Bonjour à
 # text_final = lib_genpodcasts.call_llm(prompt, text_veille, "", model, 16000)
 
 #model_synthese = "o1-preview"
-model_synthese = "grok-2-latest"
+model_synthese = "claude-3-5-sonnet-20241022"
 
 if model_synthese=="google":
   text_final = lib_genpodcasts.call_google_llm(prompt, text_veille, "")
@@ -184,6 +184,8 @@ if model_synthese=="grok-2-latest":
   text_final = lib_genpodcasts.call_grok_llm(prompt, text_veille, "", model_synthese, 16000)
 if model_synthese=="deepseek-chat":
   text_final = lib_genpodcasts.call_deepseek_llm(prompt, text_veille, "", model_synthese, 16000)
+if model_synthese=="claude-3-5-sonnet-20241022":
+  text_final = lib_genpodcasts.call_anthropic_llm(prompt, text_veille, "", model_synthese, 16000)
 
 
 start_marker = "Bonjour à toutes et à tous"
