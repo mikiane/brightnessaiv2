@@ -37,7 +37,8 @@ ACAST_API_KEY = os.environ.get("ACAST_API_KEY")
 
 ## PODCAST VEILLE #1 ##
 # Génération d'une liste de livres pour veille podcast
-rss_list = ["https://flint.media/bots/feeds/eyJhbGciOiJIUzI1NiJ9.eyJib3RfaWQiOjEyNzYyLCJlZGl0aW9uIjoibGFzdCJ9.IswPZy0ZFMgrJRIMX21OU_UDnWU7NF-FOf3DCT_8sVQ"]
+# rss_list = ["https://flint.media/bots/feeds/eyJhbGciOiJIUzI1NiJ9.eyJib3RfaWQiOjEyNzYyLCJlZGl0aW9uIjoibGFzdCJ9.IswPZy0ZFMgrJRIMX21OU_UDnWU7NF-FOf3DCT_8sVQ"]
+rss_list = ["https://flint.media/bots/feeds/eyJhbGciOiJIUzI1NiJ9.eyJib3RfaWQiOjEyNzYyLCJlZGl0aW9uIjoiY3VycmVudCJ9.K2pXIxZ9BLIxcrXAjoV76D0dLN-lUFJhh7cv2l2CDMw"]
 
 
 # Setting the locale to French
