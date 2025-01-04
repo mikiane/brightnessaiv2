@@ -104,11 +104,11 @@ current_date = datetime.now()
 formatted_date = current_date.strftime("%d %B %Y")
         
 command = "A partir du texte suivant, \
-        - rédige une section de script de podcast en français pour un podcast quotidien de revue de presse sur l'Intelligence Artificielle \
+        - rédige une section de script de podcast en français \
         - le contenu doit le plus complet possible par rapport au texte source mais etre traduit en français \
         - développe afin d'expliquer les termes techniques ou jargonneux à une audience grand public \
         Ne converse pas. Ne conclue pas. \
-        Ne pas générer d'introduction ni de conclusion à cette section, juste le contenu. \
+        Ne pas générer d'introduction ni de conclusion à cette section, juste le contenu. Ne pas commencer par Aujourd'hui nous allons parler de... Mais directement le contenu.\
         Si il n'y a pas d'article, ne pas dire qu'il n'y pas d'article, renvoyer une chaine vide.\
         Ne pas commencer par Voici la section ou voici le texte généré... Mais directement démarrer par le resultat. Respecter ces consignes strictement. "
      
@@ -122,7 +122,7 @@ text_veille = str(res.replace("```html", "")).replace("```", "")
 print("RESULTAT DE LA VEILLE \n\n\n")
 print(text_veille)
 print("FIN VEILLE \n\n\n")
-exit()
+
 
 
 prompt = """
@@ -179,6 +179,7 @@ text_final = lib_genpodcasts.call_llm(prompt, text_veille, "", model, 14000)
 
 print(text_final)
 
+exit()
 #envoi de la newsletter
 #title = "AI PODCAST : veille sur l'IA"
 #email = "contact@brightness.fr"
