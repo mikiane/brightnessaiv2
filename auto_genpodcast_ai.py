@@ -34,7 +34,7 @@ DESTINATAIRES_TECH = os.environ.get("DESTINATAIRES_TECH")
 PODCASTS_PATH = os.environ.get("PODCASTS_PATH")
 DEFAULT_MODEL = os.environ.get("DEFAULT_MODEL")
 ACAST_API_KEY = os.environ.get("ACAST_API_KEY")
-#model = DEFAULT_MODEL
+model = "gpt-4o"
 
 
 ## PODCAST VEILLE #1 ##
@@ -103,14 +103,14 @@ current_date = datetime.now()
 # Formatting the date as "dd month yyyy"
 formatted_date = current_date.strftime("%d %B %Y")
         
-command = "Nous sommes le " + formatted_date + "\nA partir du texte suivant entre ___ , contenant les derniers articles sur l'IA, \
-        extraire TOUS les articles datant d'il y a moins de 48 heures. \
-        Commencer par le titre traduit en français et la date de l'article. \
-        N'hésite pas à développer si besoin afin d'expliquer les termes techniques ou jargonneux à une audience grand public \
-        Aucun article datant de moins de 48 heures ne doit etre oublié. Ne converse pas. Ne conclue pas. \
-        Ne pas générer d'introduction ni de conclusion, juste l'article'. \
+command = "A partir du texte suivant, \
+        - rédige une section de script de podcast en français \
+        - le contenu doit le plus complet possible par rapport au texte source mais etre traduit en français \
+        - développe afin d'expliquer les termes techniques ou jargonneux à une audience grand public \
+        Ne converse pas. Ne conclue pas. \
+        Ne pas générer d'introduction ni de conclusion à cette section, juste le contenu. Ne pas commencer par Aujourd'hui nous allons parler de... Mais directement le contenu.\
         Si il n'y a pas d'article, ne pas dire qu'il n'y pas d'article, renvoyer une chaine vide.\
-        Ne pas commencer par Voici l'artcie... Mais directement démarrer par l'article'. Respecter ces consignes strictement. "
+        Ne pas commencer par Voici la section ou voici le texte généré... Mais directement démarrer par le resultat. Respecter ces consignes strictement. "
      
 #generation de la veille
 model=DEFAULT_MODEL
@@ -121,13 +121,13 @@ res = "<br><br>".join(responses)
 text_veille = str(res.replace("```html", "")).replace("```", "")
 print("RESULTAT DE LA VEILLE \n\n\n")
 print(text_veille)
+print("FIN VEILLE \n\n\n")
 
-prompt = """
 
-Contexte : Vous êtes chargé(e) d’écrire un script en français complet pour un podcast quotidien de revue de presse sur l'Intelligence Artificielle intitulé L'IA Aujourd’hui. Ce podcast doit être informatif, factuel et engageant, conçu pour un auditoire curieux mais non-expert. L’objectif est de fournir un contenu captivant et accessible tout en restant rigoureux.
 
-Consignes spécifiques :
-
+prompt = """ Vous  trouverez dasn le context précédent, le texte surlequel baser le script du podcast à écrire."
+Vous êtes chargé(e) d’écrire un script en français complet pour un podcast quotidien de revue de presse sur l'Intelligence Artificielle intitulé L'IA Aujourd’hui. Ce podcast doit être informatif, factuel et engageant, conçu pour un auditoire curieux mais non-expert. L’objectif est de fournir un contenu captivant et accessible tout en restant rigoureux.
+A partir des contenus suivant générer un script qui réponde aux caractéristiques suivantes :
 - Structure du script :
   - Introduction :
     - Courte et percutante, introduire le podcast avec la phrase standard :  
@@ -135,7 +135,7 @@ Consignes spécifiques :
     - Suivre par une phrase résumant les sujets du jour, concise et dynamique :  
       "Aujourd’hui : [grandes thématiques du jour]. C’est parti !"
   - Les grandes actualités du jour :  
-    Développez chaque actualité en au moins 6000 signes, en incluant :
+    Développez chaque contenu fourni comme une actualité. TOUTES LES ACTULITES FOURNIES DOIVENT ETRE TRAITEES DANS LE SCRIPT. Les traiter, en incluant :
     - Contexte détaillé : origine, évolution du sujet.
     - Détails et implications : chiffres, exemples, conséquences.
     - Etre précis dans le compte rendu des infos. Pas d'information générique ou vague.
@@ -160,7 +160,7 @@ Consignes spécifiques :
   - inutile de citer auteur et source
   - Eviter les mots comme : "crucial", "important", "essentiel", "fondamental", "révolutionnaire", "extraordinaire", "incroyable", "exceptionnel", "fantastique", "génial", "fabuleux", "merveilleux", "formidable", "superbe", "extraordinaire", "époustouflant", "étonnant", "impressionnant", "phénoménal", "stupéfiant", "miraculeux", "prodigieux", "sensationnel", "sublime", "grandiose", "majestueux", "magnifique", "splendide", "éblouissant", "éclatant", "radieux", "rayonnant", "resplendissant", "scintillant", "étincelant", "chatoyant", "coloré", "vif", "éclatant" et éviter les superlatifs.
 
-Objectif final : Produire un script détaillé, prêt à être lu, d’une durée de **10 à 15 minutes**, soit environ **30 000 signes**, en intégrant les actualités fournies de manière exhaustive et captivante.
+Objectif final : Produire un script détaillé, prêt à être lu, en intégrant TOUTES les actualités fournies de manière exhaustive et captivante.
 
 Instructions pour les actualités fournies :
 1. Développez chaque sujet avec rigueur en exploitant les détails, les chiffres et les exemples fournis.
@@ -172,9 +172,10 @@ Instructions pour les actualités fournies :
 
 #prompt = "À partir du texte fourni, générer un script de podcast en français d'au moins 30000 signes pour 'L'IA aujourd'hui', présenté par Michel Lévy Provençal, avec l'introduction standard 'Bienvenue dans L'IA aujourd'hui : le podcast de l'IA par l'IA qui vous permet de rester à la page ! Je suis Michel Lévy Provençal, votre hôte' et la conclusion standard 'Voilà qui conclut notre épisode d'aujourd'hui. Merci de nous avoir rejoints et n'oubliez pas de vous abonner pour ne manquer aucune de nos discussions passionnantes. À très bientôt dans L'IA aujourd'hui !'. Adopter un style de revue de presse dynamique avec un ton journalistique engageant caractéristique de Michel Lévy Provençal. Chaque news doit être développée sur au moins 6000 signes, incluant contexte, détails et implications, en expliquant les termes techniques sans simplification excessive. Établir des liens pertinents entre les actualités pour créer une narration fluide. Ignorer les articles trop génériques ou manquant d'informations substantielles. Utiliser des transitions naturelles entre les sujets, des questions rhétoriques pour maintenir l'engagement, et un style narratif incluant le 'nous' inclusif. Le contenu doit être informatif et accessible, équilibrant faits techniques et analyse approfondie, en gardant toujours à l'esprit qu'il s'agit d'une revue de presse destinée à être écoutée."
 #text_final = lib__agent_buildchronical.execute(prompt, '', text_veille, model)
-text_final = lib_genpodcasts.call_llm(prompt, text_veille, "", model, 14000)
-
+text_final = lib_genpodcasts.call_llm(prompt, text_veille, "", model, 16000)
+print("\n\n\n ----- RESULTAT DU SCRIPT DE PODCAST ----- \n\n\n")
 print(text_final)
+
 
 #envoi de la newsletter
 #title = "AI PODCAST : veille sur l'IA"
