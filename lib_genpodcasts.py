@@ -26,6 +26,8 @@ from googleapiclient.discovery import build
 import requests
 from pydub import AudioSegment
 import os
+import google.generativeai as genai
+
 
 # load_dotenv(DOTENVPATH)
 # Load the environment variables from the .env file
@@ -34,8 +36,9 @@ DESTINATAIRES_TECH = os.environ.get("DESTINATAIRES_TECH")
 PODCASTS_PATH = os.environ.get("PODCASTS_PATH")
 DEFAULT_MODEL = os.environ.get("DEFAULT_MODEL")
 ACAST_API_KEY = os.environ.get("ACAST_API_KEY")
-model = DEFAULT_MODEL
 
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
+model = DEFAULT_MODEL
 
 
 def upload_and_get_public_url(service, file_path, file_name=None):
@@ -133,6 +136,38 @@ def call_llm(prompt, context, input_data, model=DEFAULT_MODEL, max_tokens=10000)
 
     print("Erreur : Echec de la création de la completion après 10 essais")
     sys.exit()
+
+
+
+
+def call_google_llm(prompt, context, input_data, model="gemini-2.0-flash-thinking-exp-1219", max_tokens=8192):
+    
+    genai.configure(api_key=GEMINI_API_KEY)
+
+    # Create the model
+    generation_config = {
+    "temperature": 0.1,
+    "top_p": 0.95,
+    "top_k": 64,
+    "max_output_tokens": max_tokens,
+    "response_mime_type": "text/plain",
+    }
+
+    model = genai.GenerativeModel(
+    model_name="gemini-2.0-flash-thinking-exp-1219",
+    generation_config=generation_config,
+    )
+
+    chat_session = model.start_chat(
+    history=[
+    ]
+    )
+
+    response = chat_session.send_message("Context : " + context + "\n" + input_data + "\n" + "Query : " + prompt)
+
+    print(response.text)
+    return response.text
+
 
 
 
