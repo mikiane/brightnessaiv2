@@ -243,8 +243,8 @@ def call_anthropic_llm(prompt, context, input_data, model="claude-3-5-sonnet-202
             {"role": "user", "content": "Context : " + context + "\n" + input_data + "\n" + "Query : " + prompt}
         ]
     )
-    print(message.content)
-    return message.content
+    
+    return str(message.content[0]["text"])
 
 
 
