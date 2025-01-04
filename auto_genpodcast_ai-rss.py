@@ -75,6 +75,19 @@ command = "Extraire de ce texte : \
 model=DEFAULT_MODEL
 
 responses = [process_rss(command, rss, model,"","") for rss in rss_list]
+
+for response in responses:
+    if isinstance(response, dict) and 'url' in response:
+        print(response['url'])
+    elif isinstance(response, list):
+        # Si c'est une liste, on vérifie les sous-éléments
+        for item in response:
+            if isinstance(item, dict) and 'url' in item:
+                print(item['url'])
+    else:
+        print("Aucune URL trouvée dans cet élément:", response)
+
+
 res = "<br><br>".join(responses)
 text_veille = str(res.replace("```html", "")).replace("```", "")
 
