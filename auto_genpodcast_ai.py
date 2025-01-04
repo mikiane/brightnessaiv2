@@ -125,6 +125,9 @@ print("FIN VEILLE \n\n\n")
 
 prompt = """ Vous  trouverez dasn le context précédent, le texte surlequel baser le script du podcast à écrire."
 Vous êtes chargé(e) d’écrire un script en français complet en moins de 4500 signes pour un podcast quotidien de revue de presse sur l'Intelligence Artificielle intitulé L'IA Aujourd’hui. Ce podcast doit être informatif, factuel et engageant, conçu pour un auditoire curieux mais non-expert. L’objectif est de fournir un contenu captivant et accessible tout en restant rigoureux.
+TRES IMPORTANT : NE PAS DEMARRER LA REPONSE PAR UN MESSAGE COMME "Here's a plan to generate the script détaillant le plan de réponse.
+Démarrer directement par le contenu du script généré et donc par "Bonjour à toutes et à tous..."
+
 A partir des contenus suivant générer un script qui réponde aux caractéristiques suivantes :
 - Structure du script :
   - Introduction :
@@ -159,13 +162,8 @@ A partir des contenus suivant générer un script qui réponde aux caractéristi
   - Bannir les mots comme : "crucial", "important", "essentiel", "fondamental", "révolutionnaire", "extraordinaire", "incroyable", "exceptionnel", "fantastique", "génial", "fabuleux", "merveilleux", "formidable", "superbe", "extraordinaire", "époustouflant", "étonnant", "impressionnant", "phénoménal", "stupéfiant", "miraculeux", "prodigieux", "sensationnel", "sublime", "grandiose", "majestueux", "magnifique", "splendide", "éblouissant", "éclatant", "radieux", "rayonnant", "resplendissant", "scintillant", "étincelant", "chatoyant", "coloré", "vif", "éclatant" et éviter les superlatifs.
 
 Objectif final : Produire un script détaillé de moins de 4500 signes (c'est trés important que le script fasse entre 4400 et 4500 signes), prêt à être lu, en intégrant TOUTES les actualités fournies de manière exhaustive et captivante.
-TRES IMPORTANT : NE PAS DEMARRER LA REPONSE PAR UN MESSAGE COMME "Le client souhaite un script de podcast de revue de presse sur l'IA, concis (4400-4500 signes), informatif et engageant pour un public non-expert. Je dois intégrer TOUTES les actualités fournies de manière détaillée et factuelle, en respectant une structure précise et un ton journalistique.
-**Plan d'action :**...
-**Points d'attention :**...
-**Itération mentale :**...
-**Confiance :**  ...
-**Début de la génération du script.**"
-Démarrer directement par le contenu du script.
+TRES IMPORTANT : NE PAS DEMARRER LA REPONSE PAR UN MESSAGE COMME "Here's a plan to generate the script détaillant le plan de réponse.
+Démarrer directement par le contenu du script généré et donc par "Bonjour à toutes et à tous..."
 """
 
 
