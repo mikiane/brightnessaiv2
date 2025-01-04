@@ -142,38 +142,14 @@ A partir des contenus suivant générer une introduction qui réponde aux caract
     - Courte et percutante, introduire le podcast avec la phrase standard :  
       "Bonjour à toutes et à tous, bienvenue dans L'IA Aujourd’hui, le podcast de l'IA par l’IA qui vous permet de rester à la page !"  
     - Suivre par une phrase résumant les sujets du jour, concise et dynamique :  
-      "Aujourd’hui : [grandes thématiques du jour]. C’est parti !"
-  
-  - Puis coller le contenu fourni dans le context afin de constituer le coeur du sript. Ne pas modifier le contenu fourni dans le contexte, éventuellement corriger les fautes d'orthographe ou de grammaire.
-  et insérer des transitions entre chaque partie pour assurer une narration fluide.:  
-    Utilisez des transitions naturelles entre les sujets, en assurant une narration fluide. Variez les styles pour éviter la répétition, mais restez sobre : pas d’abus de questions rhétoriques ou d’effets de style inutiles.
-  
-  - Conclusion :  
-    Ne pas faire de récapitulatif court. Tout de suite après la dernière actualité, conclure avec la phrase standard :  
-      "Voilà qui conclut notre épisode d’aujourd’hui. Merci de nous avoir rejoints, et n’oubliez pas de vous abonner pour ne manquer aucune de nos discussions passionnantes. À très bientôt dans L'IA Aujourd’hui !"
-
-- Pour la redaction de l'intro, les transitions et la conclusion utiliser un ton et style :
-  - Utiliser un français journalistique, n'abuse pas des adjectifs, soit simple et direct
-- Accessible mais rigoureux : Évitez un ton trop technique ou professoral. Expliquez les concepts sans les simplifier à outrance.
-  - Engageant et fluide : Adoptez un style journalistique équilibré, dynamique mais sans excès d’emphase.
-  - Informé et crédible : Appuyez-vous sur des faits en évitant les conjectures.
-  - Sans redondance : Limitez les répétitions ou les apartés trop longs.
-  - Unifier les thématiques : Lorsque possible, établissez des liens entre les sujets pour créer une narration cohérente et captivante.
-  - N"utilise pas de titre pour chaque news.
-  - N'insiste pas sur les questions rhétoriques pour chaque news et n'abuse pas des commentaires génériques relatifs à des questions, ethiques, philosophiques ou politiques liées à ces news. 
-  - Contente toi de donner les faits mais détaille les bien.
-  - inutile de citer auteur et source
-  - Bannir les mots comme : "crucial", "important", "essentiel", "fondamental", "révolutionnaire", "extraordinaire", "incroyable", "exceptionnel", "fantastique", "génial", "fabuleux", "merveilleux", "formidable", "superbe", "extraordinaire", "époustouflant", "étonnant", "impressionnant", "phénoménal", "stupéfiant", "miraculeux", "prodigieux", "sensationnel", "sublime", "grandiose", "majestueux", "magnifique", "splendide", "éblouissant", "éclatant", "radieux", "rayonnant", "resplendissant", "scintillant", "étincelant", "chatoyant", "coloré", "vif", "éclatant" et éviter les superlatifs.
-
-Objectif final : Produire un script détaillé, prêt à être lu, en intégrant TOUTES les actualités fournies de manière exhaustive et captivante.
-"""
-
-
-
+      "Aujourd’hui : [grandes thématiques du jour]. C’est parti !"""
 
 #prompt = "À partir du texte fourni, générer un script de podcast en français d'au moins 30000 signes pour 'L'IA aujourd'hui', présenté par Michel Lévy Provençal, avec l'introduction standard 'Bienvenue dans L'IA aujourd'hui : le podcast de l'IA par l'IA qui vous permet de rester à la page ! Je suis Michel Lévy Provençal, votre hôte' et la conclusion standard 'Voilà qui conclut notre épisode d'aujourd'hui. Merci de nous avoir rejoints et n'oubliez pas de vous abonner pour ne manquer aucune de nos discussions passionnantes. À très bientôt dans L'IA aujourd'hui !'. Adopter un style de revue de presse dynamique avec un ton journalistique engageant caractéristique de Michel Lévy Provençal. Chaque news doit être développée sur au moins 6000 signes, incluant contexte, détails et implications, en expliquant les termes techniques sans simplification excessive. Établir des liens pertinents entre les actualités pour créer une narration fluide. Ignorer les articles trop génériques ou manquant d'informations substantielles. Utiliser des transitions naturelles entre les sujets, des questions rhétoriques pour maintenir l'engagement, et un style narratif incluant le 'nous' inclusif. Le contenu doit être informatif et accessible, équilibrant faits techniques et analyse approfondie, en gardant toujours à l'esprit qu'il s'agit d'une revue de presse destinée à être écoutée."
 #text_final = lib__agent_buildchronical.execute(prompt, '', text_veille, model)
-text_final = lib_genpodcasts.call_llm(prompt, text_veille, "", model, 16000)
+text_intro = lib_genpodcasts.call_llm(prompt, text_veille, "", model, 16000)
+
+text_final = text_intro + "\n\n" + text_veille + "\n\nVoilà qui conclut notre épisode d’aujourd’hui. Merci de nous avoir rejoints, et n’oubliez pas de vous abonner pour ne manquer aucune de nos discussions passionnantes. À très bientôt dans L'IA Aujourd’hui !"
+
 print("\n\n\n ----- RESULTAT DU SCRIPT DE PODCAST ----- \n\n\n")
 print(text_final)
 
