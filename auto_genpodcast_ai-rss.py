@@ -64,8 +64,7 @@ def process_rss(command, url, model, site="", input_data=""):
 # Formatting the date as "dd month yyyy"
 formatted_date = current_date.strftime("%d %B %Y")
         
-command = "Nous sommes le " + formatted_date + "\nA partir du texte suivant entre ___ , contenant les derniers articles sur l'IA, \
-        extraire TOUS les articles datant d'il y a moins de 48 heures. \
+command = "Extraire TOUS les articles. \
         Commencer par le titre traduit en français et la date de l'article. \
         N'hésite pas à développer si besoin afin d'expliquer les termes techniques ou jargonneux à une audience grand public \
         Aucun article datant de moins de 48 heures ne doit etre oublié. Ne converse pas. Ne conclue pas. \
@@ -77,10 +76,9 @@ command = "Nous sommes le " + formatted_date + "\nA partir du texte suivant entr
 model=DEFAULT_MODEL
 
 responses = [process_rss(command, rss, model,"","") for rss in rss_list]
-
 res = "<br><br>".join(responses)
-
 text_veille = str(res.replace("```html", "")).replace("```", "")
+
 print("RESULTAT DE LA VEILLE \n\n\n")
 print(text_veille)
 
