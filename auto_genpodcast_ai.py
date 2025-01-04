@@ -164,6 +164,7 @@ A partir des contenus suivant générer un script qui réponde aux caractéristi
 Objectif final : Produire un script détaillé de moins de 4500 signes (c'est trés important que le script fasse entre 4400 et 4500 signes), prêt à être lu, en intégrant TOUTES les actualités fournies de manière exhaustive et captivante.
 TRES IMPORTANT : NE PAS DEMARRER LA REPONSE PAR UN MESSAGE COMME "Here's a plan to generate the script détaillant le plan de réponse.
 Démarrer directement par le contenu du script généré et donc par "Bonjour à toutes et à tous..."
+À partir de maintenant, réponds directement à ma question sans introduction.
 """
 
 #prompt = "À partir du texte fourni, générer un script de podcast en français d'au moins 30000 signes pour 'L'IA aujourd'hui', présenté par Michel Lévy Provençal, avec l'introduction standard 'Bienvenue dans L'IA aujourd'hui : le podcast de l'IA par l'IA qui vous permet de rester à la page ! Je suis Michel Lévy Provençal, votre hôte' et la conclusion standard 'Voilà qui conclut notre épisode d'aujourd'hui. Merci de nous avoir rejoints et n'oubliez pas de vous abonner pour ne manquer aucune de nos discussions passionnantes. À très bientôt dans L'IA aujourd'hui !'. Adopter un style de revue de presse dynamique avec un ton journalistique engageant caractéristique de Michel Lévy Provençal. Chaque news doit être développée sur au moins 6000 signes, incluant contexte, détails et implications, en expliquant les termes techniques sans simplification excessive. Établir des liens pertinents entre les actualités pour créer une narration fluide. Ignorer les articles trop génériques ou manquant d'informations substantielles. Utiliser des transitions naturelles entre les sujets, des questions rhétoriques pour maintenir l'engagement, et un style narratif incluant le 'nous' inclusif. Le contenu doit être informatif et accessible, équilibrant faits techniques et analyse approfondie, en gardant toujours à l'esprit qu'il s'agit d'une revue de presse destinée à être écoutée."
@@ -173,12 +174,12 @@ text_final = lib_genpodcasts.call_google_llm(prompt, text_veille, "")
 
 print("\n\n\n ----- RESULTAT DU SCRIPT DE PODCAST 1----- \n\n\n")
 print(text_final)
-prompt_net = "A partir de ce texte, retirer l'éventuelle introduction qui dit 'Here's the plan to generate the script' et renvoyer directement le script qui débute par 'Bonjour à toutes et à tous...' et qui finit par 'À très bientôt dans L'IA aujourd'hui !'."
+# prompt_net = "A partir de ce texte, retirer l'éventuelle introduction qui dit 'Here's the plan to generate the script' et renvoyer directement le script qui débute par 'Bonjour à toutes et à tous...' et qui finit par 'À très bientôt dans L'IA aujourd'hui !'."
 
-text_final = lib_genpodcasts.call_google_llm(prompt_net, text_final, "")
+# text_final = lib_genpodcasts.call_google_llm(prompt_net, text_final, "")
 
-print("\n\n\n ----- RESULTAT DU SCRIPT DE PODCAST 2----- \n\n\n")
-print(text_final)
+# print("\n\n\n ----- RESULTAT DU SCRIPT DE PODCAST 2----- \n\n\n")
+# print(text_final)
 
 #envoi de la newsletter
 #title = "AI PODCAST : veille sur l'IA"
