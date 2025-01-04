@@ -41,6 +41,12 @@ ACAST_API_KEY = os.environ.get("ACAST_API_KEY")
 rss_list = ["https://flint.media/bots/feeds/eyJhbGciOiJIUzI1NiJ9.eyJib3RfaWQiOjEyNzYyLCJlZGl0aW9uIjoiY3VycmVudCJ9.K2pXIxZ9BLIxcrXAjoV76D0dLN-lUFJhh7cv2l2CDMw"]
 
 
+print("RSS LIST \n\n")
+for rss in rss_list:
+    print(rss)
+    
+print("\n\n")
+    
 # Setting the locale to French
 #locale.setlocale(locale.LC_TIME, 'fr_FR')
 
@@ -76,16 +82,6 @@ model=DEFAULT_MODEL
 
 responses = [process_rss(command, rss, model,"","") for rss in rss_list]
 
-for response in responses:
-    if isinstance(response, dict) and 'url' in response:
-        print(response['url'])
-    elif isinstance(response, list):
-        # Si c'est une liste, on vérifie les sous-éléments
-        for item in response:
-            if isinstance(item, dict) and 'url' in item:
-                print(item['url'])
-    else:
-        print("Aucune URL trouvée dans cet élément:", response)
 
 
 res = "<br><br>".join(responses)
