@@ -86,7 +86,7 @@ def get_urls_from_rss(rss_url: str) -> list:
     
     return urls
 
-rss_feed = "https://flint.media/bots/feeds/eyJhbGciOiJIUzI1NiJ9.eyJib3RfaWQiOjEyNzYyLCJlZGl0aW9uIjoiY3VycmVudCJ9.K2pXIxZ9BLIxcrXAjoV76D0dLN-lUFJhh7cv2l2CDMw"
+rss_feed = "https://flint.media/bots/feeds/eyJhbGciOiJIUzI1NiJ9.eyJib3RfaWQiOjEyNzYyLCJlZGl0aW9uIjoibGFzdCJ9.IswPZy0ZFMgrJRIMX21OU_UDnWU7NF-FOf3DCT_8sVQ"
 url_list = get_urls_from_rss(rss_feed)
 print(url_list)
 

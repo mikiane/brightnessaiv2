@@ -312,10 +312,10 @@ res9bis = generate_result(prompt9bis, model)
 
 ### ACTIONS / PROJETS
 prompt10 = f"Imaginons le secteur de {secteur} en {horizon}, et explorons les risques et opportunités qui pourraient se dessiner pour les acteurs clés de ce domaine. Sur la base de ces projections, propose des actions innovantes et réalistes qu'un grand acteur du secteur devrait envisager dès 2025 pour se préparer à ce futur. Pour étayer ta proposition, recherche des initiatives internationales lancées après 2023 par des acteurs de ce secteur, qui pourraient servir de modèle. Utilise ces exemples pour rédiger un article dans le style d'un journalisme d'investigation, en intégrant des exemples supplémentaires d'actions pertinentes et en développant un paragraphe sur des projets spécifiques qui illustrent ces stratégies en action. Voici le scénario à étudier : {res7}\n{res6}. Et voici les résultats de l'analyse SWOT de ce scénario: {res9}.\n\n{precisions}" 
-res10 = generate_result(prompt10, model)
+res10 = generate_result(prompt10, "perplexity")
 
 prompt10bis = f"Imaginons le secteur de {secteur} en {horizon}, et explorons les risques et opportunités qui pourraient se dessiner pour les acteurs clés de ce domaine. Sur la base de ces projections, propose des actions innovantes et réalistes qu'un grand acteur du secteur devrait envisager dès 2025 pour se préparer à ce futur. Pour étayer ta proposition, recherche des initiatives internationales lancées après 2023 par des acteurs de ce secteur, qui pourraient servir de modèle. Utilise ces exemples pour rédiger un article dans le style d'un journalisme d'investigation, en intégrant des exemples supplémentaires d'actions pertinentes et en développant un paragraphe sur des projets spécifiques qui illustrent ces stratégies en action. Voici le scénario à étudier : {res7bis}\n{res6bis}. Et voici les résultats de l'analyse SWOT de ce scénario: {res9bis}.\n\n{precisions}" 
-res10bis = generate_result(prompt10bis, model)
+res10bis = generate_result(prompt10bis, "perplexity")
 
 #print("#### Voici les actions et projets à envisager. \n\n SCENARIO 1 : \n" + res10 + "\n\nSCENARIO 2 : \n" + res10bis + "\n\n\n\n\n")
     
