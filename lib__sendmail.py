@@ -35,6 +35,8 @@ def mailfile(filename=None, destinataire='michel@brightness.fr', message=""):
     try:
         sg = SendGridAPIClient(SENDGRID_KEY)
         response = sg.send(message)
+        print("Email envoie : " + destinataire + " - " + filename + " - " + message)  
+
         print(response.status_code)
         print(response.body)
         print(response.headers)

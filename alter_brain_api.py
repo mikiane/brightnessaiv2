@@ -116,6 +116,7 @@ def handle_file():
 
     uploaded_file = request.files['file']
     email = request.form.get('email')
+    print("email à utiliser pour envoyer le brain id : " + email)
 
     # Vérifier si le nom du fichier est vide
     if uploaded_file.filename == '':
