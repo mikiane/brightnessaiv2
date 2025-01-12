@@ -193,16 +193,29 @@ def generate_chat(consigne, texte, system="", model=DEFAULT_MODEL, temperature=1
 
 
             else:   
-                #Model = gpt-4-1106-preview 
-                completion = client.chat.completions.create(
+                
+                
+                if model == "o1-preview":
+                    completion = client.chat.completions.create(
                     model=model,
                     messages=[
-                        {"role": "system", "content": system},
-                        {"role": "user", "content": prompt}
+                        {"role": "user", "content": system + "\n" + prompt}
                     ],
-                    temperature=temperature, # set to 0.4 for scenario planning
+                    temperature=temperature,
                     stream=True
-                )
+                
+)
+                else:
+                
+                    completion = client.chat.completions.create(
+                        model=model,
+                        messages=[
+                            {"role": "system", "content": system},
+                            {"role": "user", "content": prompt}
+                        ],
+                        temperature=temperature, # set to 0.4 for scenario planning
+                        stream=True
+                    )
 
                 for message in completion:
                 # Vérifiez ici la structure de 'chunk' et extrayez le contenu
