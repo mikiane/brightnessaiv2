@@ -11,6 +11,15 @@ from dotenv import load_dotenv  # Import dotenv module for loading .env files
 import lib__anthropic
 import lib__hfmodels
 from huggingface_hub import InferenceClient
+from googleapiclient.http import MediaFileUpload
+from google.oauth2.service_account import Credentials
+from googleapiclient.discovery import build
+import requests
+from pydub import AudioSegment
+import os
+import google.generativeai as genai
+import anthropic
+from openai import OpenAI
 
 
 # Load the environment variables from the .env file
@@ -24,8 +33,125 @@ model = DEFAULT_MODEL
 ELEVENLABS_API_KEY = os.environ.get("ELEVENLABS_API_KEY")
 PODCASTS_PATH = os.environ.get("PODCASTS_PATH")
 SENDGRID_KEY = os.environ.get("SENDGRID_KEY")
+XAI_KEY = os.environ.get("XAI_KEY")
+DEEPSEEK_KEY = os.environ.get("DEEPSEEK_KEY")
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
+ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY")
+
+
 # Set the OpenAI API key from the environment variables
 openai.api_key = os.environ['OPEN_AI_KEY']
+
+
+
+
+def streamcall_deepseek_llm(prompt, context, input_data, model=DEFAULT_MODEL, max_tokens=10000):
+
+    execprompt = "Context : " + context + "\n" + input_data + "\n" + "Query : " + prompt
+    system = "Je suis un assistant parlant parfaitement le français et l'anglais."
+
+    # Please install OpenAI SDK first: `pip3 install openai`
+    client = OpenAI(api_key=DEEPSEEK_KEY, base_url="https://api.deepseek.com")
+    response = client.chat.completions.create(
+        model="deepseek-chat",
+        messages=[
+            {"role": "system", "content": execprompt},
+            {"role": "user", "content": system},
+        ],
+        stream=False
+    )
+    message = response.choices[0].message.content
+    for content in message:
+        print(content)
+        yield content
+
+
+def streamcall_grok_llm(prompt, context, input_data, model="grok-2-latest", max_tokens=8192):
+    from openai import OpenAI
+    # Remplacez par votre clé API
+    XAI_API_KEY = XAI_KEY
+    client = OpenAI(
+        api_key=XAI_API_KEY,
+        base_url="https://api.x.ai/v1",
+    )
+
+    # Exemple d'entrée pour le modèle
+    prompt = [
+        {"role": "system", "content": "Vous êtes un assistant."},
+        {"role": "user", "content": "Context : " + context + "\n" + input_data + "\n" + "Query : " + prompt}
+    ]
+
+    # Créez une complétion
+    completion = client.chat.completions.create(
+        model="grok-2-latest",  # Spécifiez le modèle ici
+        messages=prompt,
+        max_tokens=max_tokens,  # Limitez le nombre de tokens générés
+        temperature=0.2,  # Réglez la créativité du modèle
+        top_p=1.0,       # Utilisez la valeur top-p pour contrôler la diversité
+        n=1,             # Nombre de réponses à générer
+        stop=None        # Optionnel : spécifiez un ou plusieurs arrêts pour le texte
+    )
+
+    # Affichez la réponse générée
+    response = completion.choices[0].message.content
+    for content in response:
+            print(content)
+            yield content
+
+
+
+def streamcall_google_llm(prompt, context, input_data, model="gemini-2.0-flash-thinking-exp-1219", max_tokens=8192):
+    
+    genai.configure(api_key=GEMINI_API_KEY)
+
+    # Create the model
+    generation_config = {
+    "temperature": 0.1,
+    "top_p": 0.95,
+    "top_k": 64,
+    "max_output_tokens": max_tokens,
+    "response_mime_type": "text/plain",
+    }
+
+    model = genai.GenerativeModel(
+        model_name="gemini-2.0-flash-thinking-exp-1219",
+        generation_config=generation_config,
+        system_instruction="À partir de maintenant, réponds directement à ma question sans introduction.\"",
+    )
+
+    chat_session = model.start_chat(
+    history=[
+    ]
+    )
+
+    response = chat_session.send_message("Context : " + context + "\n" + input_data + "\n" + "Query : " + prompt)
+
+    for content in response:
+        print(content)
+        yield content
+
+
+
+def streamcall_anthropic_llm(prompt, context, input_data, model="claude-3-5-sonnet-20241022", max_tokens=8192):
+
+    client = anthropic.Anthropic(
+        # defaults to os.environ.get("ANTHROPIC_API_KEY")
+        api_key=ANTHROPIC_API_KEY,
+    )
+    message = client.messages.create(
+        model=model,
+        max_tokens=max_tokens,
+        messages=[
+            {"role": "user", "content": "Context : " + context + "\n" + input_data + "\n" + "Query : " + prompt}
+        ]
+    )
+    
+    
+    for content in message.content[0]:
+        print(content)
+        yield content
+
+
 
 
 
