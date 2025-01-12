@@ -11,9 +11,9 @@ from dotenv import load_dotenv  # Import dotenv module for loading .env files
 import lib__anthropic
 import lib__hfmodels
 from huggingface_hub import InferenceClient
-from googleapiclient.http import MediaFileUpload
-from google.oauth2.service_account import Credentials
-from googleapiclient.discovery import build
+#from googleapiclient.http import MediaFileUpload
+#from google.oauth2.service_account import Credentials
+#from googleapiclient.discovery import build
 import requests
 from pydub import AudioSegment
 import os
