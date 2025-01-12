@@ -14,7 +14,7 @@ def mailfile(filename=None, destinataire='michel@brightness.fr', message=""):
         from_email='contact@brightness.fr',
         to_emails=destinataire,
         subject='Le résultat du traitement',
-        plain_text_content='Votre demande a été traité.' + message
+        plain_text_content='Votre demande a été traité.' + str(message)
     )
     
     if filename:
@@ -35,7 +35,7 @@ def mailfile(filename=None, destinataire='michel@brightness.fr', message=""):
     try:
         sg = SendGridAPIClient(SENDGRID_KEY)
         response = sg.send(message)
-        print("Email envoie : " + destinataire + " - " + filename + " - " + message)  
+        print("Email envoie : " + str(destinataire) + " - " + str(filename) + " - " + str(message))  
 
         print(response.status_code)
         print(response.body)

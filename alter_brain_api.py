@@ -154,9 +154,9 @@ def handle_file():
     response = jsonify(res)
     response.headers['Content-Type'] = 'application/json'
     
-    print("brain_id : " + brain_id)
+    print("brain_id : " + str(brain_id))
     #Send the Brain_id to the email
-    lib__sendmail.mailfile(None, email, ' Votre index est prêt. Son brain_id est : ' + brain_id)
+    lib__sendmail.mailfile(None, email, ' Votre index est prêt. Son brain_id est : ' + str(brain_id))
 
     
     # NOTE : the index is in the folder : base_folder + base_name + "_" + timestamp + "/" + emb_index.csv
