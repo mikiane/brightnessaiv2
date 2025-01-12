@@ -201,7 +201,6 @@ def generate_chat(consigne, texte, system="", model=DEFAULT_MODEL, temperature=1
                     messages=[
                         {"role": "user", "content": system + "\n" + prompt}
                     ],
-                    temperature=temperature,
                     stream=True
                 
 )
