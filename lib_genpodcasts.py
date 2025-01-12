@@ -103,6 +103,7 @@ def process_url(command, url, model, site="", input_data=""):
     site = ""
     model=model
     res = lib__agent_buildchronical.execute(prompt, site, input_data, model)
+    print ("URL traitée : " + url)
     return res
 
 

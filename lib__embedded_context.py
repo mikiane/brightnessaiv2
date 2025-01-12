@@ -573,7 +573,7 @@ def get_text_from_url(url):
 
     try:
         # Récupérer le contenu HTML de l'URL
-        response = requests.get(url, headers=headers)
+        response = requests.get(url, headers=headers, timeout=45)
         response.raise_for_status()
     except requests.exceptions.RequestException as e:
         print(f"Erreur lors de la requête vers {url} : {e}")

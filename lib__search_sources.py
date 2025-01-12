@@ -29,7 +29,7 @@ def get_feedly_feeds(topic, n=3):
     url = 'https://cloud.feedly.com/v3/search/feeds'
     headers = {'Authorization': 'OAuth ' + api_token}
     params = {'query': topic, 'count': n}
-    response = requests.get(url, headers=headers, params=params)
+    response = requests.get(url, headers=headers, params=params, timeout=45)
     
     if response.status_code != 200:
         print(f'Error with status code: {response.status_code}')

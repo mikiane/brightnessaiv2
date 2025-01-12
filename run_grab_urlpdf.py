@@ -11,7 +11,7 @@ OUTPUTFILE = "yoursite.txt"
 DOMAIN = 'www.yoursite.fr'  # Specify the domain
 
 def get_text_from_page(url):
-    response = requests.get(url)
+    response = requests.get(url, timeout=45)
     content_type = response.headers.get('content-type')
 
 
@@ -48,7 +48,7 @@ def get_text_from_page(url):
         return ''
 
 def get_links_from_page(url):
-    response = requests.get(url)
+    response = requests.get(url, timeout=45)
     soup = BeautifulSoup(response.text, 'html.parser')
     
     links = []

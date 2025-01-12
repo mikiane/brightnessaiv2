@@ -348,7 +348,7 @@ def extract_title(url):
     """
     ########################################################################################################################
 
-    response = requests.get(url)
+    response = requests.get(url, timeout=45)
     soup = BeautifulSoup(response.text, 'html.parser')
     try:
         return soup.title.string
@@ -383,15 +383,14 @@ def execute(prompt, site, input_data, model=DEFAULT_MODEL):
         except (requests.RequestException, ValueError):
             print(f"Failed to get content from {site}.")
 
-    prompt, context, input_data = truncate_strings(prompt, context, input_data, 6000)
-    
+      
     if model == DEFAULT_MODEL:
         # Limitation des erreurs de longueur
-        prompt, context, input_data = truncate_strings(prompt, context, input_data, 200000)
+        prompt, context, input_data = truncate_strings(prompt, context, input_data, 100000)
         
     if model == "gpt-4-turbo-preview":
         # Limitation des erreurs de longueur
-        prompt, context, input_data = truncate_strings(prompt, context, input_data, 200000)
+        prompt, context, input_data = truncate_strings(prompt, context, input_data, 100000)
   
         
     if model == "gpt-3.5-turbo-16k":
@@ -552,7 +551,7 @@ def fetch_and_parse_urls(url):
 
     try:
         # Fetch the content from the URL
-        response = requests.get(url)
+        response = requests.get(url, timeout=45)
         response.raise_for_status()
 
         # Parse the content using BeautifulSoup

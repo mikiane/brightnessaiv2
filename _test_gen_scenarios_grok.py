@@ -42,9 +42,9 @@ XAI_KEY = os.environ.get("XAI_KEY")
 model = "o1-preview"
 
 
-secteur = "Techonologies de l'information"
+secteur = "Santé"
 horizon = "2035"
-precisions = "ATTENTION : Prendre en compte les aspects géopolitiques est fondamental pour ce secteur. La question de la souveraineté (ou non) également. "
+precisions = "ATTENTION : Prendre en compte le contexte du secteur de la santé en France en particulier et de la santé en europe en générale. Aprés la crise sanitaire on a connu une crise liée à la pénurie, au systeme de santé français, à un manque criant de réforme du système en terme d'organisation. Il faudra prendre en compte les améliorations grace à l'IA, à la médecine préventives, aux nouveau systemes de diagnostic et de suivi. A l'horizon 2035 comment en France les choses peuvent radicalement évoluer. Prendre en compte la montée en puissance aussi des risques sanitaires (dus aux catastrophes climatiques mais aussi aux nouvelles pandémies. Prendre également en comlpte la révolution biotech qui peut changer la donne"
 
 ## TENDANCES ##
 
@@ -312,10 +312,10 @@ res9bis = generate_result(prompt9bis, model)
 
 ### ACTIONS / PROJETS
 prompt10 = f"Imaginons le secteur de {secteur} en {horizon}, et explorons les risques et opportunités qui pourraient se dessiner pour les acteurs clés de ce domaine. Sur la base de ces projections, propose des actions innovantes et réalistes qu'un grand acteur du secteur devrait envisager dès 2025 pour se préparer à ce futur. Pour étayer ta proposition, recherche des initiatives internationales lancées après 2023 par des acteurs de ce secteur, qui pourraient servir de modèle. Utilise ces exemples pour rédiger un article dans le style d'un journalisme d'investigation, en intégrant des exemples supplémentaires d'actions pertinentes et en développant un paragraphe sur des projets spécifiques qui illustrent ces stratégies en action. Voici le scénario à étudier : {res7}\n{res6}. Et voici les résultats de l'analyse SWOT de ce scénario: {res9}.\n\n{precisions}" 
-res10 = generate_result(prompt10, "perplexity")
+res10 = generate_result(prompt10, model)
 
 prompt10bis = f"Imaginons le secteur de {secteur} en {horizon}, et explorons les risques et opportunités qui pourraient se dessiner pour les acteurs clés de ce domaine. Sur la base de ces projections, propose des actions innovantes et réalistes qu'un grand acteur du secteur devrait envisager dès 2025 pour se préparer à ce futur. Pour étayer ta proposition, recherche des initiatives internationales lancées après 2023 par des acteurs de ce secteur, qui pourraient servir de modèle. Utilise ces exemples pour rédiger un article dans le style d'un journalisme d'investigation, en intégrant des exemples supplémentaires d'actions pertinentes et en développant un paragraphe sur des projets spécifiques qui illustrent ces stratégies en action. Voici le scénario à étudier : {res7bis}\n{res6bis}. Et voici les résultats de l'analyse SWOT de ce scénario: {res9bis}.\n\n{precisions}" 
-res10bis = generate_result(prompt10bis, "perplexity")
+res10bis = generate_result(prompt10bis, model)
 
 #print("#### Voici les actions et projets à envisager. \n\n SCENARIO 1 : \n" + res10 + "\n\nSCENARIO 2 : \n" + res10bis + "\n\n\n\n\n")
     

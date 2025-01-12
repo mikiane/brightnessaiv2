@@ -109,18 +109,18 @@ prompt1 = f"Je voudrais que tu identifier 5 tendances majeures et disruptives (S
 
 
 
-res3 = generate_result(prompt1)
+res3 = generate_result(prompt1, "perplexity")
 
 
 
 prompt4 = f"Voici les tendances sur lesquelles tu vas te baser à présent : <tendances>{res3}</tendances>\
     Peux tu intégrer dans la liste suivante des éléments concrets, des exemples, des projets, des actualités qui sous-tendent chacune de ces tendances. \n\n{precisions}"
-res4 = generate_result(prompt4)
+res4 = generate_result(prompt4, "perplexity")
 
 
 
 prompt5 = f"Peux tu  dégager de cette liste les 4 tendances qui te semblent les plus disruptives et mais les plus plausibles à l’horizon {horizon} pour le secteur de {secteur} <listes>\n\n{res4}\n\n</listes>\n\n{precisions}"
-res5 = generate_result(prompt5)
+res5 = generate_result(prompt5, "perplexity")
 
 
 print("#### Voici les tendances identifiées : \n\n" + res3 + "\n\n" + res4 + "\n\n" + res5 + "\n\n\n\n")
@@ -140,7 +140,7 @@ prompt6 = f"A partir des tendances prioritaires selectionnées, peux tu élabore
     Donne un titre à ce scenario.\
     <tendances>{res5}</tendances>\n\n{precisions}"
 
-res6 = generate_result(prompt6)
+res6 = generate_result(prompt6, "perplexity")
 
     
 prompt6bis = f"Voici un premier scenario développé : \n\n {res6}\n\n{precisions}" + "Peux tu maintenant développer un autre scénario, complètement différent, en te basant sur certaines des tendances citées ou leur inverse (des tendances inverses à celles selectionnées), peux tu élaborer un scenario disruptif pour le secteur de {secteur} à l'horizon {horizon} \
@@ -155,7 +155,7 @@ prompt6bis = f"Voici un premier scenario développé : \n\n {res6}\n\n{precision
     Précise les tendances choisis pour élaborer le scénario.\
     Donne un titre à ce scenario.\
     Voici les tendances selectionnées <tendances>{res5}</tendances>"    
-res6bis = generate_result(prompt6bis)
+res6bis = generate_result(prompt6bis, "perplexity")
 
 print ("### Voici les scenarios" + res6 + "\n\n" + res6bis + "\n\n\n\n\n")
 
@@ -201,7 +201,7 @@ Voici la structure d’article que je souhaite que tu utilises. l’article suiv
     Le rééquilibrage géographique\
     Le rééquilibrage géographique s'affirme comme une tendance significative dans le paysage urbain et rural français, influencée par divers facteurs sociétaux et économiques. Les Jeux Olympiques de 2024, par exemple, pourraient accélérer la gentrification en Seine-Saint-Denis, modifiant ainsi la dynamique de la population dans cette région. Parallèlement, le développement de l'habitat participatif en réhabilitation dans les territoires ruraux, soutenu par l'AMI 2024 de l'ANCT, témoigne d'une volonté de revitaliser ces espaces et d'encourager un nouveau mode de vie. Ce phénomène de déplacement des populations vers les villes moyennes et la grande couronne, en réponse à la hausse des prix dans les grandes métropoles, s'inscrit dans un mouvement de redistribution démographique plus large. Amplifiée par l'essor du télétravail et les nouvelles politiques d'aménagement territorial, cette dynamique transforme profondément les équilibres territoriaux, favorisant un habitat plus inclusif et diversifié.\
 </article exemple>\n\n{precisions}"
-res7 = generate_result(prompt7)
+res7 = generate_result(prompt7, "perplexity")
 
 
     
@@ -244,7 +244,7 @@ Voici la structure d’article que je souhaite que tu utilises. l’article suiv
     Le rééquilibrage géographique\
     Le rééquilibrage géographique s'affirme comme une tendance significative dans le paysage urbain et rural français, influencée par divers facteurs sociétaux et économiques. Les Jeux Olympiques de 2024, par exemple, pourraient accélérer la gentrification en Seine-Saint-Denis, modifiant ainsi la dynamique de la population dans cette région. Parallèlement, le développement de l'habitat participatif en réhabilitation dans les territoires ruraux, soutenu par l'AMI 2024 de l'ANCT, témoigne d'une volonté de revitaliser ces espaces et d'encourager un nouveau mode de vie. Ce phénomène de déplacement des populations vers les villes moyennes et la grande couronne, en réponse à la hausse des prix dans les grandes métropoles, s'inscrit dans un mouvement de redistribution démographique plus large. Amplifiée par l'essor du télétravail et les nouvelles politiques d'aménagement territorial, cette dynamique transforme profondément les équilibres territoriaux, favorisant un habitat plus inclusif et diversifié.\
 </article exemple>\n\n{precisions}"
-res7bis = generate_result(prompt7bis)
+res7bis = generate_result(prompt7bis, "perplexity")
 
 
 print("#### Voici les article concernant les scénarios" + res7 + "\n\n" + res7bis + "\n\n\n\n\n")
@@ -253,11 +253,11 @@ print("#### Voici les article concernant les scénarios" + res7 + "\n\n" + res7b
 ### RESUME SCEN
 
 prompt8 = f"peux tu résumer ce scenario en 3 phrases, sans bullet point. En faire un abstract pour le présenter à un public de non spécialistes. <scenario>{res7}</scenario>\n\n{precisions}"
-res8 = generate_result(prompt8)
+res8 = generate_result(prompt8, "perplexity")
 
 
 prompt8bis = f"peux tu résumer ce scenario en 3 phrases, sans bullet point. En faire un abstract pour le présenter à un public de non spécialistes. <scenario>{res7bis}</scenario>\n\n{precisions}"
-res8bis = generate_result(prompt8bis)
+res8bis = generate_result(prompt8bis, "perplexity")
 
 
 print("#### Voici les abstracts de scenarios. \n\n SCENARIO 1 : \n" + res8 + "\n\nSCENARIO 2 : \n" + res8bis + "\n\n\n\n\n")
@@ -266,20 +266,20 @@ print("#### Voici les abstracts de scenarios. \n\n SCENARIO 1 : \n" + res8 + "\n
 ### SWOT ###
 
 prompt9 = f"Immergeons-nous dans un scénario futuriste pour le secteur de {secteur} à l'horizon {horizon}, où nous explorerons les transformations de ce secteur en France et en Europe. Voici un scenario surlequel travailler : {res7}\n{res6}. Imagine un monde où ces changements prennent forme. Quels seraient les risques et les opportunités pour les acteurs de ce secteur ? Utilisons la matrice SWOT pour une analyse fine. Détaille chaque élément de cette matrice par des exemples concrets, en scrutant les forces, les faiblesses, mais aussi les menaces et les opportunités qui pourraient émerger. Sois précis, documente ton argumentaire et pousse la réflexion pour anticiper les impacts tangibles sur l'industrie. Ton analyse doit non seulement esquisser les contours de ce futur possible mais aussi offrir des pistes de réflexion solidement ancrées dans une prospective éclairée et audacieuse.\n\n{precisions}"
-res9 = generate_result(prompt9)
+res9 = generate_result(prompt9, "perplexity")
 
 prompt9bis = f"Immergeons-nous dans un scénario futuriste pour le secteur de {secteur} à l'horizon {horizon}, où nous explorerons les transformations de ce secteur en France et en Europe. Voici un scenario surlequel travailler : {res7bis}\n{res6bis}. Imagine un monde où ces changements prennent forme. Quels seraient les risques et les opportunités pour les acteurs de ce secteur ? Utilisons la matrice SWOT pour une analyse fine. Détaille chaque élément de cette matrice par des exemples concrets, en scrutant les forces, les faiblesses, mais aussi les menaces et les opportunités qui pourraient émerger. Sois précis, documente ton argumentaire et pousse la réflexion pour anticiper les impacts tangibles sur l'industrie. Ton analyse doit non seulement esquisser les contours de ce futur possible mais aussi offrir des pistes de réflexion solidement ancrées dans une prospective éclairée et audacieuse.\n\n{precisions}"
-res9bis = generate_result(prompt9bis)
+res9bis = generate_result(prompt9bis, "perplexity")
 
 print("#### Voici les analyses SWOT des scenarios. \n\n SCENARIO 1 : \n" + res9 + "\n\nSCENARIO 2 : \n" + res9bis + "\n\n\n\n\n")
 
 
 ### ACTIONS / PROJETS
 prompt10 = f"Imaginons le secteur de {secteur} en {horizon}, et explorons les risques et opportunités qui pourraient se dessiner pour les acteurs clés de ce domaine. Sur la base de ces projections, propose des actions innovantes et réalistes qu'un grand acteur du secteur devrait envisager dès 2025 pour se préparer à ce futur. Pour étayer ta proposition, recherche des initiatives internationales lancées après 2023 par des acteurs de ce secteur, qui pourraient servir de modèle. Utilise ces exemples pour rédiger un article dans le style d'un journalisme d'investigation, en intégrant des exemples supplémentaires d'actions pertinentes et en développant un paragraphe sur des projets spécifiques qui illustrent ces stratégies en action. Voici le scénario à étudier : {res7}\n{res6}. Et voici les résultats de l'analyse SWOT de ce scénario: {res9}.\n\n{precisions}" 
-res10 = generate_result(prompt10)
+res10 = generate_result(prompt10, "perplexity")
 
 prompt10bis = f"Imaginons le secteur de {secteur} en {horizon}, et explorons les risques et opportunités qui pourraient se dessiner pour les acteurs clés de ce domaine. Sur la base de ces projections, propose des actions innovantes et réalistes qu'un grand acteur du secteur devrait envisager dès 2025 pour se préparer à ce futur. Pour étayer ta proposition, recherche des initiatives internationales lancées après 2023 par des acteurs de ce secteur, qui pourraient servir de modèle. Utilise ces exemples pour rédiger un article dans le style d'un journalisme d'investigation, en intégrant des exemples supplémentaires d'actions pertinentes et en développant un paragraphe sur des projets spécifiques qui illustrent ces stratégies en action. Voici le scénario à étudier : {res7bis}\n{res6bis}. Et voici les résultats de l'analyse SWOT de ce scénario: {res9bis}.\n\n{precisions}" 
-res10bis = generate_result(prompt10bis)
+res10bis = generate_result(prompt10bis, "perplexity")
 
 print("#### Voici les actions et projets à envisager. \n\n SCENARIO 1 : \n" + res10 + "\n\nSCENARIO 2 : \n" + res10bis + "\n\n\n\n\n")
     
