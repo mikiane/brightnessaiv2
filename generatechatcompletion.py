@@ -17,7 +17,7 @@ from huggingface_hub import InferenceClient
 import requests
 from pydub import AudioSegment
 import os
-import google.generativeai as genai
+#import google.generativeai as genai
 import anthropic
 from openai import OpenAI
 
@@ -99,7 +99,7 @@ def streamcall_grok_llm(prompt, context, input_data, model="grok-2-latest", max_
             yield content
 
 
-
+"""
 def streamcall_google_llm(prompt, context, input_data, model="gemini-2.0-flash-thinking-exp-1219", max_tokens=8192):
     
     genai.configure(api_key=GEMINI_API_KEY)
@@ -129,7 +129,7 @@ def streamcall_google_llm(prompt, context, input_data, model="gemini-2.0-flash-t
     for content in response:
         print(content)
         yield content
-
+"""
 
 
 def streamcall_anthropic_llm(prompt, context, input_data, model="claude-3-5-sonnet-20241022", max_tokens=8192):
