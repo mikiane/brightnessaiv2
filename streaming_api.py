@@ -47,6 +47,7 @@ def stream_chat():
     # Decode any URL-encoded strings in the data
     consigne = unquote(consigne)
     texte = unquote(texte)
+    print("GENERATE CHAT COMPLETION : " + consigne + " : " + texte + " : " + system + " : " + model + " : " + "\n")
 
     # Generate a chat completion and return it as a server-sent event
     return Response(generatechatcompletion.generate_chat_completion(consigne, texte, model), content_type='text/plain')
@@ -77,6 +78,7 @@ def chat():
     # Decode any URL-encoded strings in the data
     consigne = unquote(consigne)
     texte = unquote(texte)
+    print("GENERATE CHAT : " + consigne + " : " + texte + " : " + system + " : " + model + " : " + str(temperature) + "\n")
 
     # Generate a chat and return it as a server-sent event
     return Response(generatechatcompletion.generate_chat(consigne, texte, system, model, temperature), content_type='text/plain')
