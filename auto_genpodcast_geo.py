@@ -154,7 +154,7 @@ Consignes spécifiques :
 - Structure du script :
   - Introduction :
     - Courte et percutante, introduire le podcast avec la phrase standard :  
-      "Bonjour à toutes et à tous, bienvenue dans Le monde Aujourd’hui, le podcast de géopolitique par l’IA qui vous permet de rester à la page !"  
+      "Bonjour et bienvenue dans Le monde Aujourd’hui, le podcast de géopolitique par l’IA qui vous permet de rester à la page !"  
     - Suivre par une phrase résumant les sujets du jour, concise et dynamique :  
       "Aujourd’hui : [grandes thématiques du jour]. C’est parti !"
   - Les grandes actualités du jour :  

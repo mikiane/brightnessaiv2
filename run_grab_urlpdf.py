@@ -5,10 +5,10 @@ import pdfplumber
 import os
 import io
 
-URL = "https://www.yoursite.fr/"
+URL = "https://brightness.fr"
 DEPTH = 3
-OUTPUTFILE = "yoursite.txt"
-DOMAIN = 'www.yoursite.fr'  # Specify the domain
+OUTPUTFILE = "brightness.txt"
+DOMAIN = 'brightness.fr'  # Specify the domain
 
 def get_text_from_page(url):
     response = requests.get(url, timeout=45)
