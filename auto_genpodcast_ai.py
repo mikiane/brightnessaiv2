@@ -132,7 +132,7 @@ A partir des contenus suivant générer un script qui réponde aux caractéristi
 - Structure du script :
   - Introduction :
     - Courte et percutante, introduire le podcast avec la phrase standard :  
-      "Bonjour et bienvenue dans L'IA Aujourd’hui, le podcast de l'IA par l’IA qui vous permet de rester à la page !"  
+      "Bonjour et bienvenue dans le podcast de l'IA par l’IA qui vous permet de rester à la page !"  
     - Suivre par une phrase résumant les sujets du jour, concise et dynamique :  
       "Aujourd’hui : [grandes thématiques du jour]. C’est parti !"
   - Les grandes actualités du jour :  
@@ -171,7 +171,7 @@ Démarrer directement par le contenu du script généré et donc par "Bonjour à
 #text_final = lib__agent_buildchronical.execute(prompt, '', text_veille, model)
 # text_final = lib_genpodcasts.call_llm(prompt, text_veille, "", model, 16000)
 
-model_synthese = "o1-preview"
+model_synthese = "gpt-4o"
 #model_synthese = "claude-3-5-sonnet-20241022"
 
 if model_synthese=="google":
