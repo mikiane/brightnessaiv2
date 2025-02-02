@@ -383,102 +383,101 @@ def generate_chat(consigne, texte, system="", model=DEFAULT_MODEL, temperature=0
     client = openai.OpenAI(api_key=os.environ['OPENAI_API_KEY'])
     texte = extract_context(texte, model)
 
-    match model:
-        case "claude-2":
-            model_updated = "claude-2.1"
-            response = lib__anthropic.generate_chat_completion_anthropic(
-                consigne, texte, model_updated, temperature
-            )
-            for content in response:
-                print(content)
-                yield content
+    if model == "claude-2":
+        model_updated = "claude-2.1"
+        response = lib__anthropic.generate_chat_completion_anthropic(
+            consigne, texte, model_updated, temperature
+        )
+        for content in response:
+            print(content)
+            yield content
 
-        case "claude-3":
-            model_updated = "claude-3-opus-20240229"
-            response = lib__anthropic.generate_chat_completion_anthropic(
-                consigne, texte, model_updated, temperature
-            )
-            for content in response:
-                print(content)
-                yield content
+    elif model == "claude-3":
+        model_updated = "claude-3-opus-20240229"
+        response = lib__anthropic.generate_chat_completion_anthropic(
+            consigne, texte, model_updated, temperature
+        )
+        for content in response:
+            print(content)
+            yield content
 
-        case "hf":
-            prompt_hf = str(consigne + "\n" + texte)
-            prompt_hf = "<s>[INST]" + prompt_hf + "[/INST]"
-            print("Prompt : " + prompt_hf + "\n")
-            print("Model URL : " + os.environ['MODEL_URL'] + "\n" + "HF TOKEN : " + os.environ['HF_API_TOKEN'] + "\n")
+    elif model == "hf":
+        prompt_hf = str(consigne + "\n" + texte)
+        prompt_hf = "<s>[INST]" + prompt_hf + "[/INST]"
+        print("Prompt : " + prompt_hf + "\n")
+        print("Model URL : " + os.environ['MODEL_URL'] + "\n" + "HF TOKEN : " + os.environ['HF_API_TOKEN'] + "\n")
 
-            client_hf = InferenceClient(os.environ['MODEL_URL'], token=os.environ['HF_API_TOKEN'])
-            response = client_hf.text_generation(
-                prompt_hf,
-                max_new_tokens=1024,
-                stream=True
-            )
-            for result in response:
-                yield result
+        client_hf = InferenceClient(os.environ['MODEL_URL'], token=os.environ['HF_API_TOKEN'])
+        response = client_hf.text_generation(
+            prompt_hf,
+            max_new_tokens=1024,
+            stream=True
+        )
+        for result in response:
+            yield result
 
-        case "google":
-            # Appel au modèle Gemini 2.0
-            response_stream = streamcall_google_llm(
-                prompt=consigne,
-                context="",
-                input_data=texte,
-                model="gemini-2.0-flash-thinking-exp-1219",  # par exemple
-                max_tokens=8192
-            )
-            for chunk in response_stream:
-                yield chunk
+    elif model == "google":
+        # Appel au modèle Gemini 2.0
+        response_stream = streamcall_google_llm(
+            prompt=consigne,
+            context="",
+            input_data=texte,
+            model="gemini-2.0-flash-thinking-exp-1219",
+            max_tokens=8192
+        )
+        for chunk in response_stream:
+            yield chunk
 
-        case "grok":
-            # Appel au modèle Grok
-            response_stream = streamcall_grok_llm(
-                prompt=consigne,
-                context="",
-                input_data=texte,
-                model="grok-2-latest",
-                max_tokens=8192
-            )
-            for chunk in response_stream:
-                yield chunk
+    elif model == "grok":
+        # Appel au modèle Grok
+        response_stream = streamcall_grok_llm(
+            prompt=consigne,
+            context="",
+            input_data=texte,
+            model="grok-2-latest",
+            max_tokens=8192
+        )
+        for chunk in response_stream:
+            yield chunk
 
-        case "deepseek":
-            # Appel au modèle Deepseek
-            response_stream = streamcall_deepseek_llm(
-                prompt=consigne,
-                context="",
-                input_data=texte,
-                model=DEFAULT_MODEL,  # ou "deepseek-chat" si nécessaire
-                max_tokens=10000
-            )
-            for chunk in response_stream:
-                yield chunk
+    elif model == "deepseek":
+        # Appel au modèle Deepseek
+        response_stream = streamcall_deepseek_llm(
+            prompt=consigne,
+            context="",
+            input_data=texte,
+            model=DEFAULT_MODEL,  # ou "deepseek-chat" si nécessaire
+            max_tokens=10000
+        )
+        for chunk in response_stream:
+            yield chunk
 
-        case "o1-preview" | "o1" | "o3-mini":
-            completion = client.chat.completions.create(
-                model=model,
-                messages=[
-                    {"role": "user", "content": system + "\n" + prompt}
-                ],
-                stream=True
-            )
-            for message in completion:
-                if message.choices[0].delta.content:
-                    text_chunk = message.choices[0].delta.content
-                    print(text_chunk, end="", flush=True)
-                    yield text_chunk
+    elif model in ["o1-preview", "o1", "o3-mini"]:
+        completion = client.chat.completions.create(
+            model=model,
+            messages=[
+                {"role": "user", "content": system + "\n" + prompt}
+            ],
+            stream=True
+        )
+        for message in completion:
+            if message.choices[0].delta.content:
+                text_chunk = message.choices[0].delta.content
+                print(text_chunk, end="", flush=True)
+                yield text_chunk
 
-        case _:
-            completion = client.chat.completions.create(
-                model=model,
-                messages=[
-                    {"role": "system", "content": system},
-                    {"role": "user", "content": prompt}
-                ],
-                temperature=temperature,
-                stream=True
-            )
-            for message in completion:
-                if message.choices[0].delta.content:
-                    text_chunk = message.choices[0].delta.content
-                    print(text_chunk, end="", flush=True)
-                    yield text_chunk
+    else:
+        completion = client.chat.completions.create(
+            model=model,
+            messages=[
+                {"role": "system", "content": system},
+                {"role": "user", "content": prompt}
+            ],
+            temperature=temperature,
+            stream=True
+        )
+        for message in completion:
+            if message.choices[0].delta.content:
+                text_chunk = message.choices[0].delta.content
+                print(text_chunk, end="", flush=True)
+                yield text_chunk
