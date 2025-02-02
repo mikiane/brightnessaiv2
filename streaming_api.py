@@ -50,7 +50,9 @@ def stream_chat():
     print("GENERATE CHAT COMPLETION : " + consigne + " : " + texte + " : " + system + " : " + model + " : " + "\n")
 
     # Generate a chat completion and return it as a server-sent event
-    return Response(generatechatcompletion.generate_chat_completion(consigne, texte, model), content_type='text/plain')
+    #return Response(generatechatcompletion.generate_chat_completion(consigne, texte, model), content_type='text/plain')
+    return Response(generatechatcompletion.generate_chat(consigne, texte, system='', model=model, temperature=0), content_type='text/plain')
+
 
 # Define a route for standard chat, accepting POST requests
 @app.route('/chat', methods=['POST'])

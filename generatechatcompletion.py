@@ -44,7 +44,6 @@ openai.api_key = os.environ['OPEN_AI_KEY']
 
 
 
-
 def streamcall_deepseek_llm(prompt, context, input_data, model=DEFAULT_MODEL, max_tokens=10000):
 
     execprompt = "Context : " + context + "\n" + input_data + "\n" + "Query : " + prompt
@@ -99,37 +98,56 @@ def streamcall_grok_llm(prompt, context, input_data, model="grok-2-latest", max_
             yield content
 
 
-"""
-def streamcall_google_llm(prompt, context, input_data, model="gemini-2.0-flash-thinking-exp-1219", max_tokens=8192):
-    
-    genai.configure(api_key=GEMINI_API_KEY)
 
-    # Create the model
+def streamcall_google_llm(prompt, context, input_data, model="gemini-2.0-flash-thinking-exp-1219", max_tokens=8192):
+    """
+    Appel de Gemini 2.0 en mode streaming, en reprenant la logique existante dans lib_genpodcasts.py.
+    On recrée la structure de streaming manualisé (chunk par chunk), car l’API ne semble
+    pas proposer un flux natif comme pour OpenAI/Anthropic/Grok.
+    """
+
+    import google.generativeai as genai
+    from math import ceil
+
+    # Configuration du modèle (gemini-2.0-flash-thinking-exp-1219, etc.)
+    genai.configure(api_key=os.environ.get('GEMINI_API_KEY', None))
+
     generation_config = {
-    "temperature": 0.1,
-    "top_p": 0.95,
-    "top_k": 64,
-    "max_output_tokens": max_tokens,
-    "response_mime_type": "text/plain",
+        "temperature": 0.1,
+        "top_p": 0.95,
+        "top_k": 64,
+        "max_output_tokens": max_tokens,
+        "response_mime_type": "text/plain",
     }
 
-    model = genai.GenerativeModel(
-        model_name="gemini-2.0-flash-thinking-exp-1219",
+    # Création du modèle
+    gemini_model = genai.GenerativeModel(
+        model_name=model,
         generation_config=generation_config,
-        system_instruction="À partir de maintenant, réponds directement à ma question sans introduction.\"",
+        system_instruction="À partir de maintenant, réponds directement à ma question sans introduction."
     )
 
-    chat_session = model.start_chat(
-    history=[
-    ]
-    )
+    # Ouverture de la session de chat
+    chat_session = gemini_model.start_chat(history=[])
 
-    response = chat_session.send_message("Context : " + context + "\n" + input_data + "\n" + "Query : " + prompt)
+    # Construction du prompt
+    execprompt = f"Context : {context}\n{input_data}\nQuery : {prompt}"
 
-    for content in response:
-        print(content)
-        yield content
-"""
+    # Envoi du message (Gemini ne fournit pas un stream direct, on stream donc manuellement)
+    response = chat_session.send_message(execprompt)
+    full_text = response.text  # Gemini renvoie la réponse complète
+
+    # On choisit une taille de chunk, par exemple 100 caractères
+    chunk_size = 100
+    total_chunks = ceil(len(full_text) / chunk_size)
+
+    for i in range(total_chunks):
+        start_idx = i * chunk_size
+        end_idx = min((i + 1) * chunk_size, len(full_text))
+        chunk = full_text[start_idx:end_idx]
+        print(chunk, end="", flush=True)
+        yield chunk
+
 
 
 def streamcall_anthropic_llm(prompt, context, input_data, model="claude-3-5-sonnet-20241022", max_tokens=8192):
@@ -167,7 +185,7 @@ def extract_context(text, model):
     :param limit: La limite de longueur pour le contexte extrait.
     :return: La chaîne de caractères traitée.
     """
-    token_nb = 2000
+    token_nb = 10000
     
     if model == "claude-2":
         token_nb = 100000 
@@ -200,6 +218,7 @@ def extract_context(text, model):
         return text[:half_limit_adjusted] + ' [...] ' + text[-half_limit_adjusted:]
 
 
+"""
 # Function to generate chat completions
 def generate_chat_completion(consigne, texte, model=DEFAULT_MODEL, model_url=os.environ['MODEL_URL']):
     texte = extract_context(texte, model)
@@ -264,7 +283,7 @@ def generate_chat_completion(consigne, texte, model=DEFAULT_MODEL, model_url=os.
                         print(text_chunk, end="", flush="true")
                         yield text_chunk
                     
-                
+"""              
 
 
                         
@@ -272,7 +291,7 @@ def generate_chat_completion(consigne, texte, model=DEFAULT_MODEL, model_url=os.
                         
                         
                         
-
+"""
 # Function to generate chat
 def generate_chat(consigne, texte, system="", model=DEFAULT_MODEL, temperature=1):
     prompt = str(consigne + " : " + texte)  # Construct the prompt from the given consigne and texte
@@ -321,7 +340,7 @@ def generate_chat(consigne, texte, system="", model=DEFAULT_MODEL, temperature=1
             else:   
                 
                 
-                if model == "o1-preview":
+                if model == "o1-preview" or model == "o1" or model == "o3-mini":
                     completion = client.chat.completions.create(
                     model=model,
                     messages=[
@@ -351,3 +370,115 @@ def generate_chat(consigne, texte, system="", model=DEFAULT_MODEL, temperature=1
                         print(text_chunk, end="", flush="true")
                         yield text_chunk
                         
+    """
+    
+    
+    
+    
+def generate_chat(consigne, texte, system="", model=DEFAULT_MODEL, temperature=0):
+    prompt = str(consigne + " : " + texte)  # Construction du prompt
+    print("Model : " + model + "\n")
+    print("Temperature : " + str(temperature) + "\n")
+
+    client = openai.OpenAI(api_key=os.environ['OPENAI_API_KEY'])
+    texte = extract_context(texte, model)
+
+    match model:
+        case "claude-2":
+            model_updated = "claude-2.1"
+            response = lib__anthropic.generate_chat_completion_anthropic(
+                consigne, texte, model_updated, temperature
+            )
+            for content in response:
+                print(content)
+                yield content
+
+        case "claude-3":
+            model_updated = "claude-3-opus-20240229"
+            response = lib__anthropic.generate_chat_completion_anthropic(
+                consigne, texte, model_updated, temperature
+            )
+            for content in response:
+                print(content)
+                yield content
+
+        case "hf":
+            prompt_hf = str(consigne + "\n" + texte)
+            prompt_hf = "<s>[INST]" + prompt_hf + "[/INST]"
+            print("Prompt : " + prompt_hf + "\n")
+            print("Model URL : " + os.environ['MODEL_URL'] + "\n" + "HF TOKEN : " + os.environ['HF_API_TOKEN'] + "\n")
+
+            client_hf = InferenceClient(os.environ['MODEL_URL'], token=os.environ['HF_API_TOKEN'])
+            response = client_hf.text_generation(
+                prompt_hf,
+                max_new_tokens=1024,
+                stream=True
+            )
+            for result in response:
+                yield result
+
+        case "google":
+            # Appel au modèle Gemini 2.0
+            response_stream = streamcall_google_llm(
+                prompt=consigne,
+                context="",
+                input_data=texte,
+                model="gemini-2.0-flash-thinking-exp-1219",  # par exemple
+                max_tokens=8192
+            )
+            for chunk in response_stream:
+                yield chunk
+
+        case "grok":
+            # Appel au modèle Grok
+            response_stream = streamcall_grok_llm(
+                prompt=consigne,
+                context="",
+                input_data=texte,
+                model="grok-2-latest",
+                max_tokens=8192
+            )
+            for chunk in response_stream:
+                yield chunk
+
+        case "deepseek":
+            # Appel au modèle Deepseek
+            response_stream = streamcall_deepseek_llm(
+                prompt=consigne,
+                context="",
+                input_data=texte,
+                model=DEFAULT_MODEL,  # ou "deepseek-chat" si nécessaire
+                max_tokens=10000
+            )
+            for chunk in response_stream:
+                yield chunk
+
+        case "o1-preview" | "o1" | "o3-mini":
+            completion = client.chat.completions.create(
+                model=model,
+                messages=[
+                    {"role": "user", "content": system + "\n" + prompt}
+                ],
+                stream=True
+            )
+            for message in completion:
+                if message.choices[0].delta.content:
+                    text_chunk = message.choices[0].delta.content
+                    print(text_chunk, end="", flush=True)
+                    yield text_chunk
+
+        case _:
+            completion = client.chat.completions.create(
+                model=model,
+                messages=[
+                    {"role": "system", "content": system},
+                    {"role": "user", "content": prompt}
+                ],
+                temperature=temperature,
+                stream=True
+            )
+            for message in completion:
+                if message.choices[0].delta.content:
+                    text_chunk = message.choices[0].delta.content
+                    print(text_chunk, end="", flush=True)
+                    yield text_chunk
