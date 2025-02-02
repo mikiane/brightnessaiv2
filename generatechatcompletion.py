@@ -452,7 +452,7 @@ def generate_chat(consigne, texte, system="", model=DEFAULT_MODEL, temperature=0
         for chunk in response_stream:
             yield chunk
 
-    elif model in ["o1-preview", "o1", "o3-mini"]:
+    elif model in ["o1-preview", "o3-mini"]:
         completion = client.chat.completions.create(
             model=model,
             messages=[
