@@ -186,7 +186,8 @@ def extract_context(text, model):
     :return: La chaîne de caractères traitée.
     """
     token_nb = 10000
-    
+    if model == "gpt-4.5-preview":
+        token_nb = 128000
     if model == "claude-2":
         token_nb = 100000 
     if model == "claude-3":
@@ -452,7 +453,7 @@ def generate_chat(consigne, texte, system="", model=DEFAULT_MODEL, temperature=0
         for chunk in response_stream:
             yield chunk
 
-    elif model in ["o1-preview", "o3-mini"]:
+    elif model in ["o1-preview", "o3-mini", "gpt-4.5-preview"]:
         completion = client.chat.completions.create(
             model=model,
             messages=[
