@@ -156,7 +156,7 @@ Consignes spécifiques :
     - Courte et percutante, introduire le podcast avec la phrase standard :  
       "Bonjour et bienvenue dans Le monde Aujourd’hui, le podcast quotidien de géopolitique par l’IA!"  
     - Suivre par une phrase résumant les sujets du jour, concise et dynamique :  
-      "Aujourd’hui : [grandes thématiques du jour]. C’est parti !"
+      "Aujourd’hui : [grandes thématiques du jour]."
   - Les grandes actualités du jour :  
     Développez chaque actualité en au moins 6000 signes, en incluant :
     - Contexte détaillé : origine, évolution du sujet.

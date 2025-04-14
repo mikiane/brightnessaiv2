@@ -134,7 +134,7 @@ A partir des contenus suivant générer un script qui réponde aux caractéristi
     - Courte et percutante, introduire le podcast avec la phrase standard :  
       "Bonjour et bienvenue dans le podcast de l'IA par l’IA qui vous permet de rester à la page !"  
     - Suivre par une phrase résumant les sujets du jour, concise et dynamique :  
-      "Aujourd’hui : [grandes thématiques du jour]. C’est parti !"
+      "Aujourd’hui : [grandes thématiques du jour]."
   - Les grandes actualités du jour :  
     Développez chaque contenu fourni comme une actualité. TOUTES LES ACTULITES FOURNIES DOIVENT ETRE TRAITEES DANS LE SCRIPT. Les traiter, en incluant :
     - Contexte détaillé : origine, évolution du sujet.
