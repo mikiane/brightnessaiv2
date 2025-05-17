@@ -10,3 +10,6 @@
   
   **Extended LLM (Alter Brain)** 
   Lastly, the Extended LLM (Alter Brain) project is a work-in-progress, representing a simplified 'second brain' for neural language models. Utilizing the OpenAI Embedding API, it creates semantic indexes from text embeddings stored in CSV files. This system enhances information retrieval, pivoting from traditional keyword searches to a more nuanced semantic approach. Users can index text files, build and query the index, and adapt the code for extended functionalities. This project is compatible with GPT-4 and soon with LLAMA, signifying its forward-thinking design.  Overall, BrightnessAI is a comprehensive suite of tools on GitHub, showcasing innovative uses of AI in text processing and response generation. Each project under this umbrella demonstrates a unique aspect of AI's potential in enhancing digital communication and information processing.
+
+## Gmail Sent Contacts Export
+This repository now includes a script to extract recipient information from your Gmail sent mail. Run `python gmail_sent_contacts_to_csv.py` after configuring OAuth credentials to generate a `sent_contacts.csv` file containing the names and email addresses found in your sent messages.
